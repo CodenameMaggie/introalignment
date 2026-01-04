@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntroAlignment | Beyond compatibility. Into alignment.</title>
+    <meta name="description" content="We help you find the person who is truly aligned with your life and your purpose.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burgundy: #722F37;
+            --burgundy-light: #8B3D47;
+            --burgundy-dark: #5C262D;
+            --ivory: #FFFEF9;
+            --ivory-dark: #F5F3ED;
+            --dusty-rose: #C9A9A6;
+            --dusty-rose-light: #D9C4C2;
+            --dusty-rose-dark: #B08F8C;
+            --charcoal: #2D2D2D;
+            --charcoal-light: #4A4A4A;
+            --copper: #B87333;
+            --copper-light: #D4915A;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--ivory);
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(255, 254, 249, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(114, 47, 55, 0.08);
+            padding: 1rem 4rem;
+        }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--burgundy);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--copper);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--burgundy); }
+        .mobile-menu { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; }
+        .mobile-menu span { width: 24px; height: 2px; background: var(--burgundy); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -10%;
+            width: 60%; height: 80%;
+            background: radial-gradient(ellipse, rgba(201, 169, 166, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%; left: -10%;
+            width: 50%; height: 60%;
+            background: radial-gradient(ellipse, rgba(114, 47, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content { max-width: 800px; position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+            animation: fadeUp 1s ease forwards;
+        }
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-style: italic;
+            color: var(--dusty-rose-dark);
+            margin-bottom: 3rem;
+            animation: fadeUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+        .hero-text {
+            font-size: 1.15rem;
+            color: var(--charcoal-light);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+        .hero-text strong { color: var(--charcoal); font-weight: 600; }
+        .cta-button {
+            display: inline-block;
+            background: var(--burgundy);
+            color: var(--white);
+            padding: 1.1rem 2.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            border: 2px solid var(--burgundy);
+            animation: fadeUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        .cta-button:hover {
+            background: transparent;
+            color: var(--burgundy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(114, 47, 55, 0.2);
+        }
+        .cta-secondary {
+            background: transparent;
+            color: var(--burgundy);
+            margin-left: 1rem;
+        }
+        .cta-secondary:hover { background: var(--burgundy); color: var(--white); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--dusty-rose-dark);
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Sections */
+        section { padding: 6rem 4rem; }
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+        }
+        .section-header p { font-size: 1.1rem; color: var(--charcoal-light); }
+
+        /* Difference Section */
+        .difference { background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory-dark) 100%); }
+        .difference-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .difference-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(114, 47, 55, 0.06);
+            transition: all 0.4s ease;
+        }
+        .difference-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(114, 47, 55, 0.12);
+        }
+        .difference-icon {
+            width: 60px; height: 60px;
+            background: var(--dusty-rose-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .difference-icon svg { width: 28px; height: 28px; stroke: var(--burgundy); }
+        .difference-card h3 { font-size: 1.4rem; color: var(--burgundy); margin-bottom: 1rem; }
+        .difference-card p { color: var(--charcoal-light); font-size: 0.95rem; }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--burgundy);
+            color: var(--ivory);
+            position: relative;
+            overflow: hidden;
+        }
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at top right, rgba(201, 169, 166, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .how-it-works .section-header h2 { color: var(--ivory); }
+        .how-it-works .section-header p { color: var(--dusty-rose-light); }
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .step { flex: 1; max-width: 280px; text-align: center; }
+        .step-number {
+            width: 56px; height: 56px;
+            background: var(--copper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+        .step h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--ivory); }
+        .step p { font-size: 0.95rem; color: var(--dusty-rose-light); }
+
+        /* Philosophy */
+        .philosophy { background: var(--ivory); }
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .philosophy-text h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--burgundy);
+            margin-bottom: 1.5rem;
+        }
+        .philosophy-text p {
+            font-size: 1.1rem;
+            color: var(--charcoal-light);
+            margin-bottom: 1.5rem;
+        }
+        .circles-visual {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            position: relative;
+            margin: 0 auto;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        .circle-1 { width: 100%; height: 100%; border-color: var(--dusty-rose); opacity: 0.3; }
+        .circle-2 { width: 75%; height: 75%; top: 12.5%; left: 12.5%; border-color: var(--dusty-rose-dark); opacity: 0.5; animation-delay: 0.5s; }
+        .circle-3 { width: 50%; height: 50%; top: 25%; left: 25%; border-color: var(--copper); opacity: 0.7; animation-delay: 1s; }
+        .circle-4 { width: 25%; height: 25%; top: 37.5%; left: 37.5%; background: var(--burgundy); border-color: var(--burgundy); animation-delay: 1.5s; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: var(--dusty-rose-light);
+            text-align: center;
+        }
+        .testimonial-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(114, 47, 55, 0.08);
+        }
+        .testimonial-box blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--burgundy);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .testimonial-box cite {
+            font-style: normal;
+            color: var(--charcoal-light);
+            font-size: 0.95rem;
+        }
+
+        /* Waitlist */
+        .waitlist {
+            background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory-dark) 100%);
+            text-align: center;
+        }
+        .waitlist-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3.5rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 40px rgba(114, 47, 55, 0.1);
+        }
+        .waitlist-box h2 { font-size: 2.2rem; color: var(--burgundy); margin-bottom: 1rem; }
+        .waitlist-box > p { color: var(--charcoal-light); margin-bottom: 2rem; }
+        .waitlist-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-row { display: flex; gap: 1rem; }
+        .waitlist-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--ivory-dark);
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            background: var(--ivory);
+            transition: all 0.3s ease;
+        }
+        .waitlist-form input:focus { 
+            outline: none; 
+            border-color: var(--dusty-rose-dark); 
+            background: var(--white); 
+        }
+        .waitlist-form input::placeholder { color: var(--charcoal-light); }
+        .waitlist-form button {
+            padding: 1rem 2.5rem;
+            background: var(--burgundy);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .waitlist-form button:hover {
+            background: var(--burgundy-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(114, 47, 55, 0.25);
+        }
+        .form-note { font-size: 0.85rem; color: var(--charcoal-light); margin-top: 1rem; }
+        .success-message {
+            display: none;
+            padding: 2rem;
+            background: var(--dusty-rose-light);
+            border-radius: 16px;
+            color: var(--burgundy);
+        }
+        .success-message.show { display: block; }
+        .success-message h3 { margin-bottom: 0.5rem; }
+
+        /* FAQ */
+        .faq { background: var(--ivory); }
+        .faq-grid { max-width: 900px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--ivory-dark); padding: 1.5rem 0; }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            gap: 1rem;
+        }
+        .faq-question h3 { font-size: 1.2rem; color: var(--burgundy); }
+        .faq-toggle {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: var(--dusty-rose-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .faq-toggle svg { width: 16px; height: 16px; stroke: var(--burgundy); transition: transform 0.3s; }
+        .faq-item.open .faq-toggle { background: var(--burgundy); }
+        .faq-item.open .faq-toggle svg { stroke: var(--white); transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .faq-answer p { padding-top: 1rem; color: var(--charcoal-light); line-height: 1.7; }
+        .faq-item.open .faq-answer { max-height: 500px; }
+
+        /* Footer */
+        footer {
+            background: var(--burgundy);
+            color: var(--ivory);
+            padding: 4rem;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ivory);
+            text-decoration: none;
+        }
+        .footer-tagline { font-size: 0.9rem; color: var(--dusty-rose-light); margin-top: 0.5rem; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { color: var(--dusty-rose-light); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--ivory); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 169, 166, 0.2);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--dusty-rose);
+        }
+        .footer-bottom a { color: var(--dusty-rose); }
+        .footer-bottom a:hover { color: var(--ivory); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            section { padding: 4rem 2rem; }
+            .difference-grid { grid-template-columns: repeat(2, 1fr); }
+            .philosophy-content { grid-template-columns: 1fr; gap: 3rem; }
+            .philosophy-visual { order: -1; }
+            .circles-visual { max-width: 300px; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            nav.scrolled { padding: 0.75rem 1.5rem; }
+            .nav-links { 
+                display: none; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0; 
+                background: var(--ivory); 
+                flex-direction: column; 
+                padding: 2rem; 
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(114, 47, 55, 0.1);
+            }
+            .nav-links.open { display: flex; }
+            .mobile-menu { display: flex; }
+            .hero { padding: 6rem 1.5rem 4rem; }
+            .difference-grid { grid-template-columns: 1fr; }
+            .steps { flex-direction: column; align-items: center; }
+            .step { max-width: 100%; }
+            .form-row { flex-direction: column; }
+            .waitlist-box { padding: 2rem 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; gap: 2rem; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            .cta-secondary { margin-left: 0; margin-top: 1rem; display: block; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">IntroAlignment</a>
+        <ul class="nav-links">
+            <li><a href="#difference">The Difference</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#waitlist">Join Waitlist</a></li>
+        </ul>
+        <div class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>IntroAlignment</h1>
+            <p class="tagline">Beyond compatibility. Into alignment.</p>
+            <p class="hero-text">
+                We help you find the person who is truly aligned with your life and your purpose. 
+                <strong>A partner and a friend.</strong> Not someone who is there for a season, 
+                but someone who is ready to share their life.
+            </p>
+            <div>
+                <a href="#waitlist" class="cta-button">Join the Waitlist</a>
+                <a href="#how-it-works" class="cta-button cta-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <section class="difference" id="difference">
+        <div class="section-header">
+            <h2>A Different Kind of Introduction</h2>
+            <p>We're not a dating app. We're not a matchmaking service in the traditional sense. We're something new.</p>
+        </div>
+        <div class="difference-grid">
+            <div class="difference-card">
+                <div class="difference-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                    </svg>
+                </div>
+                <h3>Conversation, Not Questionnaires</h3>
+                <p>Instead of endless checkboxes and surveys, you'll have a natural conversation with our AI. We learn who you truly are through your stories, not your statistics.</p>
+            </div>
+            <div class="difference-card">
+                <div class="difference-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3>Depth Over Volume</h3>
+                <p>No endless swiping. No inbox full of strangers. We take the time to understand you deeply, then introduce you only to people who could truly fit your life.</p>
+            </div>
+            <div class="difference-card">
+                <div class="difference-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                </div>
+                <h3>Introductions With Intention</h3>
+                <p>Every introduction we make is thoughtful and purposeful. We believe in quality connections that have the potential to become lifelong partnerships.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <h2>How IntroAlignment Works</h2>
+            <p>A simple process designed to find your person</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Have a Conversation</h3>
+                <p>Chat naturally with our AI about your life, values, dreams, and what you're looking for. No forms, no pressure—just honest dialogue.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>We Learn Who You Are</h3>
+                <p>Through our conversation, we build a deep understanding of your personality, values, and vision for the future. We see beyond the surface.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Receive Thoughtful Introductions</h3>
+                <p>When we find someone truly aligned with you, we'll make the introduction. No swiping, no searching—just meaningful connections.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-content">
+            <div class="philosophy-text">
+                <h2>Why Alignment Matters More Than Compatibility</h2>
+                <p>
+                    Compatibility is about matching preferences. Alignment is about sharing direction. 
+                    Two people can be compatible on paper but pull each other in different directions. 
+                    Two aligned people move through life together, even when their paths diverge.
+                </p>
+                <p>
+                    We combine insights from time-tested wisdom traditions with modern psychological 
+                    understanding to see the whole person—not just who you are today, but who you're 
+                    becoming and who you're meant to walk alongside.
+                </p>
+                <p>
+                    This isn't about finding someone who checks your boxes. It's about finding someone 
+                    whose life story makes sense with yours.
+                </p>
+            </div>
+            <div class="philosophy-visual">
+                <div class="circles-visual">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                    <div class="circle circle-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <div class="section-header">
+            <h2>A New Chapter Begins</h2>
+            <p>IntroAlignment is launching soon. Be among the first to experience a different approach to finding love.</p>
+        </div>
+        <div class="testimonial-box">
+            <blockquote>
+                "I wasn't looking for another dating app. I was looking for someone who understood 
+                that finding the right person is about more than algorithms and swipe counts. 
+                IntroAlignment gets that."
+            </blockquote>
+            <cite>— Sarah M. Denver</cite>
+        </div>
+    </section>
+
+    <section class="waitlist" id="waitlist">
+        <div class="waitlist-box">
+            <h2>Be Among the First</h2>
+            <p>Join our waitlist to be notified when IntroAlignment opens for new members. We're launching with a limited group to ensure everyone receives the attention they deserve.</p>
+            
+            <form class="waitlist-form" id="waitlistForm">
+                <div class="form-row">
+                    <input type="text" name="firstName" placeholder="First Name" required>
+                    <input type="text" name="lastName" placeholder="Last Name" required>
+                </div>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="location" placeholder="City, State/Country">
+                <button type="submit">Join the Waitlist</button>
+                <p class="form-note">We respect your privacy. No spam, ever. Just updates on our launch.</p>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <h3>You're on the list!</h3>
+                <p>Thank you for your interest in IntroAlignment. We'll be in touch soon with updates on our launch. In the meantime, keep believing in the possibility of finding someone truly aligned with your life.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <div class="section-header">
+            <h2>Questions You Might Have</h2>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    <h3>How is this different from dating apps?</h3>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Dating apps optimize for engagement—keeping you swiping. We optimize for outcomes—helping you find the right person and then getting out of your way. We don't have endless profiles to browse. Instead, we take time to understand you deeply, then make thoughtful introductions to people who could genuinely be right for you.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    <h3>What do you mean by "conversation"?</h3>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <p>When you join IntroAlignment, you'll chat with our AI—but not like a customer service bot. It's a warm, natural conversation about your life, your experiences, what you value, and what you're looking for. Through your stories and reflections, we learn who you truly are. It typically takes about 30-40 minutes, and you can take breaks whenever you like.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    <h3>How do you decide who to introduce me to?</h3>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <p>We use a combination of validated psychological frameworks and time-tested wisdom traditions to understand compatibility at a deep level. We look at values alignment, life vision compatibility, emotional patterns, communication styles, and more. We only make an introduction when we see genuine potential for a meaningful connection.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    <h3>Is this free?</h3>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <p>We'll announce our pricing model closer to launch. We believe in making quality matchmaking accessible while ensuring we can provide the depth of service that makes IntroAlignment special. Waitlist members will receive early access and special founding member benefits.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    <h3>What if I'm not ready to date right now?</h3>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <p>That's perfectly okay. Join our waitlist and we'll keep you updated. When you're ready, we'll be here. There's no pressure, no expiring matches, no artificial urgency. Finding the right person is worth taking time for.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    <h3>How do you protect my privacy?</h3>
+                    <div class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Your privacy is sacred to us. Your conversations and personal information are encrypted and never shared with third parties. When we make an introduction, we only share what's necessary for you to decide if you'd like to connect. You're always in control of what's shared and when.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="#" class="footer-logo">IntroAlignment</a>
+                <p class="footer-tagline">Introductions with intention.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#difference">The Difference</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#philosophy">Philosophy</a>
+                <a href="#faq">FAQ</a>
+                <a href="#waitlist">Join Waitlist</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 IntroAlignment. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Form submission
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                location: formData.get('location'),
+                source: 'website_waitlist',
+                joinedAt: new Date().toISOString()
+            };
+            
+            // TODO: Connect to Supabase API
+            console.log('Waitlist signup:', data);
+            
+            this.style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector('.nav-links').classList.remove('open');
+            });
+        });
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.difference-card, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
