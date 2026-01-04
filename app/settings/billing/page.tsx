@@ -34,7 +34,7 @@ export default function BillingSettingsPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-8">
-      <h1 className="text-2xl font-bold text-burgundy mb-8">Billing & Subscription</h1>
+      <h1 className="text-2xl font-bold text-charcoal mb-8">Billing & Subscription</h1>
 
       {/* Current Plan */}
       <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
@@ -44,7 +44,7 @@ export default function BillingSettingsPage() {
               Current Plan
             </h2>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-burgundy">
+              <span className="text-2xl font-bold text-charcoal">
                 {subscription?.plan?.name || 'Free'}
               </span>
               {subscription?.status && subscription.status !== 'active' && (
@@ -66,7 +66,7 @@ export default function BillingSettingsPage() {
 
           <button
             onClick={() => window.location.href = '/pricing'}
-            className="px-4 py-2 bg-dusty-rose text-burgundy rounded-full hover:bg-dusty-rose-dark transition-colors"
+            className="px-4 py-2 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition-colors font-medium"
           >
             {subscription?.plan?.slug === 'free' ? 'Upgrade' : 'Change Plan'}
           </button>
@@ -79,9 +79,9 @@ export default function BillingSettingsPage() {
               Introductions This Period
             </h3>
             <div className="flex items-center gap-4">
-              <div className="flex-1 bg-ivory-dark rounded-full h-3">
+              <div className="flex-1 bg-soft-gray rounded-full h-3">
                 <div
-                  className="bg-burgundy h-3 rounded-full transition-all"
+                  className="bg-champagne h-3 rounded-full transition-all"
                   style={{
                     width: subscription?.plan?.introductions_per_month === -1
                       ? '100%'
@@ -129,7 +129,7 @@ export default function BillingSettingsPage() {
         </p>
         <button
           onClick={openPortal}
-          className="px-6 py-3 bg-burgundy text-white rounded-full hover:bg-burgundy-dark transition-colors"
+          className="px-6 py-3 bg-charcoal text-ivory rounded-full hover:bg-charcoal-light transition-colors font-medium"
         >
           Open Billing Portal
         </button>
@@ -168,7 +168,7 @@ export default function BillingSettingsPage() {
                       href={invoice.invoice_pdf_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-burgundy hover:underline text-sm"
+                      className="text-champagne hover:underline text-sm font-medium"
                     >
                       Download
                     </a>

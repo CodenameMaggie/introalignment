@@ -71,7 +71,7 @@ export default function PricingPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif font-bold text-burgundy mb-4">
+          <h1 className="text-4xl font-serif font-bold text-charcoal mb-4">
             Find Your Aligned Partner
           </h1>
           <p className="text-xl text-charcoal-light max-w-2xl mx-auto">
@@ -87,7 +87,7 @@ export default function PricingPage() {
               onClick={() => setInterval('month')}
               className={`px-6 py-2 rounded-full transition-all ${
                 interval === 'month'
-                  ? 'bg-burgundy text-white'
+                  ? 'bg-charcoal text-ivory'
                   : 'text-charcoal hover:bg-ivory-dark'
               }`}
             >
@@ -97,12 +97,12 @@ export default function PricingPage() {
               onClick={() => setInterval('year')}
               className={`px-6 py-2 rounded-full transition-all ${
                 interval === 'year'
-                  ? 'bg-burgundy text-white'
+                  ? 'bg-charcoal text-ivory'
                   : 'text-charcoal hover:bg-ivory-dark'
               }`}
             >
               Yearly
-              <span className="ml-2 text-xs bg-copper text-white px-2 py-0.5 rounded-full">
+              <span className="ml-2 text-xs bg-champagne text-charcoal-dark px-2 py-0.5 rounded-full font-medium">
                 Save 20%
               </span>
             </button>
@@ -116,19 +116,19 @@ export default function PricingPage() {
               key={plan.id}
               className={`bg-white rounded-2xl p-6 relative ${
                 plan.is_featured
-                  ? 'ring-2 ring-burgundy shadow-xl scale-105'
-                  : 'shadow-md'
+                  ? 'ring-2 ring-champagne shadow-xl scale-105'
+                  : 'shadow-md border border-soft-gray'
               }`}
             >
               {/* Badge */}
               {plan.badge_text && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-burgundy text-white text-sm px-4 py-1 rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-champagne text-charcoal-dark text-sm px-4 py-1 rounded-full font-semibold">
                   {plan.badge_text}
                 </div>
               )}
 
               {/* Plan Name */}
-              <h3 className="text-xl font-semibold text-burgundy mb-2">
+              <h3 className="text-xl font-semibold text-charcoal mb-2">
                 {plan.name}
               </h3>
               <p className="text-sm text-charcoal-light mb-4">
@@ -144,7 +144,7 @@ export default function PricingPage() {
                 </span>
                 <span className="text-charcoal-light">/mo</span>
                 {interval === 'year' && plan.price_yearly > 0 && (
-                  <div className="text-sm text-copper">
+                  <div className="text-sm text-champagne font-medium">
                     Billed ${plan.price_yearly}/year
                   </div>
                 )}
@@ -190,12 +190,12 @@ export default function PricingPage() {
               <button
                 onClick={() => handleSubscribe(plan.slug)}
                 disabled={loading === plan.slug}
-                className={`w-full py-3 rounded-full font-medium transition-all ${
+                className={`w-full py-3 rounded-full font-semibold transition-all ${
                   plan.is_featured
-                    ? 'bg-burgundy text-white hover:bg-burgundy-dark'
+                    ? 'bg-champagne text-charcoal-dark hover:bg-champagne-light'
                     : plan.slug === 'free'
-                      ? 'bg-ivory-dark text-charcoal hover:bg-dusty-rose-light'
-                      : 'bg-dusty-rose text-burgundy hover:bg-dusty-rose-dark'
+                      ? 'bg-ivory-dark text-charcoal hover:bg-soft-gray'
+                      : 'bg-charcoal text-ivory hover:bg-charcoal-light'
                 } disabled:opacity-50`}
               >
                 {loading === plan.slug
@@ -210,7 +210,7 @@ export default function PricingPage() {
 
         {/* Add-ons */}
         <div className="mt-16">
-          <h2 className="text-2xl font-serif font-bold text-burgundy text-center mb-8">
+          <h2 className="text-2xl font-serif font-bold text-charcoal text-center mb-8">
             Add-ons
           </h2>
           <div className="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -243,7 +243,7 @@ export default function PricingPage() {
 
         {/* FAQ */}
         <div className="mt-16 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-serif font-bold text-burgundy text-center mb-8">
+          <h2 className="text-2xl font-serif font-bold text-charcoal text-center mb-8">
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
@@ -311,15 +311,15 @@ function AddOnCard({ name, price, description, slug }: {
   }
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm">
+    <div className="bg-white rounded-xl p-4 shadow-sm border border-soft-gray">
       <h4 className="font-medium text-charcoal">{name}</h4>
       <p className="text-sm text-charcoal-light mb-2">{description}</p>
       <div className="flex items-center justify-between">
-        <span className="font-bold text-burgundy">{price}</span>
+        <span className="font-bold text-champagne">{price}</span>
         <button
           onClick={handlePurchase}
           disabled={loading}
-          className="text-sm px-3 py-1 bg-ivory-dark rounded-full hover:bg-dusty-rose-light transition-colors disabled:opacity-50"
+          className="text-sm px-3 py-1 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition-colors disabled:opacity-50 font-medium"
         >
           {loading ? '...' : 'Buy'}
         </button>
@@ -339,7 +339,7 @@ function FAQ({ q, a }: { q: string; a: string }) {
       >
         <span className="font-medium text-charcoal">{q}</span>
         <svg
-          className={`w-5 h-5 text-burgundy transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`w-5 h-5 text-champagne transition-transform ${open ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

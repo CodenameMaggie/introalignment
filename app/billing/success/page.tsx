@@ -23,7 +23,7 @@ export default function BillingSuccessPage() {
             <div className="w-16 h-16 mx-auto mb-6 bg-sage bg-opacity-20 rounded-full flex items-center justify-center">
               <div className="w-8 h-8 border-4 border-sage border-t-transparent rounded-full animate-spin"></div>
             </div>
-            <h1 className="text-2xl font-serif font-bold text-burgundy mb-2">
+            <h1 className="text-2xl font-serif font-bold text-charcoal mb-2">
               Processing...
             </h1>
             <p className="text-charcoal-light">
@@ -37,7 +37,7 @@ export default function BillingSuccessPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-2xl font-serif font-bold text-burgundy mb-2">
+            <h1 className="text-2xl font-serif font-bold text-charcoal mb-2">
               Welcome to IntroAlignment!
             </h1>
             <p className="text-charcoal-light mb-6">
@@ -46,13 +46,13 @@ export default function BillingSuccessPage() {
             <div className="space-y-3">
               <button
                 onClick={() => router.push('/dashboard')}
-                className="w-full px-6 py-3 bg-burgundy text-white rounded-full hover:bg-burgundy-dark transition-colors"
+                className="w-full px-6 py-3 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition-colors font-semibold"
               >
                 Go to Dashboard
               </button>
               <button
                 onClick={() => router.push('/settings/billing')}
-                className="w-full px-6 py-3 bg-ivory-dark text-charcoal rounded-full hover:bg-dusty-rose-light transition-colors"
+                className="w-full px-6 py-3 bg-ivory-dark text-charcoal rounded-full hover:bg-soft-gray transition-colors"
               >
                 View Billing Details
               </button>

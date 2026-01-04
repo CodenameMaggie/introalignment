@@ -1,24 +1,55 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 
-  /* IntroAlignment Brand Colors (from landing page) */
-  --burgundy: #722F37;
-  --burgundy-light: #8B3D47;
-  --burgundy-dark: #5C262D;
-  --ivory: #FFFEF9;
-  --ivory-dark: #F5F3ED;
-  --dusty-rose: #C9A9A6;
-  --dusty-rose-light: #D9C4C2;
-  --dusty-rose-dark: #B08F8C;
-  --charcoal: #2D2D2D;
-  --charcoal-light: #4A4A4A;
-  --copper: #B87333;
-  --copper-light: #D4915A;
+  /* IntroAlignment Elegant & Timeless Palette */
+
+  /* Primary - Charcoal family */
+  --charcoal: #2D3748;
+  --charcoal-light: #4A5568;
+  --charcoal-dark: #1A202C;
+
+  /* Accent - Champagne Gold family */
+  --champagne: #D4AF37;
+  --champagne-light: #E8C547;
+  --champagne-dark: #B8960C;
+  --champagne-muted: #C9B896;
+
+  /* Neutrals */
+  --ivory: #FFFEF7;
+  --ivory-dark: #F7F5F0;
+  --soft-gray: #E2E0DB;
+  --medium-gray: #A0998F;
+
+  /* Supporting */
+  --sage: #7C9A8E;
+  --sage-light: #9FB8AD;
+  --sage-dark: #5D7A6E;
+  --rose: #C4A4A4;
+  --rose-light: #D9C4C4;
+
+  /* Status */
+  --success: #7C9A8E;
+  --warning: #D4AF37;
+  --error: #C75D5D;
+  --info: #6B8CAE;
+
+  /* Text */
+  --text-primary: #2D3748;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --text-on-dark: #FFFEF7;
+  --text-on-gold: #1A202C;
+
+  /* Backgrounds */
+  --bg-page: #FFFEF7;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F7F5F0;
+  --bg-dark: #2D3748;
 }
 
 @theme inline {
@@ -26,22 +57,26 @@
   --color-foreground: var(--foreground);
 
   /* Brand colors for Tailwind */
-  --color-burgundy: var(--burgundy);
-  --color-burgundy-light: var(--burgundy-light);
-  --color-burgundy-dark: var(--burgundy-dark);
-  --color-ivory: var(--ivory);
-  --color-ivory-dark: var(--ivory-dark);
-  --color-dusty-rose: var(--dusty-rose);
-  --color-dusty-rose-light: var(--dusty-rose-light);
-  --color-dusty-rose-dark: var(--dusty-rose-dark);
   --color-charcoal: var(--charcoal);
   --color-charcoal-light: var(--charcoal-light);
-  --color-copper: var(--copper);
-  --color-copper-light: var(--copper-light);
+  --color-charcoal-dark: var(--charcoal-dark);
+  --color-champagne: var(--champagne);
+  --color-champagne-light: var(--champagne-light);
+  --color-champagne-dark: var(--champagne-dark);
+  --color-champagne-muted: var(--champagne-muted);
+  --color-ivory: var(--ivory);
+  --color-ivory-dark: var(--ivory-dark);
+  --color-soft-gray: var(--soft-gray);
+  --color-medium-gray: var(--medium-gray);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-sage-dark: var(--sage-dark);
+  --color-rose: var(--rose);
+  --color-rose-light: var(--rose-light);
 
   /* Font families */
-  --font-serif: 'Cormorant Garamond', serif;
-  --font-sans: 'Nunito', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
