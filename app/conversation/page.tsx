@@ -47,6 +47,36 @@ function ConversationPageContent() {
     return null;
   }
 
+  // Feature flag - disable until we have users
+  const conversationEnabled = process.env.NEXT_PUBLIC_ENABLE_CONVERSATION === 'true';
+
+  if (!conversationEnabled) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex items-center justify-center p-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-12">
+            <div className="text-6xl mb-6">🚀</div>
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+              Coming Soon!
+            </h1>
+            <p className="text-xl text-gray-600 mb-6">
+              Our AI-powered conversational onboarding is being prepared for launch.
+            </p>
+            <p className="text-gray-500 mb-8">
+              This feature will allow you to build a deep compatibility profile through natural conversation instead of boring questionnaires. Stay tuned!
+            </p>
+            <button
+              onClick={() => router.push('/dashboard-interactive')}
+              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
+            >
+              Go to Dashboard
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 py-8">
       <div className="container mx-auto px-4">
