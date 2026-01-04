@@ -6,7 +6,13 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build-time errors
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is not set');
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export class OutreachEngine {
   // Send pending emails
@@ -83,7 +89,7 @@ export class OutreachEngine {
 
     try {
       // Send via Resend
-      const { data, error } = await resend.emails.send({
+      const { data, error } = await getResend().emails.send({
         from: 'IntroAlignment <hello@introalignment.com>',
         to: lead.email,
         subject,
@@ -316,11 +322,19 @@ export class OutreachEngine {
       .eq('id', leadId);
 
     // Update sequence stats
-    await supabase
+    const { data: seq } = await supabase
       .from('outreach_sequences')
-      .update({
-        leads_enrolled: supabase.sql`leads_enrolled + 1`
-      })
-      .eq('id', sequenceId);
+      .select('leads_enrolled')
+      .eq('id', sequenceId)
+      .single();
+
+    if (seq) {
+      await supabase
+        .from('outreach_sequences')
+        .update({
+          leads_enrolled: (seq.leads_enrolled || 0) + 1
+        })
+        .eq('id', sequenceId);
+    }
   }
 }

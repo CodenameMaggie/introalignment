@@ -43,13 +43,21 @@ export async function GET(request: NextRequest) {
           enrollment_id: enrollmentId
         });
 
-        // Update lead
-        await supabase
+        // Update lead - fetch current count first
+        const { data: lead } = await supabase
           .from('leads')
-          .update({
-            emails_opened: supabase.sql`emails_opened + 1`
-          })
-          .eq('id', emailSend.lead_id);
+          .select('emails_opened')
+          .eq('id', emailSend.lead_id)
+          .single();
+
+        if (lead) {
+          await supabase
+            .from('leads')
+            .update({
+              emails_opened: (lead.emails_opened || 0) + 1
+            })
+            .eq('id', emailSend.lead_id);
+        }
       }
     } catch (error) {
       console.error('Tracking error:', error);

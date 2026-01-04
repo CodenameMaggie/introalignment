@@ -190,14 +190,14 @@ async function calculatePsychologicalCompatibility(
   }
 
   // ATTACHMENT STYLE (from games if available, otherwise questionnaire)
-  const attachment1 = extraction1?.attachment_secure > 0.6 ? 'secure' :
-                      extraction1?.attachment_anxious > 0.6 ? 'anxious' :
-                      extraction1?.attachment_avoidant > 0.6 ? 'avoidant' :
+  const attachment1 = (extraction1?.attachment_secure || 0) > 0.6 ? 'secure' :
+                      (extraction1?.attachment_anxious || 0) > 0.6 ? 'anxious' :
+                      (extraction1?.attachment_avoidant || 0) > 0.6 ? 'avoidant' :
                       profile1.attachment_style?.toLowerCase();
 
-  const attachment2 = extraction2?.attachment_secure > 0.6 ? 'secure' :
-                      extraction2?.attachment_anxious > 0.6 ? 'anxious' :
-                      extraction2?.attachment_avoidant > 0.6 ? 'avoidant' :
+  const attachment2 = (extraction2?.attachment_secure || 0) > 0.6 ? 'secure' :
+                      (extraction2?.attachment_anxious || 0) > 0.6 ? 'anxious' :
+                      (extraction2?.attachment_avoidant || 0) > 0.6 ? 'avoidant' :
                       profile2.attachment_style?.toLowerCase();
 
   if (attachment1 === 'secure' && attachment2 === 'secure') {
