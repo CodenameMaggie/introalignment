@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IntroAlignment Platform
 
-## Getting Started
+> Beyond compatibility. Into alignment.
 
-First, run the development server:
+A sophisticated matchmaking platform that uses conversational AI to extract deep psychometric and astrological profiles, then matches people based on multi-dimensional compatibility.
+
+## Tech Stack
+
+- **Frontend:** Next.js 15 + React + TypeScript + Tailwind CSS
+- **Backend:** Next.js API Routes (serverless)
+- **Database:** Supabase (PostgreSQL)
+- **AI:** Claude API (Anthropic)
+- **Email:** Resend
+- **Deployment:** Vercel
+- **Astrology:** Custom calculation engines (BaZi, Vedic, Nine Star Ki)
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Set Up Supabase
+
+1. Go to [supabase.com](https://supabase.com) and create a new project
+2. Name it "IntroAlignment"
+3. Wait for the project to be created
+4. Get your credentials:
+   - Go to Settings → API
+   - Copy the `Project URL`
+   - Copy the `anon` public key
+   - Copy the `service_role` secret key
+
+### 3. Configure Environment Variables
+
+Edit `.env.local` and add your credentials:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+ANTHROPIC_API_KEY=your-claude-api-key
+RESEND_API_KEY=your-resend-key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NODE_ENV=development
+ADMIN_EMAIL=your-admin-email@example.com
+```
+
+### 4. Run Database Migrations
+
+In your Supabase project:
+1. Go to the SQL Editor
+2. Copy the contents of `supabase/migrations/001_initial_schema.sql`
+3. Paste and run in the Supabase SQL Editor
+
+### 5. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+lib/ai/              - Conversational AI & extraction engine
+lib/astrology/       - BaZi, Vedic, Nine Star Ki calculations
+lib/matching/        - Compatibility algorithm
+app/api/             - API routes
+types/               - TypeScript types
+supabase/migrations/ - Database schema
+```
 
-## Learn More
+## Key Features Built
 
-To learn more about Next.js, take a look at the following resources:
+✅ Conversational AI onboarding engine
+✅ 40+ question bank across 7 life dimensions
+✅ Psychometric extraction (Big Five, Attachment, EQ, etc.)
+✅ Astrological calculations (BaZi, Vedic, Nine Star Ki)
+✅ Multi-dimensional compatibility matching
+✅ Safety screening framework
+✅ Complete database schema with RLS policies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Next Steps
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The technical foundation is complete. Next to build:
+- User authentication
+- Frontend UI components
+- Admin dashboard
+- Match introduction flow
+- Messaging system
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the full build plan in your project documentation.
