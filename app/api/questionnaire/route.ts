@@ -9,7 +9,12 @@ import {
 // POST /api/questionnaire - Submit answer and get next question
 export async function POST(request: NextRequest) {
   try {
-    const { userId, questionId, answerId, allAnswers } = await request.json();
+    const { userId, questionId, answerId, allAnswers } = await request.json() as {
+      userId: string;
+      questionId: string;
+      answerId: string;
+      allAnswers: Record<string, string>;
+    };
 
     if (!userId || !questionId || !answerId) {
       return NextResponse.json(
@@ -21,7 +26,7 @@ export async function POST(request: NextRequest) {
     const supabase = getAdminClient();
 
     // Save the answer
-    const answerMap = new Map(Object.entries(allAnswers || {}));
+    const answerMap = new Map(Object.entries(allAnswers || {} as Record<string, string>));
     answerMap.set(questionId, answerId);
 
     // Get or create conversation record
