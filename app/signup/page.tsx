@@ -44,11 +44,11 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-cream flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="font-serif text-3xl font-semibold text-charcoal">
+          <Link href="/" className="font-serif text-3xl font-semibold text-navy">
             IntroAlignment
           </Link>
           <p className="mt-2 font-serif italic text-medium-gray">
@@ -58,7 +58,7 @@ export default function SignupPage() {
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="font-serif text-2xl text-charcoal mb-6 text-center">
+          <h2 className="font-serif text-2xl text-navy mb-6 text-center">
             Begin Your Journey
           </h2>
 
@@ -71,7 +71,7 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-charcoal mb-1">
+                <label className="block text-sm font-medium text-navy mb-1">
                   First Name
                 </label>
                 <input
@@ -79,11 +79,11 @@ export default function SignupPage() {
                   required
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
+                  className="w-full px-4 py-2 border-2 border-cream-dark rounded-full focus:border-gold focus:outline-none bg-cream transition"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-charcoal mb-1">
+                <label className="block text-sm font-medium text-navy mb-1">
                   Last Name
                 </label>
                 <input
@@ -91,13 +91,13 @@ export default function SignupPage() {
                   required
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
+                  className="w-full px-4 py-2 border-2 border-cream-dark rounded-full focus:border-gold focus:outline-none bg-cream transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-charcoal mb-1">
+              <label className="block text-sm font-medium text-navy mb-1">
                 Email
               </label>
               <input
@@ -105,12 +105,12 @@ export default function SignupPage() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
+                className="w-full px-4 py-2 border-2 border-cream-dark rounded-full focus:border-gold focus:outline-none bg-cream transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-charcoal mb-1">
+              <label className="block text-sm font-medium text-navy mb-1">
                 Password
               </label>
               <input
@@ -119,9 +119,9 @@ export default function SignupPage() {
                 minLength={8}
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
+                className="w-full px-4 py-2 border-2 border-cream-dark rounded-full focus:border-gold focus:outline-none bg-cream transition"
               />
-              <p className="text-xs text-charcoal-light mt-1">
+              <p className="text-xs text-navy-light mt-1">
                 At least 8 characters
               </p>
             </div>
@@ -129,25 +129,25 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-champagne text-charcoal-dark py-3 px-6 rounded-full font-medium hover:bg-champagne-light transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full bg-gold text-navy-dark py-3 px-6 rounded-full font-medium hover:bg-gold-light transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {loading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
 
-          <p className="text-center text-sm text-charcoal-light mt-6">
+          <p className="text-center text-sm text-navy-light mt-6">
             Already have an account?{' '}
-            <Link href="/login" className="text-charcoal hover:text-charcoal-light font-medium">
+            <Link href="/login" className="text-navy hover:text-navy-light font-medium">
               Sign in
             </Link>
           </p>
         </div>
 
-        <p className="text-center text-xs text-charcoal-light mt-6">
+        <p className="text-center text-xs text-navy-light mt-6">
           By signing up, you agree to our{' '}
-          <Link href="/terms" className="text-charcoal">Terms of Service</Link>
+          <Link href="/terms" className="text-navy">Terms of Service</Link>
           {' '}and{' '}
-          <Link href="/privacy" className="text-charcoal">Privacy Policy</Link>
+          <Link href="/privacy" className="text-navy">Privacy Policy</Link>
         </p>
       </div>
     </div>

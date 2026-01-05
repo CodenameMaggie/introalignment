@@ -16,17 +16,17 @@ function BillingSuccessContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-ivory flex items-center justify-center p-4">
+    <div className="min-h-screen bg-cream flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg text-center">
         {loading ? (
           <>
             <div className="w-16 h-16 mx-auto mb-6 bg-sage bg-opacity-20 rounded-full flex items-center justify-center">
               <div className="w-8 h-8 border-4 border-sage border-t-transparent rounded-full animate-spin"></div>
             </div>
-            <h1 className="text-2xl font-serif font-bold text-charcoal mb-2">
+            <h1 className="text-2xl font-serif font-bold text-navy mb-2">
               Processing...
             </h1>
-            <p className="text-charcoal-light">
+            <p className="text-navy-light">
               We're setting up your subscription
             </p>
           </>
@@ -37,22 +37,22 @@ function BillingSuccessContent() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-2xl font-serif font-bold text-charcoal mb-2">
+            <h1 className="text-2xl font-serif font-bold text-navy mb-2">
               Welcome to IntroAlignment!
             </h1>
-            <p className="text-charcoal-light mb-6">
+            <p className="text-navy-light mb-6">
               Your subscription is now active. Let's find your aligned partner.
             </p>
             <div className="space-y-3">
               <button
                 onClick={() => router.push('/dashboard')}
-                className="w-full px-6 py-3 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition-colors font-semibold"
+                className="w-full px-6 py-3 bg-gold text-navy-dark rounded-full hover:bg-gold-light transition-colors font-semibold"
               >
                 Go to Dashboard
               </button>
               <button
                 onClick={() => router.push('/settings/billing')}
-                className="w-full px-6 py-3 bg-ivory-dark text-charcoal rounded-full hover:bg-soft-gray transition-colors"
+                className="w-full px-6 py-3 bg-cream-dark text-navy rounded-full hover:bg-soft-gray transition-colors"
               >
                 View Billing Details
               </button>
@@ -67,12 +67,12 @@ function BillingSuccessContent() {
 export default function BillingSuccessPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-ivory flex items-center justify-center p-4">
+      <div className="min-h-screen bg-cream flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg text-center">
           <div className="w-16 h-16 mx-auto mb-6 bg-sage bg-opacity-20 rounded-full flex items-center justify-center">
             <div className="w-8 h-8 border-4 border-sage border-t-transparent rounded-full animate-spin"></div>
           </div>
-          <h1 className="text-2xl font-serif font-bold text-charcoal mb-2">
+          <h1 className="text-2xl font-serif font-bold text-navy mb-2">
             Loading...
           </h1>
         </div>

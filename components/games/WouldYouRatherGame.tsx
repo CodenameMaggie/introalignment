@@ -84,10 +84,10 @@ export default function WouldYouRatherGame({ game, userId, onComplete, onClose }
   if (!currentQuestion) {
     return (
       <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-        <p className="text-charcoal">No questions available</p>
+        <p className="text-navy">No questions available</p>
         <button
           onClick={onClose}
-          className="mt-4 py-2 px-6 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition"
+          className="mt-4 py-2 px-6 bg-gold text-navy-dark rounded-full hover:bg-gold-light transition"
         >
           Close
         </button>
@@ -100,30 +100,30 @@ export default function WouldYouRatherGame({ game, userId, onComplete, onClose }
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="font-serif text-2xl text-charcoal">{game.title}</h3>
-          <p className="text-charcoal-light">
+          <h3 className="font-serif text-2xl text-navy">{game.title}</h3>
+          <p className="text-navy-light">
             Question {currentQuestionIndex + 1} of {questions.length}
           </p>
         </div>
         <button
           onClick={onClose}
-          className="text-charcoal-light hover:text-charcoal transition text-2xl"
+          className="text-navy-light hover:text-navy transition text-2xl"
         >
           ×
         </button>
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-ivory-dark rounded-full h-2 mb-8">
+      <div className="w-full bg-cream-dark rounded-full h-2 mb-8">
         <div
-          className="bg-champagne rounded-full h-2 transition-all duration-300"
+          className="bg-gold rounded-full h-2 transition-all duration-300"
           style={{ width: `${progress}%` }}
         ></div>
       </div>
 
       {/* Question */}
       <div className="mb-8">
-        <h4 className="font-serif text-xl text-charcoal mb-6 text-center">
+        <h4 className="font-serif text-xl text-navy mb-6 text-center">
           {currentQuestion.question_text}
         </h4>
 
@@ -134,21 +134,21 @@ export default function WouldYouRatherGame({ game, userId, onComplete, onClose }
               onClick={() => setSelectedOption(option.id)}
               className={`w-full p-6 rounded-xl border-2 transition-all text-left ${
                 selectedOption === option.id
-                  ? 'border-champagne bg-champagne bg-opacity-5'
-                  : 'border-ivory-dark hover:border-copper'
+                  ? 'border-gold bg-gold bg-opacity-5'
+                  : 'border-cream-dark hover:border-copper'
               }`}
             >
               <div className="flex items-center gap-4">
                 <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition ${
                   selectedOption === option.id
-                    ? 'border-champagne bg-champagne'
-                    : 'border-charcoal-light'
+                    ? 'border-gold bg-gold'
+                    : 'border-navy-light'
                 }`}>
                   {selectedOption === option.id && (
                     <div className="w-3 h-3 bg-white rounded-full"></div>
                   )}
                 </div>
-                <span className="text-charcoal flex-1">{option.text}</span>
+                <span className="text-navy flex-1">{option.text}</span>
               </div>
             </button>
           ))}
@@ -160,14 +160,14 @@ export default function WouldYouRatherGame({ game, userId, onComplete, onClose }
         <button
           onClick={() => setCurrentQuestionIndex(Math.max(0, currentQuestionIndex - 1))}
           disabled={currentQuestionIndex === 0}
-          className="py-3 px-6 border-2 border-champagne text-charcoal rounded-full hover:bg-champagne hover:text-white transition font-medium disabled:opacity-30 disabled:cursor-not-allowed"
+          className="py-3 px-6 border-2 border-gold text-navy rounded-full hover:bg-gold hover:text-white transition font-medium disabled:opacity-30 disabled:cursor-not-allowed"
         >
           ← Back
         </button>
         <button
           onClick={handleSubmit}
           disabled={!selectedOption || isSubmitting}
-          className="py-3 px-8 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className="py-3 px-8 bg-gold text-navy-dark rounded-full hover:bg-gold-light transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Submitting...' : currentQuestionIndex < questions.length - 1 ? 'Next →' : 'Complete ✓'}
         </button>

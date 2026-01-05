@@ -164,7 +164,7 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
   return (
     <div className="flex flex-col h-[600px] max-w-3xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
       {/* Header with Progress */}
-      <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4">
+      <div className="bg-gradient-to-r from-navy to-navy-dark text-white p-4">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-xl font-semibold">IntroAlignment Conversation</h2>
           <span className="text-sm opacity-90">
@@ -202,7 +202,7 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
             <button
               onClick={startConversation}
               disabled={isLoading}
-              className="mt-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+              className="mt-4 bg-gradient-to-r from-gold to-gold-dark text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all disabled:opacity-50"
             >
               {isLoading ? 'Starting...' : "Let's Begin"}
             </button>
@@ -217,8 +217,8 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                     message.role === 'user'
-                      ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white'
-                      : 'bg-gray-100 text-gray-800'
+                      ? 'bg-gradient-to-r from-gold to-gold-dark text-white'
+                      : 'bg-blush text-navy'
                   }`}
                 >
                   <div className="whitespace-pre-wrap">{message.content}</div>
@@ -228,11 +228,11 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 rounded-2xl px-4 py-3">
+                <div className="bg-blush rounded-2xl px-4 py-3">
                   <div className="flex space-x-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    <div className="w-2 h-2 bg-gold rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-gold rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-gold rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
                 </div>
               </div>
@@ -254,12 +254,12 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
               placeholder="Type your response..."
               disabled={isLoading}
               rows={2}
-              className="flex-1 border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50 resize-none"
+              className="flex-1 border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gold disabled:opacity-50 resize-none"
             />
             <button
               onClick={sendMessage}
               disabled={!input.trim() || isLoading}
-              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed self-end"
+              className="bg-gradient-to-r from-gold to-gold-dark text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed self-end"
             >
               Send
             </button>
@@ -272,7 +272,7 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
 
       {/* Completion State */}
       {isComplete && (
-        <div className="border-t border-gray-200 p-6 bg-gradient-to-r from-pink-50 to-purple-50 text-center">
+        <div className="border-t border-gray-200 p-6 bg-blush-light text-center">
           <div className="text-4xl mb-2">🎉</div>
           <p className="text-lg font-semibold text-gray-800">
             Conversation Complete!

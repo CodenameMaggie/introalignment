@@ -67,14 +67,14 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-ivory py-16 px-4">
+    <div className="min-h-screen bg-cream py-16 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif font-bold text-charcoal mb-4">
+          <h1 className="text-4xl font-serif font-bold text-navy mb-4">
             Find Your Aligned Partner
           </h1>
-          <p className="text-xl text-charcoal-light max-w-2xl mx-auto">
+          <p className="text-xl text-navy-light max-w-2xl mx-auto">
             Choose the plan that fits your journey. All plans include our
             comprehensive personality profiling and matching algorithm.
           </p>
@@ -87,8 +87,8 @@ export default function PricingPage() {
               onClick={() => setInterval('month')}
               className={`px-6 py-2 rounded-full transition-all ${
                 interval === 'month'
-                  ? 'bg-charcoal text-ivory'
-                  : 'text-charcoal hover:bg-ivory-dark'
+                  ? 'bg-navy text-cream'
+                  : 'text-navy hover:bg-cream-dark'
               }`}
             >
               Monthly
@@ -97,12 +97,12 @@ export default function PricingPage() {
               onClick={() => setInterval('year')}
               className={`px-6 py-2 rounded-full transition-all ${
                 interval === 'year'
-                  ? 'bg-charcoal text-ivory'
-                  : 'text-charcoal hover:bg-ivory-dark'
+                  ? 'bg-navy text-cream'
+                  : 'text-navy hover:bg-cream-dark'
               }`}
             >
               Yearly
-              <span className="ml-2 text-xs bg-champagne text-charcoal-dark px-2 py-0.5 rounded-full font-medium">
+              <span className="ml-2 text-xs bg-gold text-navy-dark px-2 py-0.5 rounded-full font-medium">
                 Save 20%
               </span>
             </button>
@@ -116,35 +116,35 @@ export default function PricingPage() {
               key={plan.id}
               className={`bg-white rounded-2xl p-6 relative ${
                 plan.is_featured
-                  ? 'ring-2 ring-champagne shadow-xl scale-105'
+                  ? 'ring-2 ring-gold shadow-xl scale-105'
                   : 'shadow-md border border-soft-gray'
               }`}
             >
               {/* Badge */}
               {plan.badge_text && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-champagne text-charcoal-dark text-sm px-4 py-1 rounded-full font-semibold">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-navy-dark text-sm px-4 py-1 rounded-full font-semibold">
                   {plan.badge_text}
                 </div>
               )}
 
               {/* Plan Name */}
-              <h3 className="text-xl font-semibold text-charcoal mb-2">
+              <h3 className="text-xl font-semibold text-navy mb-2">
                 {plan.name}
               </h3>
-              <p className="text-sm text-charcoal-light mb-4">
+              <p className="text-sm text-navy-light mb-4">
                 {plan.description}
               </p>
 
               {/* Price */}
               <div className="mb-6">
-                <span className="text-4xl font-bold text-charcoal">
+                <span className="text-4xl font-bold text-navy">
                   ${interval === 'year'
                     ? Math.round(plan.price_yearly / 12)
                     : plan.price_monthly}
                 </span>
-                <span className="text-charcoal-light">/mo</span>
+                <span className="text-navy-light">/mo</span>
                 {interval === 'year' && plan.price_yearly > 0 && (
-                  <div className="text-sm text-champagne font-medium">
+                  <div className="text-sm text-gold font-medium">
                     Billed ${plan.price_yearly}/year
                   </div>
                 )}
@@ -192,10 +192,10 @@ export default function PricingPage() {
                 disabled={loading === plan.slug}
                 className={`w-full py-3 rounded-full font-semibold transition-all ${
                   plan.is_featured
-                    ? 'bg-champagne text-charcoal-dark hover:bg-champagne-light'
+                    ? 'bg-gold text-navy-dark hover:bg-gold-light'
                     : plan.slug === 'free'
-                      ? 'bg-ivory-dark text-charcoal hover:bg-soft-gray'
-                      : 'bg-charcoal text-ivory hover:bg-charcoal-light'
+                      ? 'bg-cream-dark text-navy hover:bg-soft-gray'
+                      : 'bg-navy text-cream hover:bg-navy-light'
                 } disabled:opacity-50`}
               >
                 {loading === plan.slug
@@ -210,7 +210,7 @@ export default function PricingPage() {
 
         {/* Add-ons */}
         <div className="mt-16">
-          <h2 className="text-2xl font-serif font-bold text-charcoal text-center mb-8">
+          <h2 className="text-2xl font-serif font-bold text-navy text-center mb-8">
             Add-ons
           </h2>
           <div className="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -243,7 +243,7 @@ export default function PricingPage() {
 
         {/* FAQ */}
         <div className="mt-16 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-serif font-bold text-charcoal text-center mb-8">
+          <h2 className="text-2xl font-serif font-bold text-navy text-center mb-8">
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
@@ -272,13 +272,13 @@ export default function PricingPage() {
 
 function Feature({ included, text }: { included: boolean; text: string }) {
   return (
-    <li className={`flex items-center gap-2 ${included ? 'text-charcoal' : 'text-charcoal-light line-through'}`}>
+    <li className={`flex items-center gap-2 ${included ? 'text-navy' : 'text-navy-light line-through'}`}>
       {included ? (
         <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       ) : (
-        <svg className="w-5 h-5 text-charcoal-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-5 h-5 text-navy-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
       )}
@@ -312,14 +312,14 @@ function AddOnCard({ name, price, description, slug }: {
 
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm border border-soft-gray">
-      <h4 className="font-medium text-charcoal">{name}</h4>
-      <p className="text-sm text-charcoal-light mb-2">{description}</p>
+      <h4 className="font-medium text-navy">{name}</h4>
+      <p className="text-sm text-navy-light mb-2">{description}</p>
       <div className="flex items-center justify-between">
-        <span className="font-bold text-champagne">{price}</span>
+        <span className="font-bold text-gold">{price}</span>
         <button
           onClick={handlePurchase}
           disabled={loading}
-          className="text-sm px-3 py-1 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition-colors disabled:opacity-50 font-medium"
+          className="text-sm px-3 py-1 bg-gold text-navy-dark rounded-full hover:bg-gold-light transition-colors disabled:opacity-50 font-medium"
         >
           {loading ? '...' : 'Buy'}
         </button>
@@ -332,14 +332,14 @@ function FAQ({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-ivory-dark pb-4">
+    <div className="border-b border-cream-dark pb-4">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex justify-between items-center text-left"
       >
-        <span className="font-medium text-charcoal">{q}</span>
+        <span className="font-medium text-navy">{q}</span>
         <svg
-          className={`w-5 h-5 text-champagne transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`w-5 h-5 text-gold transition-transform ${open ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -348,7 +348,7 @@ function FAQ({ q, a }: { q: string; a: string }) {
         </svg>
       </button>
       {open && (
-        <p className="mt-2 text-charcoal-light">{a}</p>
+        <p className="mt-2 text-navy-light">{a}</p>
       )}
     </div>
   );

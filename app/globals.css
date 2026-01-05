@@ -6,22 +6,28 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  /* IntroAlignment Elegant & Timeless Palette */
+  /* IntroAlignment Classic Romance Palette */
 
-  /* Primary - Charcoal family */
-  --charcoal: #2D3748;
-  --charcoal-light: #4A5568;
-  --charcoal-dark: #1A202C;
+  /* Primary - Deep Navy (trust, grounding, sophistication) */
+  --navy: #2C3E50;
+  --navy-light: #3D5166;
+  --navy-dark: #1A252F;
 
-  /* Accent - Champagne Gold family */
-  --champagne: #D4AF37;
-  --champagne-light: #E8C547;
-  --champagne-dark: #B8960C;
-  --champagne-muted: #C9B896;
+  /* Romantic - Soft Blush (warmth, romance, tenderness) */
+  --blush: #F4E4E1;
+  --blush-light: #FAF2F0;
+  --blush-dark: #E8D0CC;
+  --blush-medium: #DBBEB8;
+
+  /* Accent - Warm Gold (elegance, premium, timeless) */
+  --gold: #D4A574;
+  --gold-light: #E2BB8E;
+  --gold-dark: #B8895A;
+  --gold-muted: #C9B896;
 
   /* Neutrals */
-  --ivory: #FFFEF7;
-  --ivory-dark: #F7F5F0;
+  --cream: #FFFEF5;
+  --cream-dark: #FAF7F2;
   --soft-gray: #E2E0DB;
   --medium-gray: #A0998F;
 
@@ -34,22 +40,22 @@
 
   /* Status */
   --success: #7C9A8E;
-  --warning: #D4AF37;
+  --warning: #D4A574;
   --error: #C75D5D;
   --info: #6B8CAE;
 
   /* Text */
-  --text-primary: #2D3748;
-  --text-secondary: #4A5568;
+  --text-primary: #2C3E50;
+  --text-secondary: #3D5166;
   --text-muted: #718096;
-  --text-on-dark: #FFFEF7;
-  --text-on-gold: #1A202C;
+  --text-on-dark: #FFFEF5;
+  --text-on-gold: #1A252F;
 
   /* Backgrounds */
-  --bg-page: #FFFEF7;
+  --bg-page: #FFFEF5;
   --bg-card: #FFFFFF;
-  --bg-elevated: #F7F5F0;
-  --bg-dark: #2D3748;
+  --bg-elevated: #FAF7F2;
+  --bg-dark: #2C3E50;
 }
 
 @theme inline {
@@ -57,15 +63,19 @@
   --color-foreground: var(--foreground);
 
   /* Brand colors for Tailwind */
-  --color-charcoal: var(--charcoal);
-  --color-charcoal-light: var(--charcoal-light);
-  --color-charcoal-dark: var(--charcoal-dark);
-  --color-champagne: var(--champagne);
-  --color-champagne-light: var(--champagne-light);
-  --color-champagne-dark: var(--champagne-dark);
-  --color-champagne-muted: var(--champagne-muted);
-  --color-ivory: var(--ivory);
-  --color-ivory-dark: var(--ivory-dark);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-navy-dark: var(--navy-dark);
+  --color-blush: var(--blush);
+  --color-blush-light: var(--blush-light);
+  --color-blush-dark: var(--blush-dark);
+  --color-blush-medium: var(--blush-medium);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-gold-muted: var(--gold-muted);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
   --color-soft-gray: var(--soft-gray);
   --color-medium-gray: var(--medium-gray);
   --color-sage: var(--sage);

@@ -27,7 +27,7 @@ export default function StreakCounter({ streak }: Props) {
   if (!streak) {
     return (
       <div className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
-        <div className="h-24 bg-ivory-dark rounded"></div>
+        <div className="h-24 bg-cream-dark rounded"></div>
       </div>
     );
   }
@@ -41,32 +41,32 @@ export default function StreakCounter({ streak }: Props) {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-serif text-xl text-charcoal">Your Streak</h3>
+        <h3 className="font-serif text-xl text-navy">Your Streak</h3>
         <span className="text-3xl">🔥</span>
       </div>
 
       <div className="mb-6">
         <div className="flex items-baseline gap-2">
-          <span className="font-serif text-5xl text-charcoal">{currentStreak}</span>
-          <span className="text-charcoal-light">days</span>
+          <span className="font-serif text-5xl text-navy">{currentStreak}</span>
+          <span className="text-navy-light">days</span>
         </div>
-        <p className="text-sm text-charcoal-light mt-1">
+        <p className="text-sm text-navy-light mt-1">
           Longest: {longestStreak} days
         </p>
       </div>
 
       <div className="space-y-3">
         <div className="flex justify-between text-sm">
-          <span className="text-charcoal-light">Today's Points</span>
-          <span className="text-charcoal font-semibold">{todayPoints}</span>
+          <span className="text-navy-light">Today's Points</span>
+          <span className="text-navy font-semibold">{todayPoints}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-charcoal-light">Total Points</span>
+          <span className="text-navy-light">Total Points</span>
           <span className="text-copper font-semibold">{totalPoints}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-charcoal-light">Level</span>
-          <span className="text-charcoal font-semibold">{level}</span>
+          <span className="text-navy-light">Level</span>
+          <span className="text-navy font-semibold">{level}</span>
         </div>
       </div>
 

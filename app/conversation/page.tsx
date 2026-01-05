@@ -34,9 +34,9 @@ function ConversationPageContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blush-light via-cream to-blush">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gold border-t-transparent"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
@@ -52,7 +52,7 @@ function ConversationPageContent() {
 
   if (!conversationEnabled) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blush-light via-cream to-blush flex items-center justify-center p-4">
         <div className="max-w-2xl mx-auto text-center">
           <div className="bg-white rounded-2xl shadow-xl p-12">
             <div className="text-6xl mb-6">🚀</div>
@@ -67,7 +67,7 @@ function ConversationPageContent() {
             </p>
             <button
               onClick={() => router.push('/dashboard-interactive')}
-              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
+              className="bg-gradient-to-r from-gold to-gold-dark text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
             >
               Go to Dashboard
             </button>
@@ -78,7 +78,7 @@ function ConversationPageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blush-light via-cream to-blush py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
@@ -185,9 +185,9 @@ function ConversationPageContent() {
 export default function ConversationPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blush-light via-cream to-blush">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gold border-t-transparent"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>

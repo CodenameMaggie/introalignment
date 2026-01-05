@@ -34,17 +34,17 @@ export default function BillingSettingsPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-8">
-      <h1 className="text-2xl font-bold text-charcoal mb-8">Billing & Subscription</h1>
+      <h1 className="text-2xl font-bold text-navy mb-8">Billing & Subscription</h1>
 
       {/* Current Plan */}
       <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
         <div className="flex justify-between items-start">
           <div>
-            <h2 className="text-lg font-semibold text-charcoal mb-1">
+            <h2 className="text-lg font-semibold text-navy mb-1">
               Current Plan
             </h2>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-charcoal">
+              <span className="text-2xl font-bold text-navy">
                 {subscription?.plan?.name || 'Free'}
               </span>
               {subscription?.status && subscription.status !== 'active' && (
@@ -58,7 +58,7 @@ export default function BillingSettingsPage() {
               )}
             </div>
             {subscription?.plan?.price_monthly > 0 && (
-              <p className="text-charcoal-light">
+              <p className="text-navy-light">
                 ${subscription.plan.price_monthly}/month • {subscription.billing_interval}ly billing
               </p>
             )}
@@ -66,7 +66,7 @@ export default function BillingSettingsPage() {
 
           <button
             onClick={() => window.location.href = '/pricing'}
-            className="px-4 py-2 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-light transition-colors font-medium"
+            className="px-4 py-2 bg-gold text-navy-dark rounded-full hover:bg-gold-light transition-colors font-medium"
           >
             {subscription?.plan?.slug === 'free' ? 'Upgrade' : 'Change Plan'}
           </button>
@@ -74,14 +74,14 @@ export default function BillingSettingsPage() {
 
         {/* Usage */}
         {subscription?.plan?.introductions_per_month !== 0 && (
-          <div className="mt-6 pt-6 border-t border-ivory-dark">
-            <h3 className="text-sm font-medium text-charcoal-light mb-2">
+          <div className="mt-6 pt-6 border-t border-cream-dark">
+            <h3 className="text-sm font-medium text-navy-light mb-2">
               Introductions This Period
             </h3>
             <div className="flex items-center gap-4">
               <div className="flex-1 bg-soft-gray rounded-full h-3">
                 <div
-                  className="bg-champagne h-3 rounded-full transition-all"
+                  className="bg-gold h-3 rounded-full transition-all"
                   style={{
                     width: subscription?.plan?.introductions_per_month === -1
                       ? '100%'
@@ -89,14 +89,14 @@ export default function BillingSettingsPage() {
                   }}
                 />
               </div>
-              <span className="text-sm text-charcoal">
+              <span className="text-sm text-navy">
                 {subscription?.plan?.introductions_per_month === -1
                   ? 'Unlimited'
                   : `${subscription?.introductions_used || 0} / ${subscription?.plan?.introductions_per_month}`}
               </span>
             </div>
             {subscription?.current_period_end && (
-              <p className="text-xs text-charcoal-light mt-2">
+              <p className="text-xs text-navy-light mt-2">
                 Resets on {new Date(subscription.current_period_end).toLocaleDateString()}
               </p>
             )}
@@ -121,15 +121,15 @@ export default function BillingSettingsPage() {
 
       {/* Manage Billing */}
       <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
-        <h2 className="text-lg font-semibold text-charcoal mb-4">
+        <h2 className="text-lg font-semibold text-navy mb-4">
           Manage Billing
         </h2>
-        <p className="text-charcoal-light mb-4">
+        <p className="text-navy-light mb-4">
           Update your payment method, download invoices, or cancel your subscription.
         </p>
         <button
           onClick={openPortal}
-          className="px-6 py-3 bg-charcoal text-ivory rounded-full hover:bg-charcoal-light transition-colors font-medium"
+          className="px-6 py-3 bg-navy text-cream rounded-full hover:bg-navy-light transition-colors font-medium"
         >
           Open Billing Portal
         </button>
@@ -138,20 +138,20 @@ export default function BillingSettingsPage() {
       {/* Invoices */}
       {invoices.length > 0 && (
         <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-charcoal mb-4">
+          <h2 className="text-lg font-semibold text-navy mb-4">
             Invoice History
           </h2>
           <div className="space-y-3">
             {invoices.map(invoice => (
               <div
                 key={invoice.id}
-                className="flex items-center justify-between py-3 border-b border-ivory-dark last:border-0"
+                className="flex items-center justify-between py-3 border-b border-cream-dark last:border-0"
               >
                 <div>
-                  <p className="font-medium text-charcoal">
+                  <p className="font-medium text-navy">
                     ${invoice.amount_paid?.toFixed(2)}
                   </p>
-                  <p className="text-sm text-charcoal-light">
+                  <p className="text-sm text-navy-light">
                     {new Date(invoice.paid_at || invoice.created_at).toLocaleDateString()}
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export default function BillingSettingsPage() {
                       href={invoice.invoice_pdf_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-champagne hover:underline text-sm font-medium"
+                      className="text-gold hover:underline text-sm font-medium"
                     >
                       Download
                     </a>

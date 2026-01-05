@@ -74,10 +74,10 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
 
   if (loading && !currentQuestion) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-ivory">
+      <div className="flex items-center justify-center min-h-screen bg-cream">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-champagne mx-auto mb-4"></div>
-          <p className="text-charcoal">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto mb-4"></div>
+          <p className="text-navy">Loading...</p>
         </div>
       </div>
     );
@@ -85,30 +85,30 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
 
   if (!currentQuestion) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-ivory">
-        <p className="text-charcoal">No question available</p>
+      <div className="flex items-center justify-center min-h-screen bg-cream">
+        <p className="text-navy">No question available</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-ivory py-12 px-4">
+    <div className="min-h-screen bg-cream py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="font-serif text-3xl text-charcoal mb-2">Getting to Know You</h1>
+          <h1 className="font-serif text-3xl text-navy mb-2">Getting to Know You</h1>
           <p className="font-serif italic text-medium-gray">Take your time. There are no wrong answers.</p>
         </div>
 
         {/* Progress indicator */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-charcoal">Question {progress + 1}</span>
+            <span className="text-sm text-navy">Question {progress + 1}</span>
             <span className="text-sm text-medium-gray">{Math.round((progress / 40) * 100)}% complete</span>
           </div>
           <div className="w-full bg-soft-gray rounded-full h-2">
             <div
-              className="bg-champagne rounded-full h-2 transition-all duration-500"
+              className="bg-gold rounded-full h-2 transition-all duration-500"
               style={{ width: `${(progress / 40) * 100}%` }}
             ></div>
           </div>
@@ -116,7 +116,7 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
 
         {/* Question card */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
-          <h2 className="text-2xl font-serif text-charcoal mb-6 leading-relaxed">
+          <h2 className="text-2xl font-serif text-navy mb-6 leading-relaxed">
             {currentQuestion.text}
           </h2>
 
@@ -127,9 +127,9 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
                 key={answer.id}
                 onClick={() => handleAnswer(answer.id)}
                 disabled={loading}
-                className="w-full text-left p-4 rounded-xl border-2 border-ivory-dark hover:border-copper hover:bg-ivory transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
+                className="w-full text-left p-4 rounded-xl border-2 border-cream-dark hover:border-copper hover:bg-cream transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
               >
-                <span className="text-charcoal group-hover:text-charcoal transition-colors">
+                <span className="text-navy group-hover:text-navy transition-colors">
                   {answer.text}
                 </span>
               </button>
@@ -138,10 +138,10 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
             {currentQuestion.type === 'scale' && (
               <div className="py-6">
                 <div className="flex justify-between mb-4">
-                  <span className="text-sm text-charcoal">
+                  <span className="text-sm text-navy">
                     {currentQuestion.scaleLabels?.min}
                   </span>
-                  <span className="text-sm text-charcoal">
+                  <span className="text-sm text-navy">
                     {currentQuestion.scaleLabels?.max}
                   </span>
                 </div>
@@ -154,7 +154,7 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
                       key={num}
                       onClick={() => handleAnswer(num.toString())}
                       disabled={loading}
-                      className="flex-1 py-3 px-2 rounded-lg border-2 border-ivory-dark hover:border-champagne hover:bg-champagne hover:text-white transition-all duration-200 disabled:opacity-50 text-charcoal font-medium"
+                      className="flex-1 py-3 px-2 rounded-lg border-2 border-cream-dark hover:border-gold hover:bg-gold hover:text-white transition-all duration-200 disabled:opacity-50 text-navy font-medium"
                     >
                       {num}
                     </button>

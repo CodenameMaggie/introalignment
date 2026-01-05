@@ -41,11 +41,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-cream flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="font-serif text-3xl font-semibold text-charcoal">
+          <Link href="/" className="font-serif text-3xl font-semibold text-navy">
             IntroAlignment
           </Link>
           <p className="mt-2 font-serif italic text-medium-gray">
@@ -55,7 +55,7 @@ export default function LoginPage() {
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="font-serif text-2xl text-charcoal mb-6 text-center">
+          <h2 className="font-serif text-2xl text-navy mb-6 text-center">
             Sign In
           </h2>
 
@@ -67,7 +67,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-charcoal mb-1">
+              <label className="block text-sm font-medium text-navy mb-1">
                 Email
               </label>
               <input
@@ -75,12 +75,12 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
+                className="w-full px-4 py-2 border-2 border-cream-dark rounded-full focus:border-gold focus:outline-none bg-cream transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-charcoal mb-1">
+              <label className="block text-sm font-medium text-navy mb-1">
                 Password
               </label>
               <input
@@ -88,16 +88,16 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
+                className="w-full px-4 py-2 border-2 border-cream-dark rounded-full focus:border-gold focus:outline-none bg-cream transition"
               />
             </div>
 
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2" />
-                <span className="text-charcoal-light">Remember me</span>
+                <span className="text-navy-light">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-charcoal hover:text-charcoal-light">
+              <Link href="/forgot-password" className="text-navy hover:text-navy-light">
                 Forgot password?
               </Link>
             </div>
@@ -105,15 +105,15 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-champagne text-charcoal-dark py-3 px-6 rounded-full font-semibold hover:bg-champagne-light transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full bg-gold text-navy-dark py-3 px-6 rounded-full font-semibold hover:bg-gold-light transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <p className="text-center text-sm text-charcoal-light mt-6">
+          <p className="text-center text-sm text-navy-light mt-6">
             Don't have an account?{' '}
-            <Link href="/signup" className="text-charcoal hover:text-charcoal-light font-medium">
+            <Link href="/signup" className="text-navy hover:text-navy-light font-medium">
               Sign up
             </Link>
           </p>
