@@ -2,7 +2,7 @@
 
 **Live URL:** https://introalignment.vercel.app/admin
 **Status:** Phase 1 Complete ✅
-**Build:** 51/51 routes compiled successfully
+**Build:** 54/54 routes compiled successfully
 
 ---
 
@@ -50,6 +50,20 @@ Features:
 APIs:
 - `GET /api/admin/red-flags` - List with filters
 - `POST /api/admin/red-flags/update` - Update status
+
+### SQL Migrations Viewer (`/admin/migrations`)
+**Complete and functional - UTILITY**
+
+Features:
+- Lists all 13 migration files from `supabase/migrations/`
+- Expandable/collapsible SQL content display
+- One-click copy-to-clipboard for each migration
+- File metadata: size and last modified date
+- Instructions for running migrations in Supabase SQL Editor
+- Clean syntax-highlighted code display
+
+API:
+- `GET /api/admin/migrations` - Read migration files from filesystem
 
 ---
 
@@ -188,6 +202,8 @@ Requirements:
 - ✅ Red flags display properly
 - ✅ Red flag filters work
 - ✅ Red flag actions update database
+- ✅ SQL migrations viewer displays all files
+- ✅ Copy-to-clipboard works for migrations
 - ✅ Build compiles without errors
 - ✅ Deployed to production
 
@@ -207,9 +223,11 @@ Requirements:
 ## Next Steps
 
 1. **Run Migration 013:**
-   ```sql
-   -- Execute supabase/migrations/013_admin_dashboard_system.sql
-   ```
+   - Visit https://introalignment.vercel.app/admin/migrations
+   - Find "013_admin_dashboard_system.sql"
+   - Click "Copy SQL" button
+   - Open Supabase SQL Editor
+   - Paste and run the migration
 
 2. **Set Maggie as Admin:**
    ```sql
@@ -222,6 +240,7 @@ Requirements:
    - View overview metrics
    - Navigate to Red Flags section
    - Test filtering and actions
+   - Use SQL Migrations viewer to access migration files
 
 4. **Build Phase 2:**
    - User Management (highest priority after Red Flags)
