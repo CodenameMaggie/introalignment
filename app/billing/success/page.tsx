@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function BillingSuccessPage() {
+function BillingSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
@@ -61,5 +61,24 @@ export default function BillingSuccessPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function BillingSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-ivory flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-lg text-center">
+          <div className="w-16 h-16 mx-auto mb-6 bg-sage bg-opacity-20 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-sage border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <h1 className="text-2xl font-serif font-bold text-charcoal mb-2">
+            Loading...
+          </h1>
+        </div>
+      </div>
+    }>
+      <BillingSuccessContent />
+    </Suspense>
   );
 }

@@ -163,14 +163,14 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
       stripe_subscription_id: subscription.id,
       status: statusMap[subscription.status] || subscription.status,
       billing_interval: subscription.items.data[0]?.price.recurring?.interval || 'month',
-      current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
-      current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
-      cancel_at_period_end: subscription.cancel_at_period_end,
-      trial_start: subscription.trial_start
-        ? new Date(subscription.trial_start * 1000).toISOString()
+      current_period_start: new Date((subscription as any).current_period_start * 1000).toISOString(),
+      current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),
+      cancel_at_period_end: (subscription as any).cancel_at_period_end || false,
+      trial_start: (subscription as any).trial_start
+        ? new Date((subscription as any).trial_start * 1000).toISOString()
         : null,
-      trial_end: subscription.trial_end
-        ? new Date(subscription.trial_end * 1000).toISOString()
+      trial_end: (subscription as any).trial_end
+        ? new Date((subscription as any).trial_end * 1000).toISOString()
         : null,
       introductions_remaining: plan?.introductions_per_month === -1
         ? 999
@@ -226,12 +226,12 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
 }
 
 async function handleInvoicePaid(invoice: Stripe.Invoice) {
-  if (!invoice.subscription) return;
+  if (!(invoice as any).subscription) return;
 
   const { data: sub } = await supabase
     .from('user_subscriptions')
     .select('*, plan:subscription_plans(*)')
-    .eq('stripe_subscription_id', invoice.subscription as string)
+    .eq('stripe_subscription_id', (invoice as any).subscription as string)
     .single();
 
   if (!sub) return;
@@ -246,8 +246,8 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
     status: 'paid',
     invoice_pdf_url: invoice.invoice_pdf,
     hosted_invoice_url: invoice.hosted_invoice_url,
-    period_start: new Date(invoice.period_start * 1000).toISOString(),
-    period_end: new Date(invoice.period_end * 1000).toISOString(),
+    period_start: new Date((invoice as any).period_start * 1000).toISOString(),
+    period_end: new Date((invoice as any).period_end * 1000).toISOString(),
     paid_at: new Date().toISOString()
   }, {
     onConflict: 'stripe_invoice_id'
@@ -282,17 +282,17 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
     source_id: sub.id,
     credits_added: introductions,
     credits_remaining: introductions,
-    expires_at: new Date(invoice.period_end * 1000).toISOString()
+    expires_at: new Date((invoice as any).period_end * 1000).toISOString()
   });
 }
 
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
-  if (!invoice.subscription) return;
+  if (!(invoice as any).subscription) return;
 
   await supabase
     .from('user_subscriptions')
     .update({ status: 'past_due' })
-    .eq('stripe_subscription_id', invoice.subscription as string);
+    .eq('stripe_subscription_id', (invoice as any).subscription as string);
 
   // TODO: Send email notification about failed payment
 }
