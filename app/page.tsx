@@ -39,7 +39,7 @@ export default function LandingPage() {
         body {
           margin: 0;
           font-family: 'Nunito', sans-serif;
-          background: #FFFEF9;
+          background: #FFFEF7;
           color: #3A3A3A;
         }
 
@@ -61,7 +61,7 @@ export default function LandingPage() {
           font-family: 'Cormorant Garamond', serif;
           font-size: 1.8rem;
           font-weight: 600;
-          color: #722F37;
+          color: #2D3748;
           text-decoration: none;
         }
 
@@ -81,7 +81,7 @@ export default function LandingPage() {
         }
 
         .nav-links a:hover {
-          color: #722F37;
+          color: #2D3748;
         }
 
         .hero {
@@ -102,14 +102,14 @@ export default function LandingPage() {
           font-family: 'Cormorant Garamond', serif;
           font-size: 4rem;
           font-weight: 600;
-          color: #722F37;
+          color: #2D3748;
           margin: 0 0 1rem;
         }
 
         .tagline {
           font-size: 1.5rem;
           font-weight: 300;
-          color: #B87333;
+          color: #D4AF37;
           margin-bottom: 2rem;
           font-style: italic;
         }
@@ -124,7 +124,7 @@ export default function LandingPage() {
         .cta-button {
           display: inline-block;
           padding: 1rem 2.5rem;
-          background: #722F37;
+          background: #2D3748;
           color: white;
           text-decoration: none;
           border-radius: 50px;
@@ -134,19 +134,19 @@ export default function LandingPage() {
         }
 
         .cta-button:hover {
-          background: #5a2329;
+          background: #1A202C;
           transform: translateY(-2px);
           box-shadow: 0 10px 20px rgba(114, 47, 55, 0.2);
         }
 
         .cta-secondary {
           background: transparent;
-          color: #722F37;
-          border: 2px solid #722F37;
+          color: #2D3748;
+          border: 2px solid #2D3748;
         }
 
         .cta-secondary:hover {
-          background: #722F37;
+          background: #2D3748;
           color: white;
         }
 
@@ -157,7 +157,7 @@ export default function LandingPage() {
           transform: translateX(-50%);
           width: 30px;
           height: 30px;
-          color: #B87333;
+          color: #D4AF37;
           animation: bounce 2s infinite;
         }
 
@@ -181,7 +181,7 @@ export default function LandingPage() {
         .section-header h2 {
           font-family: 'Cormorant Garamond', serif;
           font-size: 3rem;
-          color: #722F37;
+          color: #2D3748;
           margin-bottom: 1rem;
         }
 
@@ -201,14 +201,14 @@ export default function LandingPage() {
 
         .difference-card {
           padding: 2rem;
-          background: #FFFEF9;
+          background: #FFFEF7;
           border-radius: 20px;
           transition: all 0.3s;
           border: 2px solid transparent;
         }
 
         .difference-card:hover {
-          border-color: #B87333;
+          border-color: #D4AF37;
           transform: translateY(-5px);
           box-shadow: 0 10px 30px rgba(114, 47, 55, 0.1);
         }
@@ -217,13 +217,13 @@ export default function LandingPage() {
           width: 60px;
           height: 60px;
           margin-bottom: 1.5rem;
-          color: #B87333;
+          color: #D4AF37;
         }
 
         .difference-card h3 {
           font-family: 'Cormorant Garamond', serif;
           font-size: 1.8rem;
-          color: #722F37;
+          color: #2D3748;
           margin-bottom: 1rem;
         }
 
@@ -234,7 +234,7 @@ export default function LandingPage() {
 
         .waitlist {
           padding: 6rem 5%;
-          background: linear-gradient(135deg, #722F37 0%, #5a2329 100%);
+          background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%);
         }
 
         .waitlist-box {
@@ -278,7 +278,7 @@ export default function LandingPage() {
 
         .waitlist-form button {
           padding: 1rem;
-          background: #B87333;
+          background: #D4AF37;
           color: white;
           border: none;
           border-radius: 10px;
@@ -338,7 +338,7 @@ export default function LandingPage() {
           .mobile-menu span {
             width: 25px;
             height: 3px;
-            background: #722F37;
+            background: #2D3748;
             border-radius: 3px;
           }
 

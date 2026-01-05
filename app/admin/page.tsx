@@ -50,7 +50,7 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-burgundy mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-champagne mx-auto mb-4"></div>
           <p className="text-charcoal">Loading admin dashboard...</p>
         </div>
       </div>
@@ -60,23 +60,23 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-ivory">
       {/* Admin Nav */}
-      <nav className="bg-burgundy text-white">
+      <nav className="bg-champagne text-charcoal-dark">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-8">
             <span className="font-serif text-2xl font-semibold">IntroAlignment Admin</span>
             <div className="flex gap-4">
-              <Link href="/admin" className="hover:text-copper transition">
+              <Link href="/admin" className="hover:text-champagne transition">
                 Dashboard
               </Link>
-              <Link href="/admin/matching" className="hover:text-copper transition">
+              <Link href="/admin/matching" className="hover:text-champagne transition">
                 Matching
               </Link>
-              <Link href="/admin/review" className="hover:text-copper transition">
+              <Link href="/admin/review" className="hover:text-champagne transition">
                 Safety Review
               </Link>
             </div>
           </div>
-          <Link href="/dashboard" className="text-sm hover:text-copper transition">
+          <Link href="/dashboard" className="text-sm hover:text-champagne transition">
             Exit Admin →
           </Link>
         </div>
@@ -86,19 +86,19 @@ export default function AdminDashboard() {
         {/* Stats */}
         <div className="grid grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-burgundy mb-1">{stats.total}</div>
+            <div className="text-3xl font-bold text-charcoal mb-1">{stats.total}</div>
             <div className="text-sm text-charcoal-light">Total Users</div>
           </div>
           <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-copper mb-1">{stats.waitlist}</div>
+            <div className="text-3xl font-bold text-champagne mb-1">{stats.waitlist}</div>
             <div className="text-sm text-charcoal-light">Waitlist</div>
           </div>
           <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-dusty-rose-dark mb-1">{stats.onboarding}</div>
+            <div className="text-3xl font-bold text-medium-gray mb-1">{stats.onboarding}</div>
             <div className="text-sm text-charcoal-light">Onboarding</div>
           </div>
           <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-burgundy-light mb-1">{stats.active}</div>
+            <div className="text-3xl font-bold text-charcoal-light mb-1">{stats.active}</div>
             <div className="text-sm text-charcoal-light">Active</div>
           </div>
         </div>
@@ -106,11 +106,11 @@ export default function AdminDashboard() {
         {/* Users Table */}
         <div className="bg-white rounded-xl shadow overflow-hidden">
           <div className="p-6 border-b border-ivory-dark flex justify-between items-center">
-            <h2 className="font-serif text-2xl text-burgundy">All Users</h2>
+            <h2 className="font-serif text-2xl text-charcoal">All Users</h2>
             <input
               type="text"
               placeholder="Search users..."
-              className="px-4 py-2 border-2 border-ivory-dark rounded-lg focus:border-burgundy focus:outline-none"
+              className="px-4 py-2 border-2 border-ivory-dark rounded-lg focus:border-champagne focus:outline-none"
             />
           </div>
 
@@ -146,8 +146,8 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        user.status === 'active' ? 'bg-burgundy-light text-white' :
-                        user.status === 'onboarding' ? 'bg-copper text-white' :
+                        user.status === 'active' ? 'bg-champagne-light text-white' :
+                        user.status === 'onboarding' ? 'bg-champagne text-white' :
                         'bg-ivory-dark text-charcoal'
                       }`}>
                         {user.status}
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <Link
                         href={`/admin/users/${user.id}`}
-                        className="text-burgundy hover:text-burgundy-light"
+                        className="text-charcoal hover:text-charcoal-light"
                       >
                         View →
                       </Link>

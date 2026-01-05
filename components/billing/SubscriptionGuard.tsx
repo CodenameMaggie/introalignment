@@ -63,7 +63,7 @@ export default function SubscriptionGuard({
     return (
       <div className="p-8 text-center">
         <div className="max-w-md mx-auto bg-white rounded-xl p-8 shadow-sm">
-          <h2 className="text-xl font-semibold text-burgundy mb-4">
+          <h2 className="text-xl font-semibold text-charcoal mb-4">
             Upgrade Required
           </h2>
           <p className="text-charcoal-light mb-6">
@@ -71,7 +71,7 @@ export default function SubscriptionGuard({
           </p>
           <button
             onClick={() => router.push('/pricing')}
-            className="px-6 py-3 bg-burgundy text-white rounded-full hover:bg-burgundy-dark transition-colors"
+            className="px-6 py-3 bg-champagne text-charcoal-dark rounded-full hover:bg-champagne-dark transition-colors"
           >
             View Plans
           </button>

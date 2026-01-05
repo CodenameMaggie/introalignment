@@ -41,13 +41,13 @@ export default function StreakCounter({ streak }: Props) {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-serif text-xl text-burgundy">Your Streak</h3>
+        <h3 className="font-serif text-xl text-charcoal">Your Streak</h3>
         <span className="text-3xl">🔥</span>
       </div>
 
       <div className="mb-6">
         <div className="flex items-baseline gap-2">
-          <span className="font-serif text-5xl text-burgundy">{currentStreak}</span>
+          <span className="font-serif text-5xl text-charcoal">{currentStreak}</span>
           <span className="text-charcoal-light">days</span>
         </div>
         <p className="text-sm text-charcoal-light mt-1">
@@ -58,7 +58,7 @@ export default function StreakCounter({ streak }: Props) {
       <div className="space-y-3">
         <div className="flex justify-between text-sm">
           <span className="text-charcoal-light">Today's Points</span>
-          <span className="text-burgundy font-semibold">{todayPoints}</span>
+          <span className="text-charcoal font-semibold">{todayPoints}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-charcoal-light">Total Points</span>

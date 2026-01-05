@@ -58,13 +58,13 @@ export default function ProfileProgress({ profile }: Props) {
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="font-serif text-xl text-burgundy">Profile Building</h3>
+          <h3 className="font-serif text-xl text-charcoal">Profile Building</h3>
           <p className="text-sm text-charcoal-light">
             {totalActivities} activities completed
           </p>
         </div>
         <div className="text-right">
-          <div className="text-3xl font-serif text-burgundy">{completeness}%</div>
+          <div className="text-3xl font-serif text-charcoal">{completeness}%</div>
           <p className="text-xs text-charcoal-light">Complete</p>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function ProfileProgress({ profile }: Props) {
       <div className="mb-6">
         <div className="w-full bg-ivory-dark rounded-full h-3">
           <div
-            className="bg-gradient-to-r from-burgundy to-copper rounded-full h-3 transition-all duration-500"
+            className="bg-gradient-to-r from-charcoal to-champagne rounded-full h-3 transition-all duration-500"
             style={{ width: `${completeness}%` }}
           ></div>
         </div>
@@ -82,15 +82,15 @@ export default function ProfileProgress({ profile }: Props) {
       {/* Insights */}
       <div className="grid grid-cols-4 gap-4 mb-4">
         <div className="text-center">
-          <div className="text-2xl text-burgundy font-semibold">{profile.total_games_played}</div>
+          <div className="text-2xl text-charcoal font-semibold">{profile.total_games_played}</div>
           <div className="text-xs text-charcoal-light">Games</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl text-copper font-semibold">{profile.total_puzzles_solved}</div>
+          <div className="text-2xl text-champagne font-semibold">{profile.total_puzzles_solved}</div>
           <div className="text-xs text-charcoal-light">Puzzles</div>
         </div>
         <div className="text-center">
-          <div className="text-2xl text-dusty-rose font-semibold">{profile.total_articles_read}</div>
+          <div className="text-2xl text-champagne-muted font-semibold">{profile.total_articles_read}</div>
           <div className="text-xs text-charcoal-light">Articles</div>
         </div>
         <div className="text-center">
@@ -101,15 +101,15 @@ export default function ProfileProgress({ profile }: Props) {
 
       {/* Personality Insight */}
       {strongestTrait.confidence > 0.3 && (
-        <div className="mt-4 p-4 bg-dusty-rose bg-opacity-10 rounded-lg">
+        <div className="mt-4 p-4 bg-champagne-muted bg-opacity-10 rounded-lg">
           <p className="text-sm text-charcoal">
-            <span className="font-semibold text-burgundy">Emerging Trait:</span>{' '}
+            <span className="font-semibold text-charcoal">Emerging Trait:</span>{' '}
             {getTraitLevel(strongestTrait.value)} {strongestTrait.name}
             {strongestTrait.confidence > 0.6 && ' ✓'}
           </p>
           <div className="mt-2 w-full bg-white rounded-full h-1.5">
             <div
-              className="bg-burgundy rounded-full h-1.5"
+              className="bg-champagne rounded-full h-1.5"
               style={{ width: `${strongestTrait.confidence * 100}%` }}
             ></div>
           </div>
@@ -118,7 +118,7 @@ export default function ProfileProgress({ profile }: Props) {
 
       {completeness < 50 && (
         <div className="mt-4 p-3 bg-copper bg-opacity-10 rounded-lg">
-          <p className="text-sm text-copper">
+          <p className="text-sm text-champagne">
             💡 Keep playing to build a richer profile and get better matches!
           </p>
         </div>

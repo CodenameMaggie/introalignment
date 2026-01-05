@@ -45,17 +45,17 @@ export default function LoginPage() {
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="font-serif text-3xl font-semibold text-burgundy">
+          <Link href="/" className="font-serif text-3xl font-semibold text-charcoal">
             IntroAlignment
           </Link>
-          <p className="mt-2 font-serif italic text-dusty-rose-dark">
+          <p className="mt-2 font-serif italic text-medium-gray">
             Welcome back
           </p>
         </div>
 
         {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="font-serif text-2xl text-burgundy mb-6 text-center">
+          <h2 className="font-serif text-2xl text-charcoal mb-6 text-center">
             Sign In
           </h2>
 
@@ -75,7 +75,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-dusty-rose-dark focus:outline-none bg-ivory transition"
+                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
               />
             </div>
 
@@ -88,7 +88,7 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-dusty-rose-dark focus:outline-none bg-ivory transition"
+                className="w-full px-4 py-2 border-2 border-ivory-dark rounded-full focus:border-champagne focus:outline-none bg-ivory transition"
               />
             </div>
 
@@ -97,7 +97,7 @@ export default function LoginPage() {
                 <input type="checkbox" className="mr-2" />
                 <span className="text-charcoal-light">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-burgundy hover:text-burgundy-light">
+              <Link href="/forgot-password" className="text-charcoal hover:text-charcoal-light">
                 Forgot password?
               </Link>
             </div>
@@ -105,7 +105,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-burgundy text-white py-3 px-6 rounded-full font-medium hover:bg-burgundy-light transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full bg-champagne text-charcoal-dark py-3 px-6 rounded-full font-semibold hover:bg-champagne-light transition disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
@@ -113,7 +113,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-charcoal-light mt-6">
             Don't have an account?{' '}
-            <Link href="/signup" className="text-burgundy hover:text-burgundy-light font-medium">
+            <Link href="/signup" className="text-charcoal hover:text-charcoal-light font-medium">
               Sign up
             </Link>
           </p>

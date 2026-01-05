@@ -53,7 +53,7 @@ function DashboardContent() {
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-burgundy mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-champagne mx-auto mb-4"></div>
           <p className="text-charcoal">Loading your dashboard...</p>
         </div>
       </div>
@@ -65,19 +65,19 @@ function DashboardContent() {
       {/* Navigation */}
       <nav className="bg-white border-b border-ivory-dark">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/dashboard" className="font-serif text-2xl font-semibold text-burgundy">
+          <Link href="/dashboard" className="font-serif text-2xl font-semibold text-charcoal">
             IntroAlignment
           </Link>
           <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="text-charcoal hover:text-burgundy transition">
+            <Link href="/dashboard" className="text-charcoal hover:text-charcoal transition">
               Dashboard
             </Link>
-            <Link href="/dashboard/profile" className="text-charcoal hover:text-burgundy transition">
+            <Link href="/dashboard/profile" className="text-charcoal hover:text-charcoal transition">
               Profile
             </Link>
             <button
               onClick={handleLogout}
-              className="text-charcoal hover:text-burgundy transition"
+              className="text-charcoal hover:text-charcoal transition"
             >
               Logout
             </button>
@@ -88,8 +88,8 @@ function DashboardContent() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Welcome Message */}
         {showWelcome && (
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-copper">
-            <h2 className="font-serif text-2xl text-burgundy mb-3">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-champagne">
+            <h2 className="font-serif text-2xl text-charcoal mb-3">
               Welcome to IntroAlignment! 🎉
             </h2>
             <p className="text-charcoal-light mb-4">
@@ -107,22 +107,22 @@ function DashboardContent() {
           {/* Profile Status */}
           <div className="md:col-span-2">
             <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-              <h2 className="font-serif text-2xl text-burgundy mb-6">Your Profile</h2>
+              <h2 className="font-serif text-2xl text-charcoal mb-6">Your Profile</h2>
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-ivory-dark">
                   <span className="text-charcoal">Profile Completeness</span>
                   <div className="flex items-center gap-3">
                     <div className="w-32 bg-ivory-dark rounded-full h-2">
-                      <div className="bg-burgundy rounded-full h-2 w-full"></div>
+                      <div className="bg-champagne rounded-full h-2 w-full"></div>
                     </div>
-                    <span className="text-burgundy font-semibold">100%</span>
+                    <span className="text-charcoal font-semibold">100%</span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between py-3 border-b border-ivory-dark">
                   <span className="text-charcoal">Status</span>
-                  <span className="px-3 py-1 bg-copper-light text-white rounded-full text-sm font-medium">
+                  <span className="px-3 py-1 bg-champagne-light text-white rounded-full text-sm font-medium">
                     Looking for Matches
                   </span>
                 </div>
@@ -137,7 +137,7 @@ function DashboardContent() {
 
               <Link
                 href="/dashboard/profile"
-                className="mt-6 block text-center py-3 px-6 border-2 border-burgundy text-burgundy rounded-full hover:bg-burgundy hover:text-white transition font-medium"
+                className="mt-6 block text-center py-3 px-6 border-2 border-champagne text-charcoal rounded-full hover:bg-champagne hover:text-white transition font-medium"
               >
                 View Full Profile
               </Link>
@@ -145,16 +145,16 @@ function DashboardContent() {
 
             {/* Matches Section */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="font-serif text-2xl text-burgundy mb-6">Your Matches</h2>
+              <h2 className="font-serif text-2xl text-charcoal mb-6">Your Matches</h2>
 
               {matches.length === 0 ? (
                 <div className="text-center py-12">
-                  <div className="w-20 h-20 bg-dusty-rose-light rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-10 h-10 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-20 h-20 bg-soft-gray rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-10 h-10 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
-                  <h3 className="font-serif text-xl text-burgundy mb-2">We're Looking</h3>
+                  <h3 className="font-serif text-xl text-charcoal mb-2">We're Looking</h3>
                   <p className="text-charcoal-light max-w-md mx-auto">
                     We're carefully reviewing potential matches for you. When we find someone
                     who's truly aligned with your values and vision, we'll introduce you.
@@ -165,20 +165,20 @@ function DashboardContent() {
                   {matches.map((match) => (
                     <div
                       key={match.id}
-                      className="border-2 border-ivory-dark rounded-xl p-6 hover:border-copper transition cursor-pointer"
+                      className="border-2 border-ivory-dark rounded-xl p-6 hover:border-champagne transition cursor-pointer"
                     >
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <h3 className="font-serif text-lg text-burgundy">{match.partner_name}</h3>
+                          <h3 className="font-serif text-lg text-charcoal">{match.partner_name}</h3>
                           <p className="text-sm text-charcoal-light">
                             {match.overall_score}% Compatible
                           </p>
                         </div>
-                        <span className="px-3 py-1 bg-dusty-rose-light text-burgundy rounded-full text-sm">
+                        <span className="px-3 py-1 bg-soft-gray text-charcoal rounded-full text-sm">
                           New
                         </span>
                       </div>
-                      <button className="w-full py-2 bg-burgundy text-white rounded-lg hover:bg-burgundy-light transition">
+                      <button className="w-full py-2 bg-champagne text-charcoal-dark rounded-lg hover:bg-champagne-light transition">
                         View Introduction
                       </button>
                     </div>
@@ -191,14 +191,14 @@ function DashboardContent() {
           {/* Sidebar */}
           <div>
             <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-              <h3 className="font-serif text-lg text-burgundy mb-4">What's Next?</h3>
+              <h3 className="font-serif text-lg text-charcoal mb-4">What's Next?</h3>
               <ul className="space-y-3 text-sm text-charcoal-light">
                 <li className="flex items-start gap-2">
-                  <span className="text-copper">✓</span>
+                  <span className="text-champagne">✓</span>
                   <span>Profile complete</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-burgundy">→</span>
+                  <span className="text-charcoal">→</span>
                   <span>We're reviewing potential matches</span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -208,14 +208,14 @@ function DashboardContent() {
               </ul>
             </div>
 
-            <div className="bg-burgundy rounded-2xl shadow-lg p-6 text-white">
+            <div className="bg-champagne rounded-2xl shadow-lg p-6 text-white">
               <h3 className="font-serif text-lg mb-3">Need Help?</h3>
-              <p className="text-sm text-dusty-rose-light mb-4">
+              <p className="text-sm text-medium-gray mb-4">
                 Have questions about the matching process or want to update your preferences?
               </p>
               <a
                 href="mailto:support@introalignment.com"
-                className="block text-center py-2 px-4 bg-white text-burgundy rounded-lg hover:bg-ivory transition text-sm font-medium"
+                className="block text-center py-2 px-4 bg-white text-charcoal rounded-lg hover:bg-ivory transition text-sm font-medium"
               >
                 Contact Support
               </a>
@@ -232,7 +232,7 @@ export default function DashboardPage() {
     <Suspense fallback={
       <div className="min-h-screen bg-ivory flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-burgundy mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-champagne mx-auto mb-4"></div>
           <p className="text-charcoal">Loading your dashboard...</p>
         </div>
       </div>
