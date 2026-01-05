@@ -3,178 +3,193 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-interface User {
-  id: string;
-  email: string;
-  full_name: string;
-  status: string;
-  created_at: string;
+interface DashboardMetrics {
+  totalUsers: number;
+  usersWithCompleteProfiles: number;
+  subscriptions: {
+    free: number;
+    seeker: number;
+    aligned: number;
+    founder: number;
+  };
+  revenueThisMonth: number;
+  matchesThisWeek: number;
+  introductionsThisWeek: number;
+  activeRedFlags: number;
 }
 
-export default function AdminDashboard() {
-  const [users, setUsers] = useState<User[]>([]);
+export default function AdminOverview() {
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({
-    total: 0,
-    waitlist: 0,
-    onboarding: 0,
-    active: 0
-  });
 
   useEffect(() => {
-    loadUsers();
+    loadMetrics();
   }, []);
 
-  async function loadUsers() {
+  async function loadMetrics() {
     try {
-      const response = await fetch('/api/admin/users');
+      const response = await fetch('/api/admin/dashboard-metrics');
       const data = await response.json();
-      setUsers(data.users || []);
-
-      // Calculate stats
-      const stats = {
-        total: data.users?.length || 0,
-        waitlist: data.users?.filter((u: User) => u.status === 'waitlist').length || 0,
-        onboarding: data.users?.filter((u: User) => u.status === 'onboarding').length || 0,
-        active: data.users?.filter((u: User) => u.status === 'active').length || 0
-      };
-      setStats(stats);
-      setLoading(false);
+      setMetrics(data);
     } catch (error) {
-      console.error('Error loading users:', error);
+      console.error('Error loading metrics:', error);
+    } finally {
       setLoading(false);
     }
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-cream flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto mb-4"></div>
-          <p className="text-navy">Loading admin dashboard...</p>
-        </div>
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="w-8 h-8 border-4 border-navy/20 border-t-navy rounded-full animate-spin" />
       </div>
     );
   }
 
+  if (!metrics) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-600">Failed to load dashboard metrics</p>
+      </div>
+    );
+  }
+
+  const MetricCard = ({ label, value, icon, color = 'navy', alert = false }: any) => (
+    <div className={`bg-white rounded-xl p-6 shadow-sm border ${alert ? 'border-red-500' : 'border-gray-100'}`}>
+      <div className="flex items-start justify-between mb-2">
+        <span className="text-2xl">{icon}</span>
+        {alert && <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
+      </div>
+      <div className={`text-4xl font-bold mb-1 text-${color}`}>{value.toLocaleString()}</div>
+      <div className="text-sm text-gray-600">{label}</div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-cream">
-      {/* Admin Nav */}
-      <nav className="bg-gold text-navy-dark">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-8">
-            <span className="font-serif text-2xl font-semibold">IntroAlignment Admin</span>
-            <div className="flex gap-4">
-              <Link href="/admin" className="hover:text-gold transition">
-                Dashboard
-              </Link>
-              <Link href="/admin/matching" className="hover:text-gold transition">
-                Matching
-              </Link>
-              <Link href="/admin/review" className="hover:text-gold transition">
-                Safety Review
-              </Link>
+    <div>
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="font-serif text-4xl text-navy mb-2">Dashboard Overview</h1>
+        <p className="text-gray-600">Platform metrics and health at a glance</p>
+      </div>
+
+      {/* Primary Metrics */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <MetricCard
+          label="Total Users"
+          value={metrics.totalUsers}
+          icon="👥"
+          color="navy"
+        />
+        <MetricCard
+          label="Complete Profiles"
+          value={metrics.usersWithCompleteProfiles}
+          icon="✓"
+          color="green-600"
+        />
+        <MetricCard
+          label="Revenue This Month"
+          value={`$${metrics.revenueThisMonth}`}
+          icon="💰"
+          color="gold"
+        />
+        <MetricCard
+          label="Active Red Flags"
+          value={metrics.activeRedFlags}
+          icon="🚩"
+          color="red-600"
+          alert={metrics.activeRedFlags > 0}
+        />
+      </div>
+
+      {/* Subscriptions */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
+        <h2 className="font-serif text-2xl text-navy mb-6">Subscriptions by Plan</h2>
+        <div className="grid grid-cols-4 gap-4">
+          <div className="text-center">
+            <div className="text-3xl font-bold text-gray-400 mb-2">
+              {metrics.subscriptions.free}
+            </div>
+            <div className="text-sm text-gray-600">Free</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-blue-600 mb-2">
+              {metrics.subscriptions.seeker}
+            </div>
+            <div className="text-sm text-gray-600">Seeker ($49/mo)</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-gold mb-2">
+              {metrics.subscriptions.aligned}
+            </div>
+            <div className="text-sm text-gray-600">Aligned ($99/mo)</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-navy mb-2">
+              {metrics.subscriptions.founder}
+            </div>
+            <div className="text-sm text-gray-600">Founder ($199/mo)</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Activity */}
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl">💕</span>
+            <div>
+              <h3 className="font-semibold text-navy">Matches This Week</h3>
+              <p className="text-sm text-gray-600">New compatible pairs</p>
             </div>
           </div>
-          <Link href="/dashboard" className="text-sm hover:text-gold transition">
-            Exit Admin →
+          <div className="text-4xl font-bold text-gold">{metrics.matchesThisWeek}</div>
+        </div>
+
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl">📧</span>
+            <div>
+              <h3 className="font-semibold text-navy">Introductions This Week</h3>
+              <p className="text-sm text-gray-600">Matches shown to users</p>
+            </div>
+          </div>
+          <div className="text-4xl font-bold text-navy">{metrics.introductionsThisWeek}</div>
+        </div>
+      </div>
+
+      {/* Quick Links */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <h2 className="font-serif text-2xl text-navy mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link
+            href="/admin/users"
+            className="p-4 bg-cream hover:bg-blush-light rounded-lg transition-colors text-center"
+          >
+            <div className="text-2xl mb-2">👥</div>
+            <div className="font-medium text-navy">Manage Users</div>
           </Link>
-        </div>
-      </nav>
-
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Stats */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-navy mb-1">{stats.total}</div>
-            <div className="text-sm text-navy-light">Total Users</div>
-          </div>
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-gold mb-1">{stats.waitlist}</div>
-            <div className="text-sm text-navy-light">Waitlist</div>
-          </div>
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-medium-gray mb-1">{stats.onboarding}</div>
-            <div className="text-sm text-navy-light">Onboarding</div>
-          </div>
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="text-3xl font-bold text-navy-light mb-1">{stats.active}</div>
-            <div className="text-sm text-navy-light">Active</div>
-          </div>
-        </div>
-
-        {/* Users Table */}
-        <div className="bg-white rounded-xl shadow overflow-hidden">
-          <div className="p-6 border-b border-cream-dark flex justify-between items-center">
-            <h2 className="font-serif text-2xl text-navy">All Users</h2>
-            <input
-              type="text"
-              placeholder="Search users..."
-              className="px-4 py-2 border-2 border-cream-dark rounded-lg focus:border-gold focus:outline-none"
-            />
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-cream-dark">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-navy uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-navy uppercase tracking-wider">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-navy uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-navy uppercase tracking-wider">
-                    Joined
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-navy uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-cream-dark">
-                {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-cream transition">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-medium text-navy">{user.full_name || 'N/A'}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-navy-light">
-                      {user.email}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        user.status === 'active' ? 'bg-gold-light text-white' :
-                        user.status === 'onboarding' ? 'bg-gold text-white' :
-                        'bg-cream-dark text-navy'
-                      }`}>
-                        {user.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-navy-light text-sm">
-                      {new Date(user.created_at).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <Link
-                        href={`/admin/users/${user.id}`}
-                        className="text-navy hover:text-navy-light"
-                      >
-                        View →
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            {users.length === 0 && (
-              <div className="text-center py-12 text-navy-light">
-                No users yet. They'll appear here as people sign up.
-              </div>
-            )}
-          </div>
+          <Link
+            href="/admin/red-flags"
+            className="p-4 bg-red-50 hover:bg-red-100 rounded-lg transition-colors text-center"
+          >
+            <div className="text-2xl mb-2">🚩</div>
+            <div className="font-medium text-navy">Review Flags</div>
+          </Link>
+          <Link
+            href="/admin/matches"
+            className="p-4 bg-cream hover:bg-blush-light rounded-lg transition-colors text-center"
+          >
+            <div className="text-2xl mb-2">💕</div>
+            <div className="font-medium text-navy">View Matches</div>
+          </Link>
+          <Link
+            href="/admin/revenue"
+            className="p-4 bg-cream hover:bg-blush-light rounded-lg transition-colors text-center"
+          >
+            <div className="text-2xl mb-2">💰</div>
+            <div className="font-medium text-navy">Revenue</div>
+          </Link>
         </div>
       </div>
     </div>
