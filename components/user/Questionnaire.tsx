@@ -127,7 +127,7 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
                 key={answer.id}
                 onClick={() => handleAnswer(answer.id)}
                 disabled={loading}
-                className="w-full text-left p-4 rounded-xl border-2 border-cream-dark hover:border-copper hover:bg-cream transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
+                className="w-full text-left p-4 rounded-xl border-2 border-cream-dark hover:border-gold hover:bg-cream transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
               >
                 <span className="text-navy group-hover:text-navy transition-colors">
                   {answer.text}

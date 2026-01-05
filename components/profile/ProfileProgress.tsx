@@ -117,7 +117,7 @@ export default function ProfileProgress({ profile }: Props) {
       )}
 
       {completeness < 50 && (
-        <div className="mt-4 p-3 bg-copper bg-opacity-10 rounded-lg">
+        <div className="mt-4 p-3 bg-gold bg-opacity-10 rounded-lg">
           <p className="text-sm text-gold">
             💡 Keep playing to build a richer profile and get better matches!
           </p>

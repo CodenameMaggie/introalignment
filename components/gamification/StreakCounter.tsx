@@ -62,7 +62,7 @@ export default function StreakCounter({ streak }: Props) {
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-navy-light">Total Points</span>
-          <span className="text-copper font-semibold">{totalPoints}</span>
+          <span className="text-gold font-semibold">{totalPoints}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-navy-light">Level</span>
@@ -71,8 +71,8 @@ export default function StreakCounter({ streak }: Props) {
       </div>
 
       {currentStreak >= 7 && (
-        <div className="mt-4 p-3 bg-copper bg-opacity-10 rounded-lg">
-          <p className="text-sm text-copper font-medium">
+        <div className="mt-4 p-3 bg-gold bg-opacity-10 rounded-lg">
+          <p className="text-sm text-gold font-medium">
             🎉 You're on fire! {currentStreak} day streak!
           </p>
         </div>
