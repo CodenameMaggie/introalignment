@@ -46,7 +46,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/revenue', label: 'Revenue', icon: '💰' },
     { href: '/admin/extractions', label: 'Extractions', icon: '🧠' },
     { href: '/admin/leads', label: 'Leads', icon: '🎯' },
-    { href: '/admin/system', label: 'System Health', icon: '⚙️' }
+    { href: '/admin/system', label: 'System Health', icon: '⚙️' },
+    { href: '/admin/migrations', label: 'SQL Migrations', icon: '🗄️' }
   ];
 
   return (
