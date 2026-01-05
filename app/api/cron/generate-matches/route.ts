@@ -4,9 +4,18 @@ import { generateReportsBatch } from '@/lib/matching/report-generator';
 
 /**
  * POST /api/cron/generate-matches
- * Cron job to generate matches and introduction reports
  *
- * This should be called daily or weekly via a cron scheduler (Vercel Cron, Railway Cron, etc.)
+ * ⚠️ TODO: DO NOT USE UNTIL YOU HAVE REAL CLIENTS ⚠️
+ *
+ * This endpoint should ONLY be called when:
+ * 1. You have real paying clients who need matches
+ * 2. A user manually requests match generation
+ * 3. A user signs up and completes their profile
+ *
+ * DO NOT set up automated cron jobs until you have real users!
+ *
+ * Match generation is free (just database queries), but AI report generation
+ * costs money via Claude API. Set ENABLE_AI_REPORTS=true only when ready.
  *
  * Authorization: Bearer token set in CRON_SECRET environment variable
  */

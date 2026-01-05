@@ -1,14 +1,21 @@
 /**
  * Report Generator Service
  * Generates beautiful, personalized introduction reports for matches using Claude
+ *
+ * TODO: ENABLE WHEN YOU HAVE REAL CLIENTS
+ * Set ENABLE_AI_REPORTS=true in environment variables to enable Claude AI reports
+ * Until then, this will generate placeholder reports at no cost
  */
 
 import Anthropic from '@anthropic-ai/sdk';
 import { getAdminClient } from '@/lib/db/supabase';
 
-const anthropic = new Anthropic({
+// Feature flag - DISABLE AI until you have real paying clients
+const AI_ENABLED = process.env.ENABLE_AI_REPORTS === 'true';
+
+const anthropic = AI_ENABLED ? new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
-});
+}) : null;
 
 interface IntroductionReport {
   executiveSummary: string;
@@ -201,48 +208,69 @@ Write a warm, insightful introduction report that helps these two people underst
 
 Output ONLY valid JSON, no other text.`;
 
-  try {
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      temperature: 0.7,
-      messages: [{
-        role: 'user',
-        content: prompt
-      }]
-    });
+  let report: IntroductionReport;
+  let generationTokens = 0;
 
-    const content = response.content[0];
-    if (content.type !== 'text') {
-      throw new Error('Unexpected response type from Claude');
-    }
-
-    const report: IntroductionReport = JSON.parse(content.text);
-
-    // Save the report to the database
-    const { error: insertError } = await supabase
-      .from('introduction_reports')
-      .insert({
-        match_id: matchId,
-        executive_summary: report.executiveSummary,
-        compatibility_narrative: report.compatibilityNarrative,
-        growth_opportunities: report.growthOpportunities,
-        conversation_starters: report.conversationStarters,
-        potential_challenges: report.potentialChallenges,
-        astrological_insights: report.astrologicalInsights,
-        generated_by: 'claude-sonnet-4',
-        generation_tokens: response.usage.input_tokens + response.usage.output_tokens
+  // TODO: REMOVE THIS CHECK WHEN YOU HAVE REAL CLIENTS
+  // AI is disabled until ENABLE_AI_REPORTS=true
+  if (!AI_ENABLED || !anthropic) {
+    // Generate placeholder report (no cost)
+    report = {
+      executiveSummary: `This is a placeholder introduction for ${userA.full_name?.split(' ')[0]} and ${userB.full_name?.split(' ')[0]}. With an overall compatibility score of ${match.overall_score}%, this match shows strong potential across multiple dimensions. Enable AI reports (ENABLE_AI_REPORTS=true) to generate personalized introductions with Claude.`,
+      compatibilityNarrative: `Compatibility Scores:\n- Psychological: ${match.psychological_score}%\n- Intellectual: ${match.intellectual_score}%\n- Communication: ${match.communication_score}%\n- Life Alignment: ${match.life_alignment_score}%\n\nThis is a placeholder report. Enable AI to generate detailed narratives.`,
+      growthOpportunities: 'Enable AI reports to see detailed growth opportunities.',
+      conversationStarters: [
+        { topic: 'Shared interests', why: 'Enable AI to generate personalized conversation starters' }
+      ],
+      potentialChallenges: 'Enable AI reports to see thoughtful analysis of areas to navigate.',
+      astrologicalInsights: 'Astrological insights available when AI reports are enabled.'
+    };
+  } else {
+    // Generate real AI report with Claude
+    try {
+      const response = await anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        temperature: 0.7,
+        messages: [{
+          role: 'user',
+          content: prompt
+        }]
       });
 
-    if (insertError) {
-      throw new Error(`Failed to save report: ${insertError.message}`);
-    }
+      const content = response.content[0];
+      if (content.type !== 'text') {
+        throw new Error('Unexpected response type from Claude');
+      }
 
-    return report;
-  } catch (error: any) {
-    console.error('Error generating introduction report:', error);
-    throw new Error(`Failed to generate report: ${error.message}`);
+      report = JSON.parse(content.text);
+      generationTokens = response.usage.input_tokens + response.usage.output_tokens;
+    } catch (error: any) {
+      console.error('Error generating AI report:', error);
+      throw new Error(`Failed to generate AI report: ${error.message}`);
+    }
   }
+
+  // Save the report to the database
+  const { error: insertError } = await supabase
+    .from('introduction_reports')
+    .insert({
+      match_id: matchId,
+      executive_summary: report.executiveSummary,
+      compatibility_narrative: report.compatibilityNarrative,
+      growth_opportunities: report.growthOpportunities,
+      conversation_starters: report.conversationStarters,
+      potential_challenges: report.potentialChallenges,
+      astrological_insights: report.astrologicalInsights,
+      generated_by: AI_ENABLED ? 'claude-sonnet-4' : 'placeholder',
+      generation_tokens: generationTokens
+    });
+
+  if (insertError) {
+    throw new Error(`Failed to save report: ${insertError.message}`);
+  }
+
+  return report;
 }
 
 /**
