@@ -47,7 +47,7 @@ export default function LandingPage() {
           position: fixed;
           top: 0;
           width: 100%;
-          background: rgba(255, 254, 249, 0.95);
+          background: rgba(255, 254, 245, 0.95);
           backdrop-filter: blur(10px);
           z-index: 100;
           border-bottom: 1px solid rgba(44, 62, 80, 0.1);
