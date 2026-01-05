@@ -290,9 +290,9 @@ export default function LandingPage() {
         }
 
         .waitlist-form button:hover {
-          background: #9d5f28;
+          background: #B8895A;
           transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(184, 115, 51, 0.3);
+          box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
         }
 
         .form-note {

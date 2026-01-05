@@ -50,7 +50,7 @@ export default function BillingSettingsPage() {
               {subscription?.status && subscription.status !== 'active' && (
                 <span className={`text-xs px-2 py-1 rounded-full ${
                   subscription.status === 'past_due'
-                    ? 'bg-red-100 text-red-800'
+                    ? 'bg-rose-light text-navy-dark'
                     : 'bg-yellow-100 text-yellow-800'
                 }`}>
                   {subscription.status}

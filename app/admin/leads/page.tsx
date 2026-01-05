@@ -166,7 +166,7 @@ export default function LeadsAdminPage() {
                   <tr key={lead.id} className="border-t hover:bg-gray-50">
                     <td className="p-3">
                       <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        lead.source_type === 'reddit' ? 'bg-orange-100 text-orange-800' :
+                        lead.source_type === 'reddit' ? 'bg-gold-muted text-gold-dark' :
                         lead.source_type === 'twitter' ? 'bg-blue-100 text-blue-800' :
                         'bg-gray-100 text-gray-800'
                       }`}>
@@ -179,7 +179,7 @@ export default function LeadsAdminPage() {
                       <span className={`font-semibold ${
                         lead.fit_score >= 70 ? 'text-green-600' :
                         lead.fit_score >= 50 ? 'text-yellow-600' :
-                        lead.fit_score ? 'text-red-600' : 'text-gray-400'
+                        lead.fit_score ? 'text-rose' : 'text-gray-400'
                       }`}>
                         {lead.fit_score?.toFixed(0) || '-'}
                       </span>
