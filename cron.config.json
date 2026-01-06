@@ -1,0 +1,64 @@
+{
+  "jobs": [
+    {
+      "name": "generate-matches",
+      "schedule": "0 */6 * * *",
+      "endpoint": "/api/cron/generate-matches",
+      "description": "Generate new matches every 6 hours",
+      "enabled": true,
+      "method": "POST",
+      "headers": {
+        "Authorization": "Bearer ${CRON_SECRET}",
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "name": "user-outreach",
+      "schedule": "0 9-17 * * 1-5",
+      "endpoint": "/api/cron/outreach",
+      "description": "Send user outreach emails (9am-5pm, Mon-Fri)",
+      "enabled": true,
+      "method": "POST",
+      "headers": {
+        "Authorization": "Bearer ${CRON_SECRET}",
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "name": "compatibility-scoring",
+      "schedule": "0 */3 * * *",
+      "endpoint": "/api/cron/score",
+      "description": "Recalculate compatibility scores every 3 hours",
+      "enabled": true,
+      "method": "POST",
+      "headers": {
+        "Authorization": "Bearer ${CRON_SECRET}",
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "name": "profile-scraper",
+      "schedule": "0 */12 * * *",
+      "endpoint": "/api/cron/scrape",
+      "description": "Scrape and update user profiles every 12 hours",
+      "enabled": false,
+      "method": "POST",
+      "headers": {
+        "Authorization": "Bearer ${CRON_SECRET}",
+        "Content-Type": "application/json"
+      },
+      "note": "Disabled by default - enable only when needed"
+    }
+  ],
+  "timezone": "America/New_York",
+  "notes": {
+    "schedule_format": "Cron format: minute hour day month day-of-week",
+    "examples": {
+      "every_5_minutes": "*/5 * * * *",
+      "every_hour": "0 * * * *",
+      "every_6_hours": "0 */6 * * *",
+      "daily_at_9am": "0 9 * * *",
+      "weekdays_9to5": "0 9-17 * * 1-5"
+    }
+  }
+}
