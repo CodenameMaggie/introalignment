@@ -54,9 +54,9 @@ export default function LandingPage() {
             Beyond compatibility. Into alignment.
           </p>
           <p className="text-lg text-gray-600 mb-12 leading-relaxed">
-            We help you find the person who is truly aligned with your life and your purpose.
+            A matchmaking service dedicated to helping you find the person who is truly aligned with your life and your purpose.
             <strong className="text-navy"> A partner and a friend.</strong> Not someone who is there for a season,
-            but someone who is ready to share their life.
+            but someone who is ready to share their life. We combine thoughtful conversation, comprehensive profiling, and expert curation to make meaningful introductions.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a href="#waitlist" className="px-8 py-3 bg-navy text-white rounded-full font-medium hover:bg-navy-dark transition-all hover:shadow-lg">
@@ -85,7 +85,7 @@ export default function LandingPage() {
                 </svg>
               </div>
               <h3 className="font-serif text-2xl text-navy mb-4">Conversation, Not Questionnaires</h3>
-              <p className="text-gray-600">Instead of endless checkboxes and surveys, you'll have a natural conversation with our AI. We learn who you truly are through your stories, not your statistics.</p>
+              <p className="text-gray-600">Instead of endless checkboxes and surveys, you'll have a natural conversation that helps us understand who you truly are. We learn through your stories, not your statistics, to make more thoughtful matches.</p>
             </div>
 
             <div className="bg-blush-light p-8 rounded-2xl hover:shadow-xl transition-all">

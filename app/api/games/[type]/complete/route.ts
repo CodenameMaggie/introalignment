@@ -1,5 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { getAdminClient } from '@/lib/db/supabase';
+
+// Helper functions for badge system
+async function checkUserBadge(userId: string, badgeSlug: string): Promise<boolean> {
+  const supabase = getAdminClient();
+  const { data } = await supabase
+    .from('user_badges')
+    .select('id')
+    .eq('user_id', userId)
+    .eq('badge_slug', badgeSlug)
+    .single();
+
+  return !!data;
+}
+
+async function awardBadge(userId: string, badgeSlug: string, badgeName: string, description: string): Promise<void> {
+  const supabase = getAdminClient();
+  await supabase.from('user_badges').insert({
+    user_id: userId,
+    badge_slug: badgeSlug,
+    badge_name: badgeName,
+    description,
+    earned_at: new Date().toISOString()
+  });
+}
 
 export async function POST(
   request: NextRequest,
@@ -111,14 +136,54 @@ export async function POST(
       .update({ total_points: newTotalPoints })
       .eq('id', user.id);
 
-    // TODO: Check for badges/achievements based on streak and points
-    // For now, return basic response
+    // Check for badges/achievements
+    const badgesEarned: string[] = [];
+
+    // Streak-based badges
+    if (streak.current_streak === 3) {
+      const hasThis = await checkUserBadge(userId, 'first_streak');
+      if (!hasThis) {
+        await awardBadge(userId, 'first_streak', 'First Streak', '3 days in a row!');
+        badgesEarned.push('First Streak');
+      }
+    }
+    if (streak.current_streak === 7) {
+      const hasThis = await checkUserBadge(userId, 'week_warrior');
+      if (!hasThis) {
+        await awardBadge(userId, 'week_warrior', 'Week Warrior', '7 days in a row!');
+        badgesEarned.push('Week Warrior');
+      }
+    }
+    if (streak.current_streak === 30) {
+      const hasThis = await checkUserBadge(userId, 'monthly_master');
+      if (!hasThis) {
+        await awardBadge(userId, 'monthly_master', 'Monthly Master', '30 days in a row!');
+        badgesEarned.push('Monthly Master');
+      }
+    }
+
+    // Points-based badges
+    if (newTotalPoints >= 100) {
+      const hasThis = await checkUserBadge(userId, 'century_club');
+      if (!hasThis) {
+        await awardBadge(userId, 'century_club', 'Century Club', '100 points earned!');
+        badgesEarned.push('Century Club');
+      }
+    }
+    if (newTotalPoints >= 500) {
+      const hasThis = await checkUserBadge(userId, 'point_champion');
+      if (!hasThis) {
+        await awardBadge(userId, 'point_champion', 'Point Champion', '500 points earned!');
+        badgesEarned.push('Point Champion');
+      }
+    }
 
     return NextResponse.json({
       success: true,
       streak,
       points: game.points_value,
-      totalPoints: newTotalPoints
+      totalPoints: newTotalPoints,
+      badgesEarned
     });
   } catch (error) {
     console.error('Error completing game:', error);

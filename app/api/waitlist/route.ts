@@ -54,11 +54,24 @@ export async function POST(request: NextRequest) {
         .from('profiles')
         .insert({
           user_id: user.id,
+          first_name: firstName,
+          last_name: lastName,
           location_city: location
         });
     }
 
-    // TODO: Send welcome email via Resend when configured
+    // Send welcome email
+    const { sendWaitlistWelcome } = await import('@/lib/email/resend');
+    const emailResult = await sendWaitlistWelcome({
+      email: email.toLowerCase(),
+      firstName,
+      lastName
+    });
+
+    if (!emailResult.success) {
+      console.warn('Failed to send welcome email:', emailResult.error);
+      // Don't fail the request if email fails - user is still on waitlist
+    }
 
     return NextResponse.json({
       success: true,

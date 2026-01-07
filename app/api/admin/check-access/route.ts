@@ -2,14 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAdminClient } from '@/lib/db/supabase';
 import { checkAdminAccess } from '@/lib/admin/auth';
 
-// GET /api/admin/users - Get all users
+/**
+ * Check if the current user has admin access
+ * GET /api/admin/check-access
+ */
 export async function GET(request: NextRequest) {
   try {
-    // Check admin authentication
+    const supabase = getAdminClient();
+
+    // Get user from session
+    // First try to get from localStorage (passed as header in the request)
     const authHeader = request.headers.get('authorization');
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json(
-        { error: 'Unauthorized - Admin access required' },
+        { error: 'Unauthorized', isAdmin: false },
         { status: 401 }
       );
     }
@@ -23,47 +30,35 @@ export async function GET(request: NextRequest) {
 
       if (!userId) {
         return NextResponse.json(
-          { error: 'Invalid session' },
+          { error: 'Invalid session', isAdmin: false },
           { status: 401 }
         );
       }
     } catch {
       return NextResponse.json(
-        { error: 'Invalid session format' },
+        { error: 'Invalid session format', isAdmin: false },
         { status: 401 }
       );
     }
 
-    // Verify admin access
+    // Check if user has admin access
     const isAdmin = await checkAdminAccess(userId);
+
     if (!isAdmin) {
       return NextResponse.json(
-        { error: 'Forbidden - Admin privileges required' },
+        { error: 'Forbidden - Admin access required', isAdmin: false },
         { status: 403 }
       );
     }
 
-    const supabase = getAdminClient();
-
-    const { data: users, error } = await supabase
-      .from('users')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching users:', error);
-      return NextResponse.json(
-        { error: 'Failed to fetch users' },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ users });
-
+    return NextResponse.json({
+      isAdmin: true,
+      userId
+    });
   } catch (error) {
-    console.error('Admin users API error:', error);
+    console.error('Admin access check error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', isAdmin: false },
       { status: 500 }
     );
   }

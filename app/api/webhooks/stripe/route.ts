@@ -289,12 +289,52 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
   if (!(invoice as any).subscription) return;
 
-  await supabase
+  // Update subscription status
+  const { data: subscription } = await supabase
     .from('user_subscriptions')
     .update({ status: 'past_due' })
-    .eq('stripe_subscription_id', (invoice as any).subscription as string);
+    .eq('stripe_subscription_id', (invoice as any).subscription as string)
+    .select('user_id')
+    .single();
 
-  // TODO: Send email notification about failed payment
+  if (!subscription) {
+    console.error('Subscription not found for failed payment');
+    return;
+  }
+
+  // Get user information
+  const { data: user } = await supabase
+    .from('users')
+    .select('email, full_name')
+    .eq('id', subscription.user_id)
+    .single();
+
+  if (!user) {
+    console.error('User not found for failed payment');
+    return;
+  }
+
+  // Get profile for first name
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('first_name')
+    .eq('user_id', subscription.user_id)
+    .single();
+
+  const firstName = profile?.first_name || user.full_name?.split(' ')[0] || 'there';
+
+  // Send payment failed notification
+  const { sendPaymentFailedNotification } = await import('@/lib/email/resend');
+  const emailResult = await sendPaymentFailedNotification({
+    email: user.email,
+    firstName,
+    amount: invoice.amount_due,
+    currency: invoice.currency
+  });
+
+  if (!emailResult.success) {
+    console.error('Failed to send payment failure email:', emailResult.error);
+  }
 }
 
 async function handlePaymentSuccess(paymentIntent: Stripe.PaymentIntent) {

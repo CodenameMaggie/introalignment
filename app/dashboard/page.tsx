@@ -36,10 +36,33 @@ function DashboardContent() {
       const sessionData = JSON.parse(session);
       setUser(sessionData.user);
 
-      // Load user profile and matches
-      // TODO: Implement these API endpoints
+      // Load user profile
+      const profileResponse = await fetch('/api/profile', {
+        headers: {
+          'Authorization': `Bearer ${session}`
+        }
+      });
+
+      if (profileResponse.ok) {
+        const profileData = await profileResponse.json();
+        setProfile(profileData);
+      }
+
+      // Load matches
+      const matchesResponse = await fetch('/api/matches', {
+        headers: {
+          'Authorization': `Bearer ${session}`
+        }
+      });
+
+      if (matchesResponse.ok) {
+        const matchesData = await matchesResponse.json();
+        setMatches(matchesData.matches || []);
+      }
+
       setLoading(false);
-    } catch {
+    } catch (error) {
+      console.error('Error loading dashboard:', error);
       router.push('/login');
     }
   }
@@ -114,23 +137,28 @@ function DashboardContent() {
                   <span className="text-navy">Profile Completeness</span>
                   <div className="flex items-center gap-3">
                     <div className="w-32 bg-cream-dark rounded-full h-2">
-                      <div className="bg-gold rounded-full h-2 w-full"></div>
+                      <div
+                        className="bg-gold rounded-full h-2 transition-all"
+                        style={{ width: `${profile?.completeness || 0}%` }}
+                      ></div>
                     </div>
-                    <span className="text-navy font-semibold">100%</span>
+                    <span className="text-navy font-semibold">{profile?.completeness || 0}%</span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between py-3 border-b border-cream-dark">
                   <span className="text-navy">Status</span>
                   <span className="px-3 py-1 bg-gold-light text-white rounded-full text-sm font-medium">
-                    Looking for Matches
+                    {profile?.conversation?.status === 'completed' ? 'Looking for Matches' : 'Completing Profile'}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between py-3">
                   <span className="text-navy">Member Since</span>
                   <span className="text-navy-light">
-                    {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    {profile?.user?.created_at
+                      ? new Date(profile.user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+                      : 'Recently'}
                   </span>
                 </div>
               </div>

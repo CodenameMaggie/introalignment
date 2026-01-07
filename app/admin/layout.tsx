@@ -16,12 +16,36 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   async function checkAdminAccess() {
     try {
-      // TODO: Implement proper admin check when auth is ready
-      // For now, allow access in development
+      // Get session from localStorage
+      const session = localStorage.getItem('session');
+
+      if (!session) {
+        console.warn('No session found - redirecting to login');
+        router.push('/login?redirect=/admin');
+        return;
+      }
+
+      // Check admin access via API
+      const response = await fetch('/api/admin/check-access', {
+        headers: {
+          'Authorization': `Bearer ${session}`
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.isAdmin) {
+        console.warn('Admin access denied');
+        alert('Access denied. Admin privileges required.');
+        router.push('/dashboard');
+        return;
+      }
+
       setIsAdmin(true);
       setLoading(false);
     } catch (error) {
       console.error('Admin access check failed:', error);
+      alert('Error verifying admin access. Please try again.');
       router.push('/');
     }
   }

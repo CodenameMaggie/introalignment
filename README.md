@@ -2,7 +2,7 @@
 
 > Beyond compatibility. Into alignment.
 
-A sophisticated matchmaking platform that uses conversational AI to extract deep psychometric and astrological profiles, then matches people based on multi-dimensional compatibility.
+A sophisticated matchmaking service that helps people find genuine alignment through comprehensive profiling and thoughtful introductions. We use conversational insights, psychometric analysis, and multi-dimensional compatibility algorithms to facilitate meaningful connections.
 
 ## Tech Stack
 
