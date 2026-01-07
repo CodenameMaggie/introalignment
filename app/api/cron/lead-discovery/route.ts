@@ -91,22 +91,22 @@ export async function GET(request: NextRequest) {
         const { data: newLead, error } = await supabase
           .from('leads')
           .insert({
-            source_type: 'ai_discovery',
+            source_type: 'curated_list',
             source_url: `https://${company.domain}`,
             company: company.name,
             email: primaryEmail,
             email_confidence: 0.6,
             email_source: 'pattern_guess',
-            bio: `${company.industry} company with ${company.size} employees. ${company.reason}`,
-            trigger_content: `AI-discovered company: ${company.reason}`,
-            trigger_keywords: [company.industry, 'ai_discovery'],
+            bio: `${company.industry} company (${company.size} employees) in the dating/matchmaking industry`,
+            trigger_content: `Curated lead from ${company.industry} industry`,
+            trigger_keywords: [company.industry, 'curated_list'],
             fit_score: 65,
             priority: 'medium',
             status: 'new',
             outreach_status: 'pending',
             enrichment_status: 'pending',
             fingerprint,
-            tags: ['ai_discovery', company.industry],
+            tags: ['curated_list', company.industry],
             notes: `Email estimated using common patterns. Verify before outreach.\nAlternate emails: ${alternateEmails.join(', ')}`
           })
           .select()
