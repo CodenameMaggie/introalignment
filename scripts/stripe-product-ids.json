@@ -1,0 +1,51 @@
+{
+  "subscriptions": [
+    {
+      "slug": "seeker",
+      "name": "Seeker",
+      "product_id": "prod_TjqIenxwNG33Kg",
+      "price_monthly": "price_1SmMbsPXo2GMOIj5ha0LcJ1g",
+      "price_yearly": "price_1SmMbsPXo2GMOIj5x9jp8aCS"
+    },
+    {
+      "slug": "aligned",
+      "name": "Aligned",
+      "product_id": "prod_TjqIcZwjv6kesd",
+      "price_monthly": "price_1SmMbsPXo2GMOIj5NZYOkoEZ",
+      "price_yearly": "price_1SmMbsPXo2GMOIj5ZRm3umuI"
+    },
+    {
+      "slug": "founder",
+      "name": "Founder",
+      "product_id": "prod_TjqIQAbd15wBBn",
+      "price_monthly": "price_1SmMbtPXo2GMOIj5Ea1ftFuG",
+      "price_yearly": "price_1SmMbtPXo2GMOIj5ImU5OIze"
+    }
+  ],
+  "oneTime": [
+    {
+      "slug": "extra-intro",
+      "name": "Extra Introduction",
+      "product_id": "prod_TjqIw07Fwp7ICQ",
+      "price_id": "price_1SmMbuPXo2GMOIj5sbUvzmxj"
+    },
+    {
+      "slug": "intro-3-pack",
+      "name": "3-Pack Introductions",
+      "product_id": "prod_TjqIr78G1I9iiq",
+      "price_id": "price_1SmMbuPXo2GMOIj55XifEnyM"
+    },
+    {
+      "slug": "compatibility-report",
+      "name": "Compatibility Deep Dive",
+      "product_id": "prod_TjqIzKtWlQCyIQ",
+      "price_id": "price_1SmMbuPXo2GMOIj50GbuzG7A"
+    },
+    {
+      "slug": "profile-review",
+      "name": "Profile Review",
+      "product_id": "prod_TjqIoXbh2NNffO",
+      "price_id": "price_1SmMbvPXo2GMOIj5qjKezAAb"
+    }
+  ]
+}

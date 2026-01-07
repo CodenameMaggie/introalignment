@@ -15,6 +15,10 @@ ADD COLUMN IF NOT EXISTS read_time_minutes INT,
 ADD COLUMN IF NOT EXISTS author_name VARCHAR(255),
 ADD COLUMN IF NOT EXISTS is_published BOOLEAN DEFAULT FALSE;
 
+-- Make old body_html column nullable (transitioning to 'content' column)
+ALTER TABLE content_articles
+ALTER COLUMN body_html DROP NOT NULL;
+
 -- Create slug index for fast lookups
 CREATE INDEX IF NOT EXISTS idx_content_articles_slug ON content_articles(slug);
 
@@ -64,10 +68,10 @@ CREATE TABLE content_interactions (
 -- INDEXES
 -- ============================================
 
-CREATE INDEX idx_content_interactions_user_article ON content_interactions(user_id, article_id);
-CREATE INDEX idx_content_interactions_type ON content_interactions(interaction_type);
-CREATE INDEX idx_content_articles_published ON content_articles(is_published, published_at);
-CREATE INDEX idx_content_articles_category_published ON content_articles(category, is_published);
+CREATE INDEX IF NOT EXISTS idx_content_interactions_user_article ON content_interactions(user_id, article_id);
+CREATE INDEX IF NOT EXISTS idx_content_interactions_type ON content_interactions(interaction_type);
+CREATE INDEX IF NOT EXISTS idx_content_articles_published ON content_articles(is_published, published_at);
+CREATE INDEX IF NOT EXISTS idx_content_articles_category_published ON content_articles(category, is_published);
 
 -- ============================================
 -- RLS POLICIES

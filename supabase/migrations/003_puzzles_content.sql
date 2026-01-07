@@ -25,6 +25,8 @@ CREATE TABLE puzzles (
     measures_memory BOOLEAN DEFAULT FALSE,
     measures_persistence BOOLEAN DEFAULT FALSE,
     measures_pattern_recognition BOOLEAN DEFAULT FALSE,
+    measures_values BOOLEAN DEFAULT FALSE,
+    measures_personality BOOLEAN DEFAULT FALSE,
 
     points_value INT DEFAULT 15,
     time_limit_seconds INT,

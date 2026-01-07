@@ -58,15 +58,18 @@ DO $$
 BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.columns
-        WHERE table_name = 'users' AND column_name = 'role'
+        WHERE table_schema = 'public'
+        AND table_name = 'users'
+        AND column_name = 'role'
     ) THEN
-        ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user'
+        ALTER TABLE public.users ADD COLUMN role TEXT DEFAULT 'user';
+        ALTER TABLE public.users ADD CONSTRAINT users_role_check
             CHECK (role IN ('user', 'admin', 'moderator'));
     END IF;
 END $$;
 
 -- Set Maggie as admin
-UPDATE users
+UPDATE public.users
 SET role = 'admin'
 WHERE email = 'maggie@maggieforbesstrategies.com';
 

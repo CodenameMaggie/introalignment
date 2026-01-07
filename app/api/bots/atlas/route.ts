@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import Anthropic from '@anthropic-ai/sdk';
 import { updateBotHealth, logBotAction } from '@/lib/bots/health-tracker';
+import { generateRuleBasedResponse } from '@/lib/bots/rule-based-responses';
 
 // ============================================================================
 // ATLAS - Master Router Bot
 // The central intelligence that routes all requests to specialized bots
 // ============================================================================
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-});
 
 
 // ============================================================================
@@ -219,48 +215,8 @@ export async function POST(request: NextRequest) {
     // Determine which bot should handle this request
     const routedBot = await routeRequest(message);
 
-    // Build system prompt with routing intelligence
-    const systemPrompt = `You are ATLAS, the master AI router for IntroAlignment, a romantic matchmaking platform.
-
-Your role:
-1. Analyze user messages and route them to the appropriate specialized bot
-2. Maintain conversation context and memory
-3. Provide intelligent, empathetic responses
-4. Ensure users get the right help from the right specialist
-
-Available Specialists:
-- ANNIE: Matchmaking, conversations, profile help, general support
-- HENRY: User onboarding, account setup, tutorials
-- DAVE: Billing, subscriptions, payments
-- DAN: Promotions, referrals, marketing
-- JORDAN: Safety, privacy, compliance, reporting
-
-Current Routing Decision: ${routedBot.toUpperCase()}
-
-Guidelines:
-- Be warm, professional, and empathetic (this is a dating platform)
-- Acknowledge the user's request
-- Provide helpful information while being concise
-- If routing to a specialist, briefly explain why
-- Maintain conversation continuity using history
-
-${history.length > 0 ? `Recent Conversation:\n${history.map((h: any) => `${h.role === 'user' ? 'User' : 'ATLAS'}: ${h.content}`).join('\n')}` : ''}`;
-
-    // Generate AI response
-    const aiMessage = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: [
-        {
-          role: 'user',
-          content: message
-        }
-      ]
-    });
-
-    const content = aiMessage.content[0];
-    const aiResponse = content.type === 'text' ? content.text : '';
+    // Generate rule-based response
+    const aiResponse = generateRuleBasedResponse(message, 'atlas');
 
     // Save conversation to database
     const finalConversationId = await saveConversationMessage(

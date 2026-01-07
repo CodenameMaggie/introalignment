@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import Anthropic from '@anthropic-ai/sdk';
 import { updateBotHealth, logBotAction } from '@/lib/bots/health-tracker';
+import { generateRuleBasedResponse } from '@/lib/bots/rule-based-responses';
 
 // ============================================================================
 // JORDAN - Legal, Compliance & Safety Bot
 // Handles user safety, privacy compliance, content moderation, and reporting
 // ============================================================================
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-});
 
 
 // ============================================================================
@@ -18,7 +14,7 @@ const anthropic = new Anthropic({
 // ============================================================================
 
 /**
- * Analyze content for safety violations
+ * Analyze content for safety violations using rule-based approach
  */
 async function analyzeContentSafety(content: string): Promise<{
   isSafe: boolean;
@@ -26,49 +22,49 @@ async function analyzeContentSafety(content: string): Promise<{
   severity: string;
   reasoning: string;
 }> {
-  const aiMessage = await anthropic.messages.create({
-    model: 'claude-3-5-sonnet-20241022',
-    max_tokens: 512,
-    system: `You are a content moderation AI for a romantic matchmaking platform.
+  const contentLower = content.toLowerCase();
+  const violations: string[] = [];
 
-Analyze content for:
-1. Harassment or bullying
-2. Hate speech or discrimination
-3. Sexual harassment or inappropriate content
-4. Violence or threats
-5. Spam or scams
-6. Personal information exposure
-7. Illegal activities
+  // Define violation patterns
+  const patterns = {
+    harassment: ['harass', 'bully', 'stalk', 'threaten', 'intimidate'],
+    hate_speech: ['hate', 'racist', 'sexist', 'discriminat', 'bigot'],
+    sexual_harassment: ['explicit', 'sexual', 'nude', 'porn', 'xxx'],
+    violence: ['kill', 'harm', 'attack', 'weapon', 'violence', 'assault'],
+    spam: ['click here', 'buy now', 'limited time', 'act fast', '$$'],
+    personal_info: ['ssn', 'social security', 'credit card', 'password'],
+    illegal: ['drug', 'illegal', 'scam', 'fraud']
+  };
 
-Respond ONLY with valid JSON in this exact format:
-{
-  "isSafe": boolean,
-  "violations": ["violation1", "violation2"],
-  "severity": "none" | "low" | "medium" | "high" | "critical",
-  "reasoning": "brief explanation"
-}`,
-    messages: [
-      {
-        role: 'user',
-        content: `Analyze this content for safety violations:\n\n${content}`
-      }
-    ]
-  });
-
-  const responseContent = aiMessage.content[0];
-  const responseText = responseContent.type === 'text' ? responseContent.text : '';
-
-  try {
-    return JSON.parse(responseText);
-  } catch (error) {
-    // Fallback if AI response isn't valid JSON
-    return {
-      isSafe: true,
-      violations: [],
-      severity: 'none',
-      reasoning: 'Analysis failed, defaulting to safe'
-    };
+  // Check for violations
+  for (const [category, keywords] of Object.entries(patterns)) {
+    if (keywords.some(keyword => contentLower.includes(keyword))) {
+      violations.push(category.replace('_', ' '));
+    }
   }
+
+  // Determine severity
+  let severity = 'none';
+  if (violations.length === 0) {
+    severity = 'none';
+  } else if (violations.some(v => ['violence', 'hate speech', 'sexual harassment'].includes(v))) {
+    severity = 'critical';
+  } else if (violations.length >= 3) {
+    severity = 'high';
+  } else if (violations.length >= 2) {
+    severity = 'medium';
+  } else {
+    severity = 'low';
+  }
+
+  return {
+    isSafe: violations.length === 0,
+    violations,
+    severity,
+    reasoning: violations.length > 0
+      ? `Detected potential ${violations.join(', ')}`
+      : 'Content appears safe'
+  };
 }
 
 /**

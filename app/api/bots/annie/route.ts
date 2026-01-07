@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import Anthropic from '@anthropic-ai/sdk';
 import { updateBotHealth, logBotAction } from '@/lib/bots/health-tracker';
+import { generateRuleBasedResponse, requiresEscalation } from '@/lib/bots/rule-based-responses';
 
 // ============================================================================
 // ANNIE - Conversations & Matchmaking Support Bot
 // Handles user conversations, support tickets, and matchmaking questions
 // ============================================================================
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-});
 
 
 // ============================================================================
@@ -181,19 +177,6 @@ async function saveConversationMessage(
   }
 }
 
-/**
- * Check if message requires escalation to human support
- */
-function requiresEscalation(message: string): boolean {
-  const escalationKeywords = [
-    'urgent', 'emergency', 'complaint', 'lawyer', 'legal',
-    'sue', 'terrible', 'awful', 'worst', 'hate this',
-    'refund', 'cancel immediately', 'unacceptable'
-  ];
-
-  const lowerMessage = message.toLowerCase();
-  return escalationKeywords.some(keyword => lowerMessage.includes(keyword));
-}
 
 // ============================================================================
 // ROUTE HANDLER
@@ -237,55 +220,8 @@ export async function POST(request: NextRequest) {
     // Check if escalation needed
     const needsEscalation = requiresEscalation(message);
 
-    // Build comprehensive system prompt
-    const systemPrompt = `You are ANNIE, the AI matchmaking assistant for IntroAlignment.
-
-Your role:
-- Provide warm, empathetic support for romantic matchmaking
-- Answer questions about matches, profiles, and the matchmaking process
-- Help users understand their compatibility scores
-- Guide users through profile optimization
-- Handle support questions with care and professionalism
-
-User Context:
-- Name: ${userContext.user?.full_name || 'User'}
-- Onboarding Complete: ${userContext.user?.onboarding_completed ? 'Yes' : 'No'}
-- Active Matches: ${matchContext.totalActive}
-- Open Support Tickets: ${supportTickets.length}
-
-${conversationContext.summary ? `Previous Conversation Summary:\n${conversationContext.summary}\n` : ''}
-
-${conversationContext.history.length > 0 ? `Recent Messages:\n${conversationContext.history.map((h: any) => `${h.role === 'user' ? 'User' : 'ANNIE'}: ${h.content}`).join('\n')}\n` : ''}
-
-${matchContext.matches.length > 0 ? `Recent Matches:\n${matchContext.matches.map((m: any, i: number) => `${i + 1}. ${m.matched_user?.full_name || 'Match'} (${m.compatibility_score || 'N/A'}% compatible)`).join('\n')}\n` : ''}
-
-Guidelines:
-1. Be warm, supportive, and professional
-2. Use the user's name when appropriate
-3. Reference their matches and profile context when relevant
-4. Encourage engagement and optimism about finding love
-5. Be honest but tactful about compatibility and expectations
-6. Protect user privacy - never share other users' private information
-7. If you don't know something, admit it and offer to check
-8. Keep responses concise but helpful (2-4 paragraphs max)
-
-${needsEscalation ? '⚠️ IMPORTANT: This message may require human escalation. Provide a helpful response but indicate that a human team member will follow up.' : ''}`;
-
-    // Generate AI response
-    const aiMessage = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: [
-        {
-          role: 'user',
-          content: message
-        }
-      ]
-    });
-
-    const content = aiMessage.content[0];
-    let aiResponse = content.type === 'text' ? content.text : '';
+    // Generate rule-based response
+    let aiResponse = generateRuleBasedResponse(message, 'annie');
 
     // If escalation needed, create support ticket
     let createdTicket = null;
