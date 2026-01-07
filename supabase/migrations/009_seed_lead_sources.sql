@@ -2,6 +2,11 @@
 -- SEED LEAD SOURCES & EMAIL SEQUENCES
 -- =====================================================
 
+-- Clean up existing data to avoid duplicates
+DELETE FROM sequence_emails WHERE sequence_id IN (SELECT id FROM outreach_sequences WHERE name IN ('High Intent Singles', 'Dating App Frustrated'));
+DELETE FROM outreach_sequences WHERE name IN ('High Intent Singles', 'Dating App Frustrated');
+DELETE FROM lead_sources WHERE source_type = 'reddit' AND source_name IN ('r/dating', 'r/datingoverthirty', 'r/datingoverforty', 'r/OnlineDating', 'r/singles');
+
 -- Insert default lead sources
 INSERT INTO lead_sources (source_type, source_name, source_url, scrape_config, scrape_frequency) VALUES
 
@@ -60,7 +65,7 @@ INSERT INTO outreach_sequences (name, description, target_fit_score_min, total_e
 
 -- Email 1 - Immediate
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
-((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles'),
+((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles' LIMIT 1),
 1, 0,
 'A different approach to finding love',
 '<p>Hi {{first_name}},</p>
@@ -98,7 +103,7 @@ P.S. No pressure at all. Just thought this might resonate with what you''re look
 
 -- Email 2 - 3 days later
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
-((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles'),
+((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles' LIMIT 1),
 2, 3,
 'The problem with dating apps (and what we''re doing differently)',
 '<p>Hi {{first_name}},</p>
@@ -146,7 +151,7 @@ The IntroAlignment Team');
 
 -- Email 3 - 7 days later
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
-((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles'),
+((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles' LIMIT 1),
 3, 7,
 'Quick question',
 '<p>Hi {{first_name}},</p>
@@ -172,7 +177,7 @@ The IntroAlignment Team');
 
 -- Email 4 - 14 days later (final)
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
-((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles'),
+((SELECT id FROM outreach_sequences WHERE name = 'High Intent Singles' LIMIT 1),
 4, 14,
 'Last note from me',
 '<p>Hi {{first_name}},</p>
@@ -206,7 +211,7 @@ INSERT INTO outreach_sequences (name, description, target_fit_score_min, total_e
 
 -- Email 1
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
-((SELECT id FROM outreach_sequences WHERE name = 'Dating App Frustrated'),
+((SELECT id FROM outreach_sequences WHERE name = 'Dating App Frustrated' LIMIT 1),
 1, 0,
 'I get it - apps are exhausting',
 '<p>Hi {{first_name}},</p>
