@@ -1,21 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!
-});
-
 /**
- * FREE Lead Discovery using Claude
- * Finds real companies and guesses their contact emails
- * No paid APIs required beyond Claude (which you're already using)
+ * Lead Discovery - Pure Business Logic
+ * Uses curated list of target companies
+ * No AI required
  */
+
+// Curated list of potential leads (dating coaches, matchmakers, wedding industry)
+const POTENTIAL_LEADS = [
+  { name: "The Matchmaking Institute", domain: "matchmakinginstitute.com", industry: "matchmaking", size: "10-50" },
+  { name: "It's Just Lunch", domain: "itsjustlunch.com", industry: "matchmaking", size: "100-500" },
+  { name: "Selective Search", domain: "selectivesearch.com", industry: "matchmaking", size: "10-50" },
+  { name: "Three Day Rule", domain: "threedayrule.com", industry: "matchmaking", size: "50-100" },
+  { name: "The League Dating App", domain: "theleague.com", industry: "dating_app", size: "50-200" },
+  { name: "Hinge", domain: "hinge.co", industry: "dating_app", size: "100-500" },
+  { name: "Coffee Meets Bagel", domain: "coffeemeetsbagel.com", industry: "dating_app", size: "50-100" },
+  { name: "Bumble", domain: "bumble.com", industry: "dating_app", size: "500+" },
+  { name: "The Knot", domain: "theknot.com", industry: "wedding", size: "500+" },
+  { name: "Zola", domain: "zola.com", industry: "wedding", size: "100-500" },
+  { name: "WeddingWire", domain: "weddingwire.com", industry: "wedding", size: "500+" },
+  { name: "Minted Weddings", domain: "minted.com", industry: "wedding", size: "100-500" },
+  { name: "Relationship Hero", domain: "relationshiphero.com", industry: "coaching", size: "10-50" },
+  { name: "BetterHelp", domain: "betterhelp.com", industry: "counseling", size: "500+" },
+  { name: "Talkspace", domain: "talkspace.com", industry: "counseling", size: "100-500" },
+  { name: "Eventbrite Singles Events", domain: "eventbrite.com", industry: "events", size: "500+" },
+  { name: "Meetup Dating Groups", domain: "meetup.com", industry: "events", size: "500+" },
+  { name: "SpeedLA Dating", domain: "speedladating.com", industry: "speed_dating", size: "10-50" },
+  { name: "Pre-Dating", domain: "pre-dating.com", industry: "speed_dating", size: "10-50" },
+  { name: "CitySwoon", domain: "cityswoon.com", industry: "speed_dating", size: "10-50" }
+];
+
 export async function GET(request: NextRequest) {
   try {
     console.log('[Lead Discovery] Starting company discovery...');
@@ -27,80 +47,20 @@ export async function GET(request: NextRequest) {
       .not('company', 'is', null)
       .neq('company', '')
       .order('created_at', { ascending: false })
-      .limit(50);
+      .limit(100);
 
-    const existingCompanies = existingLeads?.map(l => l.company).join(', ') || 'None yet';
+    const existingCompaniesSet = new Set(
+      existingLeads?.map(l => l.company.toLowerCase()) || []
+    );
 
     console.log(`[Lead Discovery] Found ${existingLeads?.length || 0} existing companies to exclude`);
 
-    // Step 2: Use Claude to discover new companies
-    const prompt = `Search your knowledge and suggest 10 real companies that would be ideal customers for a matchmaking/dating service like IntroAlignment.
+    // Step 2: Filter out companies we already have
+    const companies = POTENTIAL_LEADS.filter(
+      company => !existingCompaniesSet.has(company.name.toLowerCase())
+    ).slice(0, 10); // Take up to 10 new companies
 
-CRITICAL: Find DIFFERENT companies than these we already have:
-${existingCompanies}
-
-For each company, provide:
-- Company name (must be DIFFERENT from the list above)
-- Website domain (e.g., acme.com)
-- Industry
-- Estimated size (employees)
-- Why they'd be a good fit
-
-Return ONLY a JSON array, no other text:
-[
-  {
-    "name": "Company Name",
-    "domain": "domain.com",
-    "industry": "industry",
-    "size": "10-50",
-    "reason": "Why they're a good fit"
-  }
-]
-
-Focus on:
-- Dating coaches/matchmakers
-- Relationship counselors
-- Wedding planners
-- Event companies
-- HR consulting firms
-- Companies that already serve singles/couples`;
-
-    console.log('[Lead Discovery] Querying Claude for new companies...');
-
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 2000,
-      messages: [{
-        role: 'user',
-        content: prompt
-      }]
-    });
-
-    const responseText = response.content[0].type === 'text'
-      ? response.content[0].text
-      : '';
-
-    // Extract JSON from response
-    let companies = [];
-    try {
-      const jsonMatch = responseText.match(/```(?:json)?\s*(\[[\s\S]*?\])\s*```/) ||
-                        responseText.match(/(\[[\s\S]*\])/);
-
-      if (jsonMatch) {
-        companies = JSON.parse(jsonMatch[1]);
-      } else {
-        throw new Error('Could not extract JSON from Claude response');
-      }
-
-      console.log(`[Lead Discovery] Claude found ${companies.length} companies`);
-    } catch (error: any) {
-      console.error('[Lead Discovery] Failed to parse Claude response:', error);
-      return NextResponse.json({
-        success: false,
-        error: 'Failed to parse AI response',
-        raw: responseText
-      }, { status: 500 });
-    }
+    console.log(`[Lead Discovery] Found ${companies.length} new companies to add`);
 
     // Step 3: Generate email addresses and save to database
     const emailPatterns = ['contact', 'info', 'hello', 'team', 'support'];
