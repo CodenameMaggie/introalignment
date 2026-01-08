@@ -49,24 +49,28 @@ SMTP_DOMAIN=maggieforbesstrategies.com
 
 ## API Request Format
 
-```typescript
+```json
 POST http://5.78.139.9:3000/api/email-api
-Headers:
-  Content-Type: application/json
-  X-API-Key: forbes-command-2026
-  Authorization: Bearer forbes-command-2026
+Content-Type: application/json
 
-Body:
 {
-  "from": "henry@maggieforbesstrategies.com",
-  "to": ["recipient@example.com"],
+  "action": "send",
+  "api_key": "forbes-command-2026",
+  "business": "IA",
+  "to": "recipient@example.com",
   "subject": "Email Subject",
   "html": "<p>HTML content</p>",
-  "text": "Plain text content",
-  "replyTo": "reply@example.com",
-  "domain": "maggieforbesstrategies.com"
+  "from": "henry@maggieforbesstrategies.com",
+  "replyTo": "reply@example.com"
 }
 ```
+
+**Business Codes:**
+- **MFS** - Maggie Forbes Strategies
+- **GMP** - Growth Manager Pro
+- **IC** - IntroConnected
+- **IA** - IntroAlignment ✅
+- **FF** - Frequency and Form
 
 ## API Response Format
 
@@ -88,7 +92,25 @@ Body:
 
 ## Testing
 
-### Test API Connection
+### Test API Status
+```bash
+curl -X POST http://5.78.139.9:3000/api/email-api \
+  -H "Content-Type: application/json" \
+  -d '{"action":"status","api_key":"forbes-command-2026"}'
+```
+
+**Response:**
+```json
+{
+  "service": "Forbes Command Email API",
+  "server": "5.78.139.9",
+  "port": 25,
+  "businesses": ["MFS", "GMP", "IC", "IA", "FF"],
+  "status": "ready"
+}
+```
+
+### Test Email Sending via IntroAlignment
 ```bash
 curl http://localhost:3000/api/test-email
 ```
@@ -100,12 +122,7 @@ curl http://localhost:3000/api/test-email
   "connection": "verified",
   "emailSent": true,
   "messageId": "...",
-  "recipient": "henry@introalignment.com",
-  "config": {
-    "apiUrl": "http://5.78.139.9:3000/api/email-api",
-    "from": "henry@maggieforbesstrategies.com",
-    "domain": "maggieforbesstrategies.com"
-  }
+  "recipient": "henry@introalignment.com"
 }
 ```
 

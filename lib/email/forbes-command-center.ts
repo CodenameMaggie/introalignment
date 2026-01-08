@@ -14,6 +14,7 @@ export interface EmailParams {
 
 const FORBES_COMMAND_API = process.env.FORBES_COMMAND_API_URL || 'http://5.78.139.9:3000/api/email-api';
 const FORBES_COMMAND_KEY = process.env.FORBES_COMMAND_API_KEY || 'forbes-command-2026';
+const BUSINESS_CODE = 'IA'; // IntroAlignment business code
 
 /**
  * Send email via Forbes Command Center API
@@ -23,18 +24,17 @@ export async function sendEmail(params: EmailParams): Promise<{success: boolean;
     const response = await fetch(FORBES_COMMAND_API, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-API-Key': FORBES_COMMAND_KEY,
-        'Authorization': `Bearer ${FORBES_COMMAND_KEY}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: params.from || process.env.SMTP_FROM_EMAIL || 'henry@maggieforbesstrategies.com',
-        to: Array.isArray(params.to) ? params.to : [params.to],
+        action: 'send',
+        api_key: FORBES_COMMAND_KEY,
+        business: BUSINESS_CODE,
+        to: Array.isArray(params.to) ? params.to[0] : params.to, // API expects single recipient
         subject: params.subject,
         html: params.html,
-        text: params.text,
-        replyTo: params.replyTo,
-        domain: process.env.SMTP_DOMAIN || 'maggieforbesstrategies.com'
+        from: params.from || process.env.SMTP_FROM_EMAIL || 'henry@maggieforbesstrategies.com',
+        replyTo: params.replyTo
       })
     });
 
@@ -314,19 +314,26 @@ The IntroAlignment Team`;
  */
 export async function verifyConnection(): Promise<{success: boolean; error?: string}> {
   try {
-    const response = await fetch(FORBES_COMMAND_API.replace('/email-api', '/health'), {
+    const response = await fetch(FORBES_COMMAND_API, {
+      method: 'POST',
       headers: {
-        'X-API-Key': FORBES_COMMAND_KEY
-      }
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        action: 'status',
+        api_key: FORBES_COMMAND_KEY
+      })
     });
 
     if (response.ok) {
-      console.log('[Forbes Command Center] Connection verified');
+      const data = await response.json();
+      console.log('[Forbes Command Center] Connection verified:', data);
       return { success: true };
     } else {
+      const errorData = await response.json().catch(() => ({}));
       return {
         success: false,
-        error: `API returned ${response.status}`
+        error: errorData.error || `API returned ${response.status}`
       };
     }
   } catch (error: any) {
