@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import ConversationChat from '@/components/conversation/ConversationChat';
+import QuestionnaireForm from '@/components/conversation/QuestionnaireForm';
 
 function ConversationPageContent() {
   const router = useRouter();
@@ -47,35 +48,8 @@ function ConversationPageContent() {
     return null;
   }
 
-  // Feature flag - disable until we have users
-  const conversationEnabled = process.env.NEXT_PUBLIC_ENABLE_CONVERSATION === 'true';
-
-  if (!conversationEnabled) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blush-light via-cream to-blush flex items-center justify-center p-4">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="bg-white rounded-2xl shadow-xl p-12">
-            <div className="text-6xl mb-6">🚀</div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
-              Coming Soon!
-            </h1>
-            <p className="text-xl text-gray-600 mb-6">
-              Our AI-powered conversational onboarding is being prepared for launch.
-            </p>
-            <p className="text-gray-500 mb-8">
-              This feature will allow you to build a deep compatibility profile through natural conversation instead of boring questionnaires. Stay tuned!
-            </p>
-            <button
-              onClick={() => router.push('/dashboard-interactive')}
-              className="bg-gradient-to-r from-gold to-gold-dark text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
-            >
-              Go to Dashboard
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Check which conversation mode to use
+  const useAI = process.env.NEXT_PUBLIC_ENABLE_AI_CONVERSATION === 'true';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blush-light via-cream to-blush py-8">
@@ -86,16 +60,25 @@ function ConversationPageContent() {
             Get to Know You
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Have a natural conversation with us to build your deep compatibility profile.
-            The more you share, the better we can match you.
+            {useAI
+              ? 'Have a natural conversation with us to build your deep compatibility profile.'
+              : 'Answer some questions to help us build your compatibility profile.'}
+            {' '}The more you share, the better we can match you.
           </p>
         </div>
 
-        {/* Chat Component */}
-        <ConversationChat
-          userId={userId}
-          onComplete={handleConversationComplete}
-        />
+        {/* Questionnaire or Chat based on AI mode */}
+        {useAI ? (
+          <ConversationChat
+            userId={userId}
+            onComplete={handleConversationComplete}
+          />
+        ) : (
+          <QuestionnaireForm
+            userId={userId}
+            onComplete={handleConversationComplete}
+          />
+        )}
 
         {/* Info Section */}
         <div className="mt-8 max-w-3xl mx-auto">
@@ -105,10 +88,10 @@ function ConversationPageContent() {
             </h3>
             <div className="space-y-2 text-sm text-gray-600">
               <p>
-                <strong>Natural Conversation:</strong> We'll chat through 7 chapters covering different aspects of your life and personality.
+                <strong>{useAI ? 'Natural Conversation' : 'Structured Questions'}:</strong> We'll guide you through 7 chapters covering different aspects of your life and personality.
               </p>
               <p>
-                <strong>49 Questions Total:</strong> But it won't feel like a questionnaire - we'll explore topics naturally and go deeper where it matters.
+                <strong>22 Questions Total:</strong> {useAI ? 'We'll explore topics naturally and go deeper where it matters.' : 'Take your time with each question and answer as openly as you'd like.'}
               </p>
               <p>
                 <strong>Privacy First:</strong> Your responses are private and used only to find compatible matches.

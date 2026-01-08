@@ -324,7 +324,7 @@ async function handlePaymentFailed(invoice: Stripe.Invoice) {
   const firstName = profile?.first_name || user.full_name?.split(' ')[0] || 'there';
 
   // Send payment failed notification
-  const { sendPaymentFailedNotification } = await import('@/lib/email/resend');
+  const { sendPaymentFailedNotification } = await import('@/lib/email/smtp');
   const emailResult = await sendPaymentFailedNotification({
     email: user.email,
     firstName,

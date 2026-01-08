@@ -68,10 +68,10 @@ BEGIN
     END IF;
 END $$;
 
--- Set Maggie as admin
+-- Set admin user
 UPDATE public.users
 SET role = 'admin'
-WHERE email = 'maggie@maggieforbesstrategies.com';
+WHERE email = 'henry@introalignment.com';
 
 -- =====================================================
 -- INDEXES

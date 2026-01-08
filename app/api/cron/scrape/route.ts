@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { RedditScraper } from '@/lib/scrapers/reddit-scraper';
+import { QuoraScraper } from '@/lib/scrapers/quora-scraper';
+import { ForumScraper } from '@/lib/scrapers/forum-scraper';
+import { MeetupScraper } from '@/lib/scrapers/meetup-scraper';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,12 +12,11 @@ const supabase = createClient(
 
 export async function GET(request: NextRequest) {
   try {
-    // Get sources due for scraping
+    // Get all active sources
     const { data: sources } = await supabase
       .from('lead_sources')
       .select('*')
-      .eq('is_active', true)
-      .eq('source_type', 'reddit'); // Only Reddit for now
+      .eq('is_active', true);
 
     if (!sources?.length) {
       return NextResponse.json({ message: 'No sources to scrape' });
@@ -24,11 +26,39 @@ export async function GET(request: NextRequest) {
 
     for (const source of sources) {
       try {
-        const scraper = new RedditScraper(source.id, source.scrape_config);
-        const result = await scraper.scrape();
+        let scraper;
+        let result;
+
+        // Create appropriate scraper based on source type
+        switch (source.source_type) {
+          case 'reddit':
+            scraper = new RedditScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'quora':
+            scraper = new QuoraScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'forum':
+            scraper = new ForumScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'meetup':
+            scraper = new MeetupScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          default:
+            console.log(`Unknown source type: ${source.source_type}`);
+            continue;
+        }
 
         results.push({
           source: source.source_name,
+          type: source.source_type,
           ...result
         });
 
@@ -53,6 +83,7 @@ export async function GET(request: NextRequest) {
         console.error(`Error scraping ${source.source_name}:`, error);
         results.push({
           source: source.source_name,
+          type: source.source_type,
           error: error.message
         });
       }

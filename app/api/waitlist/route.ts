@@ -60,8 +60,30 @@ export async function POST(request: NextRequest) {
         });
     }
 
+    // Check if this signup came from a lead (outreach campaign)
+    const { data: lead } = await supabase
+      .from('leads')
+      .select('id, source_type, fit_score, current_sequence_id')
+      .eq('email', email.toLowerCase())
+      .single();
+
+    if (lead) {
+      // Mark lead as converted
+      await supabase
+        .from('leads')
+        .update({
+          status: 'converted',
+          converted_at: new Date().toISOString(),
+          converted_user_id: user.id,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', lead.id);
+
+      console.log(`Lead ${lead.id} converted to user ${user.id} from ${lead.source_type}`);
+    }
+
     // Send welcome email
-    const { sendWaitlistWelcome } = await import('@/lib/email/resend');
+    const { sendWaitlistWelcome } = await import('@/lib/email/smtp');
     const emailResult = await sendWaitlistWelcome({
       email: email.toLowerCase(),
       firstName,
@@ -75,7 +97,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Successfully joined the waitlist!'
+      message: 'Successfully joined the waitlist!',
+      leadConverted: !!lead
     });
 
   } catch (error) {

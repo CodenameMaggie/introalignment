@@ -1,18 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
-import { Resend } from 'resend';
+import { sendEmail } from '@/lib/email/smtp';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
-
-// Lazy initialization to avoid build-time errors
-function getResend() {
-  if (!process.env.RESEND_API_KEY) {
-    throw new Error('RESEND_API_KEY is not set');
-  }
-  return new Resend(process.env.RESEND_API_KEY);
-}
 
 export class OutreachEngine {
   // Send pending emails
@@ -88,19 +80,18 @@ export class OutreachEngine {
     const trackedHtml = this.addTracking(bodyHtml, enrollment.id);
 
     try {
-      // Send via Resend
-      const { data, error } = await getResend().emails.send({
+      // Send via SMTP
+      const result = await sendEmail({
         from: 'IntroAlignment <hello@introalignment.com>',
         to: lead.email,
         subject,
         html: trackedHtml,
-        text: bodyText,
-        headers: {
-          'X-Entity-Ref-ID': enrollment.id
-        }
+        text: bodyText
       });
 
-      if (error) throw error;
+      if (!result.success) {
+        throw new Error(result.error || 'Email send failed');
+      }
 
       // Record send
       await supabase.from('email_sends').insert({
@@ -113,8 +104,8 @@ export class OutreachEngine {
         subject,
         body_html: trackedHtml,
         body_text: bodyText,
-        provider: 'resend',
-        provider_message_id: data?.id,
+        provider: 'smtp',
+        provider_message_id: result.messageId,
         status: 'sent',
         sent_at: new Date().toISOString()
       });

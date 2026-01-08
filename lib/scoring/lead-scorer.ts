@@ -18,7 +18,7 @@ export class LeadScorer {
   // Target profile for ideal lead
   private idealProfile = {
     relationship_goals: ['serious'],
-    age_ranges: ['25-34', '35-44', '45-54', '30-39', '40-49'],
+    age_ranges: ['25-34', '35-44', '45-54', '50-60', '30-39', '40-49', '55-64'],
     locations: [] as string[], // Can be configured for geo-targeting
     engagement_signals: ['long post', 'thoughtful', 'specific details']
   };
@@ -100,7 +100,7 @@ export class LeadScorer {
     // Max 20 points
     if (!lead.estimated_age_range) return 10; // Unknown = neutral
 
-    const targetRanges = ['25-34', '35-44', '45-54', '30-39', '40-49'];
+    const targetRanges = ['25-34', '35-44', '45-54', '50-60', '30-39', '40-49', '55-64'];
 
     // Extract age from range (e.g., "28-33" -> 28)
     const ageMatch = lead.estimated_age_range.match(/(\d+)/);
@@ -116,8 +116,8 @@ export class LeadScorer {
       }
     }
 
-    // Slightly outside target
-    if (age >= 22 && age <= 60) {
+    // Slightly outside target (22-24 or 61-65)
+    if (age >= 22 && age <= 65) {
       return 15;
     }
 

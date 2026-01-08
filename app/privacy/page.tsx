@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Anthropic:</strong> AI conversation processing</li>
               <li><strong>Supabase:</strong> Database and authentication services</li>
               <li><strong>Vercel:</strong> Hosting and infrastructure</li>
-              <li><strong>Resend:</strong> Email delivery</li>
+              <li><strong>SMTP Mail Server:</strong> Email delivery (self-hosted)</li>
             </ul>
             <p className="text-navy-light mt-3">
               These providers are contractually obligated to protect your data and use it only for the services they provide to us.

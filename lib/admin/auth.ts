@@ -19,8 +19,8 @@ export async function checkAdminAccess(userId: string): Promise<boolean> {
     return false;
   }
 
-  // Check if user has admin role OR is Maggie's email
-  return user.role === 'admin' || user.email === 'maggie@maggieforbesstrategies.com';
+  // Check if user has admin role OR is configured admin email
+  return user.role === 'admin' || user.email === process.env.ADMIN_EMAIL;
 }
 
 /**
