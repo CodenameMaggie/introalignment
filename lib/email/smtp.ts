@@ -57,9 +57,12 @@ export async function sendEmail(params: EmailParams): Promise<{success: boolean;
   try {
     const transport = getTransporter();
 
+    // Use configured from email or default
+    const defaultFrom = process.env.SMTP_FROM_EMAIL || `IntroAlignment <noreply@${process.env.SMTP_DOMAIN || 'introalignment.com'}>`;
+
     // Prepare email
     const mailOptions = {
-      from: params.from || `IntroAlignment <noreply@${process.env.SMTP_DOMAIN || 'introalignment.com'}>`,
+      from: params.from || defaultFrom,
       to: Array.isArray(params.to) ? params.to.join(', ') : params.to,
       subject: params.subject,
       html: params.html,
