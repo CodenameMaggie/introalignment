@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { verifyConnection, sendEmail } from '@/lib/email/smtp';
-import { createClient } from 'net';
+import { Socket } from 'net';
 
 export async function GET() {
   const results: any = {
@@ -16,11 +16,12 @@ export async function GET() {
   // Test 1: TCP Port connectivity
   try {
     await new Promise((resolve, reject) => {
-      const socket = createClient({
-        host: process.env.SMTP_HOST || 'localhost',
-        port: parseInt(process.env.SMTP_PORT || '25', 10),
-        timeout: 5000
-      });
+      const socket = new Socket();
+      socket.setTimeout(5000);
+      socket.connect(
+        parseInt(process.env.SMTP_PORT || '25', 10),
+        process.env.SMTP_HOST || 'localhost'
+      );
 
       socket.on('connect', () => {
         results.tests.tcpConnection = {

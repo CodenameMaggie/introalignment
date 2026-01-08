@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: 'No sources to scrape' });
     }
 
-    const results = [];
+    const results: any[] = [];
 
     // Process sources in parallel for 10X speed boost
     const scrapePromises = sources.map(async (source) => {

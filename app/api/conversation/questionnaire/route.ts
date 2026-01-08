@@ -69,7 +69,7 @@ async function startQuestionnaire(userId: string) {
     conversationId: conversation.id,
     currentQuestion: 1,
     totalQuestions: TOTAL_QUESTIONS,
-    question: firstQuestion.text,
+    question: firstQuestion.question,
     chapter: {
       number: firstQuestion.chapter,
       title: chapterInfo?.title,
@@ -144,7 +144,7 @@ async function saveAnswerAndGetNext(userId: string, questionNumber: number, answ
     isComplete: false,
     currentQuestion: nextQuestionNumber,
     totalQuestions: TOTAL_QUESTIONS,
-    question: nextQuestion.text,
+    question: nextQuestion.question,
     chapter: {
       number: nextQuestion.chapter,
       title: nextChapterInfo?.title,
@@ -219,7 +219,7 @@ async function saveAnswer(
       content: answer,
       chapter_id: chapter?.id,
       question_number: questionNumber,
-      question_text: question.text
+      question_text: question.question
     });
 
   if (error) {

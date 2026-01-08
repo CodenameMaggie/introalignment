@@ -140,40 +140,40 @@ export async function POST(
     const badgesEarned: string[] = [];
 
     // Streak-based badges
-    if (streak.current_streak === 3) {
-      const hasThis = await checkUserBadge(userId, 'first_streak');
+    if (streak === 3) {
+      const hasThis = await checkUserBadge(user.id, 'first_streak');
       if (!hasThis) {
-        await awardBadge(userId, 'first_streak', 'First Streak', '3 days in a row!');
+        await awardBadge(user.id, 'first_streak', 'First Streak', '3 days in a row!');
         badgesEarned.push('First Streak');
       }
     }
-    if (streak.current_streak === 7) {
-      const hasThis = await checkUserBadge(userId, 'week_warrior');
+    if (streak === 7) {
+      const hasThis = await checkUserBadge(user.id, 'week_warrior');
       if (!hasThis) {
-        await awardBadge(userId, 'week_warrior', 'Week Warrior', '7 days in a row!');
+        await awardBadge(user.id, 'week_warrior', 'Week Warrior', '7 days in a row!');
         badgesEarned.push('Week Warrior');
       }
     }
-    if (streak.current_streak === 30) {
-      const hasThis = await checkUserBadge(userId, 'monthly_master');
+    if (streak === 30) {
+      const hasThis = await checkUserBadge(user.id, 'monthly_master');
       if (!hasThis) {
-        await awardBadge(userId, 'monthly_master', 'Monthly Master', '30 days in a row!');
+        await awardBadge(user.id, 'monthly_master', 'Monthly Master', '30 days in a row!');
         badgesEarned.push('Monthly Master');
       }
     }
 
     // Points-based badges
     if (newTotalPoints >= 100) {
-      const hasThis = await checkUserBadge(userId, 'century_club');
+      const hasThis = await checkUserBadge(user.id, 'century_club');
       if (!hasThis) {
-        await awardBadge(userId, 'century_club', 'Century Club', '100 points earned!');
+        await awardBadge(user.id, 'century_club', 'Century Club', '100 points earned!');
         badgesEarned.push('Century Club');
       }
     }
     if (newTotalPoints >= 500) {
-      const hasThis = await checkUserBadge(userId, 'point_champion');
+      const hasThis = await checkUserBadge(user.id, 'point_champion');
       if (!hasThis) {
-        await awardBadge(userId, 'point_champion', 'Point Champion', '500 points earned!');
+        await awardBadge(user.id, 'point_champion', 'Point Champion', '500 points earned!');
         badgesEarned.push('Point Champion');
       }
     }

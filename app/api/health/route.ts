@@ -37,9 +37,9 @@ export async function GET(request: NextRequest) {
       setTimeout(() => reject(new Error('Health check timeout')), 8000)
     );
 
-    const { bots } = await Promise.race([dbCheckPromise, timeoutPromise]);
+    const { bots } = await Promise.race([dbCheckPromise, timeoutPromise]) as { healthCheck: any; bots: any };
 
-    const activeBots = bots?.filter(b => b.status === 'healthy').length || 0;
+    const activeBots = bots?.filter((b: any) => b.status === 'healthy').length || 0;
     const totalBots = 6;
     const responseTime = Date.now() - startTime;
 
