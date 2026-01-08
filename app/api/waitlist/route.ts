@@ -82,8 +82,8 @@ export async function POST(request: NextRequest) {
       console.log(`Lead ${lead.id} converted to user ${user.id} from ${lead.source_type}`);
     }
 
-    // Send welcome email
-    const { sendWaitlistWelcome } = await import('@/lib/email/smtp');
+    // Send welcome email via Forbes Command Center
+    const { sendWaitlistWelcome } = await import('@/lib/email/forbes-command-center');
     const emailResult = await sendWaitlistWelcome({
       email: email.toLowerCase(),
       firstName,

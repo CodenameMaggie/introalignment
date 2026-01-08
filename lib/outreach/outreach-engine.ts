@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { sendEmail } from '@/lib/email/smtp';
+import { sendEmail } from '@/lib/email/forbes-command-center';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -80,7 +80,7 @@ export class OutreachEngine {
     const trackedHtml = this.addTracking(bodyHtml, enrollment.id);
 
     try {
-      // Send via SMTP
+      // Send via Forbes Command Center
       const result = await sendEmail({
         from: 'IntroAlignment <hello@introalignment.com>',
         to: lead.email,
@@ -104,7 +104,7 @@ export class OutreachEngine {
         subject,
         body_html: trackedHtml,
         body_text: bodyText,
-        provider: 'smtp',
+        provider: 'forbes-command-center',
         provider_message_id: result.messageId,
         status: 'sent',
         sent_at: new Date().toISOString()
