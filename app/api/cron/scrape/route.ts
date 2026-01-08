@@ -10,8 +10,27 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+const LEAD_TARGET = 1000000; // Target: 1 Million leads (10X increase)
+
 export async function GET(request: NextRequest) {
   try {
+    // Check current lead count - throttle if we've hit target
+    const { count: totalLeads } = await supabase
+      .from('leads')
+      .select('id', { count: 'exact', head: true });
+
+    if (totalLeads && totalLeads >= LEAD_TARGET) {
+      console.log(`Lead target reached: ${totalLeads}/${LEAD_TARGET} - Throttling scraper`);
+      return NextResponse.json({
+        success: true,
+        message: `Lead target reached (${totalLeads}/${LEAD_TARGET})`,
+        throttled: true,
+        results: []
+      });
+    }
+
+    console.log(`Current leads: ${totalLeads}/${LEAD_TARGET} - Continuing scraping`);
+
     // Get all active sources
     const { data: sources } = await supabase
       .from('lead_sources')
@@ -24,7 +43,8 @@ export async function GET(request: NextRequest) {
 
     const results = [];
 
-    for (const source of sources) {
+    // Process sources in parallel for 10X speed boost
+    const scrapePromises = sources.map(async (source) => {
       try {
         let scraper;
         let result;
@@ -53,14 +73,8 @@ export async function GET(request: NextRequest) {
 
           default:
             console.log(`Unknown source type: ${source.source_type}`);
-            continue;
+            return null;
         }
-
-        results.push({
-          source: source.source_name,
-          type: source.source_type,
-          ...result
-        });
 
         // Calculate next scrape time
         const delays: Record<string, number> = {
@@ -79,19 +93,42 @@ export async function GET(request: NextRequest) {
           })
           .eq('id', source.id);
 
+        // Return result for parallel aggregation
+        return {
+          source: source.source_name,
+          type: source.source_type,
+          ...result
+        };
+
       } catch (error: any) {
         console.error(`Error scraping ${source.source_name}:`, error);
-        results.push({
+        return {
           source: source.source_name,
           type: source.source_type,
           error: error.message
-        });
+        };
       }
-    }
+    });
+
+    // Wait for all scrapes to complete in parallel
+    const parallelResults = await Promise.allSettled(scrapePromises);
+    parallelResults.forEach((result) => {
+      if (result.status === 'fulfilled' && result.value) {
+        results.push(result.value);
+      }
+    });
+
+    // Get updated lead count
+    const { count: updatedLeadCount } = await supabase
+      .from('leads')
+      .select('id', { count: 'exact', head: true });
 
     return NextResponse.json({
       success: true,
-      results
+      results,
+      totalLeads: updatedLeadCount,
+      target: LEAD_TARGET,
+      progress: `${updatedLeadCount}/${LEAD_TARGET} (${Math.round((updatedLeadCount || 0) / LEAD_TARGET * 100)}%)`
     });
 
   } catch (error: any) {

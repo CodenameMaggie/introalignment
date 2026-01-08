@@ -91,7 +91,7 @@ function ConversationPageContent() {
                 <strong>{useAI ? 'Natural Conversation' : 'Structured Questions'}:</strong> We'll guide you through 7 chapters covering different aspects of your life and personality.
               </p>
               <p>
-                <strong>22 Questions Total:</strong> {useAI ? 'We'll explore topics naturally and go deeper where it matters.' : 'Take your time with each question and answer as openly as you'd like.'}
+                <strong>22 Questions Total:</strong> {useAI ? "We'll explore topics naturally and go deeper where it matters." : "Take your time with each question and answer as openly as you'd like."}
               </p>
               <p>
                 <strong>Privacy First:</strong> Your responses are private and used only to find compatible matches.

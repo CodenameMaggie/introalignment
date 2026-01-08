@@ -65,6 +65,40 @@ export class LeadScorer {
     // Max 25 points
     let score = 0;
 
+    const content = (lead.trigger_content || '').toLowerCase();
+
+    // **QUALITY CHECK: Disqualify spam/low-quality**
+    const negativeKeywords = [
+      'onlyfans',
+      'cashapp',
+      'venmo',
+      'paypal',
+      'kik',
+      'snapchat premium',
+      'selling',
+      'telegram',
+      'whatsapp me',
+      'dm for',
+      'sugar daddy',
+      'sugar baby',
+      'findom',
+      'feet pics',
+      'send $',
+      'cashapp',
+      'quick hookup',
+      'one night',
+      'nsa',
+      'fwb',
+      'hookup only',
+      'dtf'
+    ];
+
+    for (const negative of negativeKeywords) {
+      if (content.includes(negative)) {
+        return 0; // INSTANT DISQUALIFICATION for spam/transactional
+      }
+    }
+
     if (lead.relationship_goal === 'serious') {
       score += 20;
     } else if (lead.relationship_goal === 'unknown') {
@@ -81,10 +115,12 @@ export class LeadScorer {
       'life partner',
       'serious relationship',
       'forever',
-      'committed'
+      'committed',
+      'looking for something real',
+      'tired of games',
+      'genuine connection',
+      'soulmate'
     ];
-
-    const content = (lead.trigger_content || '').toLowerCase();
 
     for (const keyword of intentKeywords) {
       if (content.includes(keyword)) {
@@ -152,10 +188,30 @@ export class LeadScorer {
 
     const content = lead.trigger_content || '';
 
-    // Length indicates effort
+    // **QUALITY CHECK: Minimum content requirement**
+    if (content.length < 50) {
+      return 0; // Too short = low quality/spam
+    }
+
+    // **QUALITY CHECK: Bot/spam patterns**
+    const spamPatterns = [
+      /(.)\1{4,}/, // Repeated characters (hiiiii, heyyyy)
+      /\b\w{20,}\b/, // Super long words (gibberish)
+      /http|www\.|\.com|\.net/, // URLs
+      /\d{10,}/, // Long number strings (phone spammers)
+    ];
+
+    for (const pattern of spamPatterns) {
+      if (pattern.test(content)) {
+        return 0; // Spam detected
+      }
+    }
+
+    // Length indicates effort (stricter thresholds)
     if (content.length > 500) score += 8;
-    else if (content.length > 200) score += 5;
-    else if (content.length > 100) score += 3;
+    else if (content.length > 300) score += 6;
+    else if (content.length > 150) score += 4;
+    else if (content.length > 75) score += 2;
     else score += 1;
 
     // Specific details (personal pronouns indicate authenticity)

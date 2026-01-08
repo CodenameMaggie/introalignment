@@ -85,16 +85,20 @@ export class AutoMatcher {
     const profileA = userA.profiles[0];
     const profileB = userB.profiles[0];
 
+    // Get profile extractions (from games)
+    const extractionA = userA.profile_extractions?.[0];
+    const extractionB = userB.profile_extractions?.[0];
+
     // 1. Dealbreakers check (immediate disqualification)
     if (this.hasDealbreakerConflict(profileA, profileB)) {
       return this.zeroScore();
     }
 
-    // 2. Calculate individual dimensions
-    const psychological = this.scorePsychological(profileA, profileB);
-    const intellectual = this.scoreIntellectual(profileA, profileB);
-    const communication = this.scoreCommunication(profileA, profileB);
-    const lifeAlignment = this.scoreLifeAlignment(profileA, profileB);
+    // 2. Calculate individual dimensions (now using game data)
+    const psychological = this.scorePsychological(profileA, profileB, extractionA, extractionB);
+    const intellectual = this.scoreIntellectual(profileA, profileB, extractionA, extractionB);
+    const communication = this.scoreCommunication(profileA, profileB, extractionA, extractionB);
+    const lifeAlignment = this.scoreLifeAlignment(profileA, profileB, extractionA, extractionB);
     const astrological = this.scoreAstrological(profileA, profileB);
 
     // 3. Weighted average
@@ -155,14 +159,28 @@ export class AutoMatcher {
   /**
    * Score psychological compatibility (Big Five, Attachment)
    */
-  private scorePsychological(profileA: any, profileB: any): number {
+  private scorePsychological(profileA: any, profileB: any, extractionA?: any, extractionB?: any): number {
     let score = 0;
 
-    // Big Five compatibility (0-50 points)
-    if (profileA.big_five && profileB.big_five) {
-      const bigFiveA = profileA.big_five;
-      const bigFiveB = profileB.big_five;
+    // Use game-extracted Big Five data (preferred) or profile data
+    const bigFiveA = extractionA ? {
+      openness: (extractionA.openness || 0.5) * 100,
+      conscientiousness: (extractionA.conscientiousness || 0.5) * 100,
+      extraversion: (extractionA.extraversion || 0.5) * 100,
+      agreeableness: (extractionA.agreeableness || 0.5) * 100,
+      neuroticism: (extractionA.neuroticism || 0.5) * 100
+    } : profileA.big_five;
 
+    const bigFiveB = extractionB ? {
+      openness: (extractionB.openness || 0.5) * 100,
+      conscientiousness: (extractionB.conscientiousness || 0.5) * 100,
+      extraversion: (extractionB.extraversion || 0.5) * 100,
+      agreeableness: (extractionB.agreeableness || 0.5) * 100,
+      neuroticism: (extractionB.neuroticism || 0.5) * 100
+    } : profileB.big_five;
+
+    // Big Five compatibility (0-50 points)
+    if (bigFiveA && bigFiveB) {
       // Openness: Similar is good
       score += this.similarityScore(bigFiveA.openness, bigFiveB.openness, 10);
 
@@ -195,7 +213,7 @@ export class AutoMatcher {
   /**
    * Score intellectual compatibility
    */
-  private scoreIntellectual(profileA: any, profileB: any): number {
+  private scoreIntellectual(profileA: any, profileB: any, extractionA?: any, extractionB?: any): number {
     let score = 50; // Start neutral
 
     // Similar intellectual interests
@@ -204,9 +222,12 @@ export class AutoMatcher {
       score += commonInterests * 5; // +5 per shared interest (up to 30)
     }
 
-    // Similar curiosity/openness to learning
-    if (profileA.curiosity_score && profileB.curiosity_score) {
-      score += this.similarityScore(profileA.curiosity_score, profileB.curiosity_score, 20);
+    // Similar curiosity/openness to learning (use game data if available)
+    const curiosityA = extractionA?.openness ? extractionA.openness * 100 : profileA.curiosity_score;
+    const curiosityB = extractionB?.openness ? extractionB.openness * 100 : profileB.curiosity_score;
+
+    if (curiosityA && curiosityB) {
+      score += this.similarityScore(curiosityA, curiosityB, 20);
     }
 
     return Math.min(100, Math.round(score));
@@ -215,7 +236,7 @@ export class AutoMatcher {
   /**
    * Score communication compatibility
    */
-  private scoreCommunication(profileA: any, profileB: any): number {
+  private scoreCommunication(profileA: any, profileB: any, extractionA?: any, extractionB?: any): number {
     let score = 50;
 
     // Communication style match
@@ -236,13 +257,20 @@ export class AutoMatcher {
       score += conflictScore;
     }
 
+    // Use decision speed from games as communication indicator
+    if (extractionA?.decision_speed && extractionB?.decision_speed) {
+      if (extractionA.decision_speed === extractionB.decision_speed) {
+        score += 10; // Similar decision-making pace is good
+      }
+    }
+
     return Math.min(100, Math.round(score));
   }
 
   /**
    * Score life alignment (goals, lifestyle, values)
    */
-  private scoreLifeAlignment(profileA: any, profileB: any): number {
+  private scoreLifeAlignment(profileA: any, profileB: any, extractionA?: any, extractionB?: any): number {
     let score = 0;
 
     // Values alignment (0-40 points)
@@ -260,8 +288,8 @@ export class AutoMatcher {
       score += 15; // Neutral if missing
     }
 
-    // Lifestyle compatibility (0-30 points)
-    score += this.scoreLifestyle(profileA, profileB);
+    // Lifestyle compatibility (0-30 points) - enhanced with game data
+    score += this.scoreLifestyleWithGames(profileA, profileB, extractionA, extractionB);
 
     return Math.min(100, Math.round(score));
   }
@@ -424,6 +452,24 @@ export class AutoMatcher {
     }
 
     return score;
+  }
+
+  private scoreLifestyleWithGames(profileA: any, profileB: any, extractionA?: any, extractionB?: any): number {
+    let score = this.scoreLifestyle(profileA, profileB);
+
+    // Add lifestyle indicators from games
+    if (extractionA?.lifestyle_indicators && extractionB?.lifestyle_indicators) {
+      const lifestyleA = extractionA.lifestyle_indicators;
+      const lifestyleB = extractionB.lifestyle_indicators;
+
+      // Count matching lifestyle preferences
+      const keys = Object.keys(lifestyleA).filter(k => lifestyleB[k]);
+      const matches = keys.filter(k => lifestyleA[k] === lifestyleB[k]).length;
+
+      score += matches * 3; // Bonus for each matching lifestyle indicator
+    }
+
+    return Math.min(30, score);
   }
 
   private identifyStrengths(psych: number, intel: number, comm: number, life: number): string[] {
