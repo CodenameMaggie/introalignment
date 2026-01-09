@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# Lead data (privacy - never commit)
+/data/qualified-leads/*.json
+/data/qualified-leads/*.csv
+!/data/qualified-leads/README.md
