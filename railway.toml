@@ -6,3 +6,5 @@ buildCommand = "rm -rf .next && npm run build"
 startCommand = "npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
+healthcheckPath = "/api/ping"
+healthcheckTimeout = 100
