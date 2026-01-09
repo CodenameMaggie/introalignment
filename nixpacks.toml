@@ -1,11 +1,11 @@
 [phases.setup]
-nixPkgs = ["nodejs-24_x"]
+nixPkgs = ["nodejs-22_x", "npm-10_x"]
 
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = ["rm -rf .next", "npm run build"]
 
 [start]
-cmd = "node .next/standalone/server.js"
+cmd = "npm start"
