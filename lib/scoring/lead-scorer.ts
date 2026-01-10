@@ -1,10 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface ScoreBreakdown {
   relationship_intent: number; // 0-25
   age_fit: number; // 0-20
@@ -15,6 +10,13 @@ interface ScoreBreakdown {
 }
 
 export class LeadScorer {
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+  }
+
   // Target profile for ideal lead
   private idealProfile = {
     relationship_goals: ['serious'],
@@ -24,6 +26,7 @@ export class LeadScorer {
   };
 
   async scoreLead(leadId: string): Promise<number> {
+    const supabase = this.getSupabase();
     const { data: lead } = await supabase
       .from('leads')
       .select('*')

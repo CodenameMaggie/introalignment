@@ -1,14 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 import { sendEmail } from '@/lib/email/forbes-command-center';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export class OutreachEngine {
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+  }
+
   // Send pending emails
   async processPendingEmails(): Promise<number> {
+    const supabase = this.getSupabase();
     // Get enrollments with emails due
     const { data: dueEmails } = await supabase
       .from('sequence_enrollments')
@@ -36,6 +39,7 @@ export class OutreachEngine {
   }
 
   async sendSequenceEmail(enrollment: any): Promise<void> {
+    const supabase = this.getSupabase();
     const { lead, sequence } = enrollment;
 
     // Skip if no email
@@ -216,6 +220,7 @@ export class OutreachEngine {
   }
 
   private async updateSequenceStats(sequenceId: string): Promise<void> {
+    const supabase = this.getSupabase();
     // Calculate and update sequence stats
     const { data: stats } = await supabase
       .from('email_sends')
@@ -250,6 +255,7 @@ export class OutreachEngine {
 
   // Enroll lead in sequence
   async enrollLead(leadId: string, sequenceId?: string): Promise<void> {
+    const supabase = this.getSupabase();
     const { data: lead } = await supabase
       .from('leads')
       .select('*')

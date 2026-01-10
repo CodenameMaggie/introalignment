@@ -2,15 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { OutreachEngine } from '@/lib/outreach/outreach-engine';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 // OUTREACH PAUSED - Collecting data for 3 days before launch
 const OUTREACH_ENABLED = process.env.OUTREACH_ENABLED === 'true';
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase();
   try {
     const engine = new OutreachEngine();
 

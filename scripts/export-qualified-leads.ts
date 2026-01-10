@@ -7,10 +7,12 @@ import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 interface QualifiedLead {
   id: string;
@@ -28,6 +30,7 @@ interface QualifiedLead {
 }
 
 async function exportQualifiedLeads() {
+  const supabase = getSupabase();
   console.log('🔍 Fetching qualified leads from database...\n');
 
   // Get qualified leads ready to email

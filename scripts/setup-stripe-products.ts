@@ -1,13 +1,16 @@
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 async function setupStripeProducts() {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const supabase = getSupabase();
   console.log('Setting up Stripe products...\n');
 
   // Get all plans (except free)

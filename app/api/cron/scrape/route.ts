@@ -5,14 +5,17 @@ import { QuoraScraper } from '@/lib/scrapers/quora-scraper';
 import { ForumScraper } from '@/lib/scrapers/forum-scraper';
 import { MeetupScraper } from '@/lib/scrapers/meetup-scraper';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 const LEAD_TARGET = 1000000; // Target: 1 Million leads (10X increase)
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase();
   try {
     // Check current lead count - throttle if we've hit target
     const { count: totalLeads } = await supabase

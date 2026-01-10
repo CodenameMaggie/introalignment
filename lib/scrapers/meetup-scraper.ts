@@ -1,10 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface MeetupScrapeConfig {
   cities: string[];
   keywords: string[];
@@ -29,6 +24,13 @@ export class MeetupScraper {
   constructor(sourceId: string, config: MeetupScrapeConfig) {
     this.sourceId = sourceId;
     this.config = config;
+  }
+
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
   }
 
   async scrape() {
@@ -183,6 +185,7 @@ export class MeetupScraper {
   }
 
   private async saveLead(event: MeetupEvent): Promise<boolean> {
+    const supabase = this.getSupabase();
     // Check for duplicates
     const { data: existing } = await supabase
       .from('leads')

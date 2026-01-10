@@ -1,10 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface MatchScore {
   userId: string;
   overallScore: number;
@@ -17,10 +12,18 @@ interface MatchScore {
 }
 
 export class AutoMatcher {
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+  }
+
   /**
    * Find potential matches for a user who just completed onboarding
    */
   async findMatches(userId: string, limit: number = 10): Promise<MatchScore[]> {
+    const supabase = this.getSupabase();
     // Get user's profile and conversation data
     const { data: user } = await supabase
       .from('users')
@@ -331,6 +334,7 @@ export class AutoMatcher {
   // ==================== HELPER METHODS ====================
 
   private async getExcludedUserIds(userId: string): Promise<string[]> {
+    const supabase = this.getSupabase();
     const excluded: string[] = [];
 
     // Already matched
@@ -519,6 +523,11 @@ export class AutoMatcher {
  * Create matches for a user
  */
 export async function createMatchesForUser(userId: string): Promise<number> {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
   const matcher = new AutoMatcher();
 
   // Find top matches

@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { QUESTION_BANK, getQuestionByNumber, getChapterInfo, TOTAL_QUESTIONS } from '@/lib/conversation/question-bank';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 // AI-FREE QUESTIONNAIRE MODE
 // This endpoint uses ZERO Claude API calls - completely free!
@@ -56,6 +58,7 @@ async function startQuestionnaire(userId: string) {
 
   const chapterInfo = getChapterInfo(firstQuestion.chapter);
 
+  const supabase = getSupabase();
   // Get user profile for personalization
   const { data: profile } = await supabase
     .from('profiles')
@@ -156,6 +159,7 @@ async function saveAnswerAndGetNext(userId: string, questionNumber: number, answ
 }
 
 async function getOrCreateConversation(userId: string) {
+  const supabase = getSupabase();
   // Try to get existing conversation
   let { data: existing } = await supabase
     .from('conversations')
@@ -202,6 +206,7 @@ async function saveAnswer(
   question: any,
   answer: string
 ) {
+  const supabase = getSupabase();
   // Get chapter ID
   const chapterInfo = getChapterInfo(question.chapter);
   const { data: chapter } = await supabase
@@ -237,6 +242,7 @@ async function updateConversationProgress(
   nextQuestionNumber: number,
   nextChapterNumber: number
 ) {
+  const supabase = getSupabase();
   // Get chapter ID
   const { data: chapter } = await supabase
     .from('conversation_chapters')
@@ -259,6 +265,7 @@ async function updateConversationProgress(
 }
 
 async function completeConversation(conversationId: string) {
+  const supabase = getSupabase();
   const { error } = await supabase
     .from('conversations')
     .update({

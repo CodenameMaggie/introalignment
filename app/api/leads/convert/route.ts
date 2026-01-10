@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 /**
  * POST /api/leads/convert
@@ -13,6 +15,7 @@ const supabase = createClient(
  * Called when someone clicks email link and completes signup
  */
 export async function POST(req: NextRequest) {
+  const supabase = getSupabase();
   try {
     const { leadId, userId, email } = await req.json();
 

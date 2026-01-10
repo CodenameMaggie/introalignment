@@ -1,10 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface QuoraScrapeConfig {
   topics: string[];
   keywords: string[];
@@ -28,6 +23,13 @@ export class QuoraScraper {
   constructor(sourceId: string, config: QuoraScrapeConfig) {
     this.sourceId = sourceId;
     this.config = config;
+  }
+
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
   }
 
   async scrape() {
@@ -147,6 +149,7 @@ export class QuoraScraper {
   }
 
   private async saveLead(question: QuoraQuestion, topic: string): Promise<boolean> {
+    const supabase = this.getSupabase();
     // Check for duplicates
     const { data: existing } = await supabase
       .from('leads')

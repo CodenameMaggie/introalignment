@@ -1,10 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface ForumScrapeConfig {
   forum_url: string;
   forum_type: 'loveshack' | 'enotalone' | 'talkaboutmarriage' | 'generic';
@@ -30,6 +25,13 @@ export class ForumScraper {
   constructor(sourceId: string, config: ForumScrapeConfig) {
     this.sourceId = sourceId;
     this.config = config;
+  }
+
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
   }
 
   async scrape() {
@@ -258,6 +260,7 @@ export class ForumScraper {
   }
 
   private async saveLead(post: ForumPost): Promise<boolean> {
+    const supabase = this.getSupabase();
     // Check for duplicates
     const { data: existing } = await supabase
       .from('leads')

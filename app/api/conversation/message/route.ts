@@ -18,10 +18,12 @@ import {
   TOTAL_QUESTIONS
 } from '@/lib/conversation/question-bank';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!
@@ -207,6 +209,7 @@ export async function POST(req: NextRequest) {
 // =====================================================
 
 async function startConversation(userId: string) {
+  const supabase = getSupabase();
   const conversation = await getOrCreateConversation(userId);
 
   // Get user profile for personalization
@@ -232,6 +235,7 @@ async function startConversation(userId: string) {
 }
 
 async function getOrCreateConversation(userId: string) {
+  const supabase = getSupabase();
   // Try to get existing conversation
   let { data: existing } = await supabase
     .from('conversations')
@@ -271,6 +275,7 @@ async function getOrCreateConversation(userId: string) {
 }
 
 async function getConversation(conversationId: string) {
+  const supabase = getSupabase();
   const { data, error } = await supabase
     .from('conversations')
     .select('*')
@@ -291,6 +296,7 @@ async function saveMessage(
   chapterId: number | null,
   questionNumber: number | null
 ) {
+  const supabase = getSupabase();
   // Get chapter ID if we have chapter number
   let actualChapterId = null;
   if (chapterId !== null) {
@@ -320,6 +326,7 @@ async function saveMessage(
 }
 
 async function getConversationHistory(conversationId: string) {
+  const supabase = getSupabase();
   const { data: messages } = await supabase
     .from('conversation_messages')
     .select('role, content')
@@ -330,6 +337,7 @@ async function getConversationHistory(conversationId: string) {
 }
 
 async function getMessageCountForQuestion(conversationId: string, questionNumber: number) {
+  const supabase = getSupabase();
   const { data, error } = await supabase
     .from('conversation_messages')
     .select('id', { count: 'exact' })
@@ -381,6 +389,7 @@ async function extractAndSaveInsights(
   question: any,
   userResponse: string
 ) {
+  const supabase = getSupabase();
   try {
     // Generate extraction prompt
     const extractionPrompt = getExtractionPrompt(
@@ -460,6 +469,7 @@ async function updateConversationProgress(
   nextQuestionNumber: number,
   nextChapterNumber: number
 ) {
+  const supabase = getSupabase();
   // Get chapter ID
   const { data: chapter } = await supabase
     .from('conversation_chapters')
@@ -482,6 +492,7 @@ async function updateConversationProgress(
 }
 
 async function completeConversation(conversationId: string) {
+  const supabase = getSupabase();
   const { error } = await supabase
     .from('conversations')
     .update({

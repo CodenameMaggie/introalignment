@@ -1,10 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 interface RedditPost {
   id: string;
   author: string;
@@ -40,6 +35,13 @@ export class RedditScraper {
   constructor(sourceId: string, config: RedditConfig) {
     this.sourceId = sourceId;
     this.config = config;
+  }
+
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
   }
 
   async scrape(): Promise<ScrapeResult> {
@@ -235,6 +237,7 @@ export class RedditScraper {
   }
 
   private async checkDuplicate(fingerprint: string): Promise<boolean> {
+    const supabase = this.getSupabase();
     const { data } = await supabase
       .from('leads')
       .select('id')
@@ -244,10 +247,12 @@ export class RedditScraper {
   }
 
   private async createLead(lead: any): Promise<void> {
+    const supabase = this.getSupabase();
     await supabase.from('leads').insert(lead);
   }
 
   private async startRun(): Promise<string> {
+    const supabase = this.getSupabase();
     const { data } = await supabase
       .from('scrape_runs')
       .insert({ source_id: this.sourceId, status: 'running' })
@@ -257,6 +262,7 @@ export class RedditScraper {
   }
 
   private async completeRun(runId: string, stats: any): Promise<void> {
+    const supabase = this.getSupabase();
     await supabase
       .from('scrape_runs')
       .update({
@@ -274,6 +280,7 @@ export class RedditScraper {
   }
 
   private async failRun(runId: string, error: string): Promise<void> {
+    const supabase = this.getSupabase();
     await supabase
       .from('scrape_runs')
       .update({

@@ -10,10 +10,12 @@ function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY);
 }
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -77,6 +79,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
+  const supabase = getSupabase();
   const userId = session.metadata?.user_id;
 
   if (!userId) {
@@ -118,6 +121,7 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
 }
 
 async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
+  const supabase = getSupabase();
   const userId = subscription.metadata?.user_id;
   const planId = subscription.metadata?.plan_id;
 
@@ -191,6 +195,7 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
 }
 
 async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
+  const supabase = getSupabase();
   const { data } = await supabase
     .from('user_subscriptions')
     .select('user_id')
@@ -226,6 +231,7 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
 }
 
 async function handleInvoicePaid(invoice: Stripe.Invoice) {
+  const supabase = getSupabase();
   if (!(invoice as any).subscription) return;
 
   const { data: sub } = await supabase
@@ -287,6 +293,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
 }
 
 async function handlePaymentFailed(invoice: Stripe.Invoice) {
+  const supabase = getSupabase();
   if (!(invoice as any).subscription) return;
 
   // Update subscription status
