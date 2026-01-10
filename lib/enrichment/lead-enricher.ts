@@ -5,16 +5,18 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export class LeadEnricher {
+  private getSupabase() {
+    return createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+  }
   /**
    * Enrich leads using business logic and heuristics
    */
   async enrichLeads(limit: number = 50): Promise<number> {
+    const supabase = this.getSupabase();
     // Get pending leads that need enrichment
     const { data: leads } = await supabase
       .from('leads')
@@ -203,6 +205,7 @@ export class LeadEnricher {
    * Enrich specific lead by ID
    */
   async enrichLead(leadId: string): Promise<boolean> {
+    const supabase = this.getSupabase();
     const { data: lead } = await supabase
       .from('leads')
       .select('*')
