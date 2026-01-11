@@ -38,7 +38,7 @@ function BillingSuccessContent() {
               </svg>
             </div>
             <h1 className="text-2xl font-serif font-bold text-navy mb-2">
-              Welcome to IntroAlignment!
+              Welcome to SovereigntyIntroAlignment!
             </h1>
             <p className="text-navy-light mb-6">
               Your subscription is now active. Let's find your aligned partner.

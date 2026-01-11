@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | IntroAlignment',
-  description: 'Privacy Policy for IntroAlignment dating and matchmaking service',
+  title: 'Privacy Policy | SovereigntyIntroAlignment',
+  description: 'Privacy Policy for SovereigntyIntroAlignment dating and matchmaking service',
 };
 
 export default function PrivacyPolicyPage() {
@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
           {/* Introduction */}
           <section>
             <p className="text-gray-700">
-              IntroAlignment ("we," "our," or "us") operates the website <a href="https://introalignment.com" className="text-blue-600 hover:underline">introalignment.com</a> and provides matchmaking and dating services. We are committed to protecting your privacy and ensuring the security of your personal information.
+              SovereigntyIntroAlignment ("we," "our," or "us") operates the website <a href="https://sovereigntyintroalignment.com" className="text-blue-600 hover:underline">sovereigntyintroalignment.com</a> and provides matchmaking and dating services. We are committed to protecting your privacy and ensuring the security of your personal information.
             </p>
             <p className="text-gray-700">
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our services.
@@ -125,12 +125,12 @@ export default function PrivacyPolicyPage() {
               <li><strong>Service Emails:</strong> Account verification, password resets, security alerts (cannot opt-out)</li>
               <li><strong>Match Notifications:</strong> New match alerts, introduction reports</li>
               <li><strong>Marketing Emails:</strong> Product updates, tips, promotional offers</li>
-              <li><strong>Lead Outreach:</strong> Invitations to join IntroAlignment based on public expressions of interest in dating</li>
+              <li><strong>Lead Outreach:</strong> Invitations to join SovereigntyIntroAlignment based on public expressions of interest in dating</li>
             </ul>
 
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
               <p className="text-gray-800">
-                <strong>Opt-Out Rights:</strong> You can unsubscribe from marketing emails at any time by clicking the "unsubscribe" link in any email or contacting us at <a href="mailto:henry@introalignment.com" className="text-blue-600 hover:underline">henry@introalignment.com</a>.
+                <strong>Opt-Out Rights:</strong> You can unsubscribe from marketing emails at any time by clicking the "unsubscribe" link in any email or contacting us at <a href="mailto:henry@sovereigntyintroalignment.com" className="text-blue-600 hover:underline">henry@sovereigntyintroalignment.com</a>.
               </p>
             </div>
           </section>
@@ -211,7 +211,7 @@ export default function PrivacyPolicyPage() {
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
               <p className="text-gray-800">
                 <strong>To exercise your rights, contact us at:</strong><br />
-                Email: <a href="mailto:henry@introalignment.com" className="text-blue-600 hover:underline">henry@introalignment.com</a>
+                Email: <a href="mailto:henry@sovereigntyintroalignment.com" className="text-blue-600 hover:underline">henry@sovereigntyintroalignment.com</a>
               </p>
             </div>
           </section>
@@ -221,7 +221,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">9. Children's Privacy</h2>
 
             <p className="text-gray-700">
-              IntroAlignment is not intended for users under the age of 18. We do not knowingly collect personal information from children under 18. If we discover that we have collected information from a child under 18, we will delete it immediately.
+              SovereigntyIntroAlignment is not intended for users under the age of 18. We do not knowingly collect personal information from children under 18. If we discover that we have collected information from a child under 18, we will delete it immediately.
             </p>
           </section>
 
@@ -289,9 +289,9 @@ export default function PrivacyPolicyPage() {
               </p>
 
               <div className="space-y-2 text-gray-800">
-                <p><strong>IntroAlignment</strong></p>
-                <p>Email: <a href="mailto:henry@introalignment.com" className="text-blue-600 hover:underline">henry@introalignment.com</a></p>
-                <p>Website: <a href="https://introalignment.com" className="text-blue-600 hover:underline">introalignment.com</a></p>
+                <p><strong>SovereigntyIntroAlignment</strong></p>
+                <p>Email: <a href="mailto:henry@sovereigntyintroalignment.com" className="text-blue-600 hover:underline">henry@sovereigntyintroalignment.com</a></p>
+                <p>Website: <a href="https://sovereigntyintroalignment.com" className="text-blue-600 hover:underline">sovereigntyintroalignment.com</a></p>
               </div>
             </div>
           </section>
@@ -300,7 +300,7 @@ export default function PrivacyPolicyPage() {
           <section className="bg-blue-50 border-l-4 border-blue-600 p-6 mt-8">
             <h2 className="text-xl font-bold text-gray-900 mb-3">Your Consent</h2>
             <p className="text-gray-800">
-              By using IntroAlignment, you acknowledge that you have read, understood, and agree to this Privacy Policy. If you do not agree with this policy, please do not use our services.
+              By using SovereigntyIntroAlignment, you acknowledge that you have read, understood, and agree to this Privacy Policy. If you do not agree with this policy, please do not use our services.
             </p>
           </section>
         </div>

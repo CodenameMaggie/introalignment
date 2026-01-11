@@ -1,4 +1,4 @@
-# IntroAlignment - Railway Deployment Guide
+# SovereigntyIntroAlignment - Railway Deployment Guide
 
 ## Architecture Overview
 
@@ -406,7 +406,7 @@ NEXT_PUBLIC_APP_URL=https://introalignment.vercel.app
 * * * * *
 ```
 
-### IntroAlignment Cron Schedule:
+### SovereigntyIntroAlignment Cron Schedule:
 
 | Job | Schedule | Cron Expression | Description |
 |-----|----------|----------------|-------------|
@@ -522,8 +522,8 @@ ORDER BY duration DESC;
 
 - Railway docs: https://docs.railway.app
 - Supabase docs: https://supabase.com/docs
-- IntroAlignment issues: Check `BOT_SYSTEM_TEST_REPORT.md`
+- SovereigntyIntroAlignment issues: Check `BOT_SYSTEM_TEST_REPORT.md`
 
 ---
 
-**Your IntroAlignment bot system is ready for production!** 🚀
+**Your SovereigntyIntroAlignment bot system is ready for production!** 🚀

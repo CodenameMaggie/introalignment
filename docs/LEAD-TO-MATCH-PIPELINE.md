@@ -1,4 +1,4 @@
-# 🔄 IntroAlignment: Complete Lead → Match Pipeline
+# 🔄 SovereigntyIntroAlignment: Complete Lead → Match Pipeline
 
 ## ✅ SYSTEM NOW FULLY CONNECTED
 
@@ -150,7 +150,7 @@ INSERT INTO sequence_enrollments (
 ```
 System sends Email #1:
 "Hi Jane, I noticed your post in r/dating about finding someone
-who truly gets you. We're IntroAlignment - a matchmaking service
+who truly gets you. We're SovereigntyIntroAlignment - a matchmaking service
 that goes beyond swipes. Interested in learning more?"
 
 [Click here to join waitlist]

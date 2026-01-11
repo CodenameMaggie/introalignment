@@ -1,6 +1,6 @@
 # 10X SCRAPING CONFIGURATION - PATH TO 1 MILLION LEADS
 
-IntroAlignment is now configured for **MAXIMUM** lead acquisition with 10X aggressive scaling.
+SovereigntyIntroAlignment is now configured for **MAXIMUM** lead acquisition with 10X aggressive scaling.
 
 ## What Changed
 

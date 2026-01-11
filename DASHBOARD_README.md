@@ -1,4 +1,4 @@
-# IntroAlignment Interactive Dashboard
+# SovereigntyIntroAlignment Interactive Dashboard
 
 ## 🎮 What's Been Built
 

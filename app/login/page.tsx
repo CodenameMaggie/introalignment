@@ -46,7 +46,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="font-serif text-3xl font-semibold text-navy">
-            IntroAlignment
+            SovereigntyIntroAlignment
           </Link>
           <p className="mt-2 font-serif italic text-medium-gray">
             Welcome back

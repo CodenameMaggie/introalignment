@@ -1,4 +1,4 @@
-// IntroAlignment ENHANCED Compatibility Algorithm
+// SovereigntyIntroAlignment ENHANCED Compatibility Algorithm
 // Pulls from ALL data sources: questionnaire, games, content, community, dealbreakers
 
 import { Profile, AstroProfile } from '@/types/database';

@@ -43,7 +43,7 @@ await transporter.sendMail({
 });
 ```
 
-## IntroAlignment Integration
+## SovereigntyIntroAlignment Integration
 
 **Email Functions:**
 - ✅ `lib/email/smtp.ts` - SMTP port 25 integration
@@ -57,14 +57,14 @@ await transporter.sendMail({
 
 ### For Production (Railway/Vercel):
 
-Since IntroAlignment app is deployed separately from forbes-command:
+Since SovereigntyIntroAlignment app is deployed separately from forbes-command:
 
 **Option A: Allow External SMTP Connections**
 - Ensure forbes-command port 25 accepts connections from app server IP
 - Update firewall: `ufw allow from APP_SERVER_IP to any port 25`
 
 **Option B: Deploy on Same Server**
-- Deploy IntroAlignment on forbes-command
+- Deploy SovereigntyIntroAlignment on forbes-command
 - Use `SMTP_HOST=localhost`
 
 **Option C: SMTP Relay/Authentication**
@@ -73,7 +73,7 @@ Since IntroAlignment app is deployed separately from forbes-command:
 
 ## Testing
 
-**From IntroAlignment app:**
+**From SovereigntyIntroAlignment app:**
 ```bash
 # Test SMTP connection
 curl http://localhost:3000/api/check-smtp
@@ -102,13 +102,13 @@ tail -f /var/log/mail.log
 
 - ✅ Port 25 working on forbes-command
 - ✅ DKIM configured
-- ✅ IntroAlignment code updated to use henry@maggieforbesstrategies.com
+- ✅ SovereigntyIntroAlignment code updated to use henry@maggieforbesstrategies.com
 - ⏳ Need to verify external connectivity from app server
 - ⏳ May need firewall rule for app server IP
 
 ## Next Steps
 
-1. Deploy IntroAlignment or test from same network
+1. Deploy SovereigntyIntroAlignment or test from same network
 2. Verify external SMTP connectivity
 3. Test sending real email through the app
 4. Monitor mail logs for delivery confirmations

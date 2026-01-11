@@ -4,7 +4,7 @@
 # Tests all major endpoints for stability
 
 echo "========================================="
-echo "  IntroAlignment API Endpoint Test Suite"
+echo "  SovereigntyIntroAlignment API Endpoint Test Suite"
 echo "========================================="
 echo ""
 

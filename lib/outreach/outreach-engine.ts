@@ -86,7 +86,7 @@ export class OutreachEngine {
     try {
       // Send via Forbes Command Center
       const result = await sendEmail({
-        from: 'IntroAlignment <hello@introalignment.com>',
+        from: 'SovereigntyIntroAlignment <hello@introalignment.com>',
         to: lead.email,
         subject,
         html: trackedHtml,

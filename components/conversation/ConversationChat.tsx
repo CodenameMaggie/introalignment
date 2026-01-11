@@ -166,7 +166,7 @@ export default function ConversationChat({ userId, onComplete }: ConversationCha
       {/* Header with Progress */}
       <div className="bg-gradient-to-r from-navy to-navy-dark text-white p-4">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-xl font-semibold">IntroAlignment Conversation</h2>
+          <h2 className="text-xl font-semibold">SovereigntyIntroAlignment Conversation</h2>
           <span className="text-sm opacity-90">
             Question {currentQuestion} of {totalQuestions}
           </span>

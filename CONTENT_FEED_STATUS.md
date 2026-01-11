@@ -75,7 +75,7 @@
       "tags": ["communication", "relationships"],
       "cover_image_url": "https://...",
       "read_time_minutes": 4,
-      "author_name": "IntroAlignment Team",
+      "author_name": "SovereigntyIntroAlignment Team",
       "published_at": "2026-01-05T...",
       "like_count": 15,
       "save_count": 8,

@@ -1,6 +1,6 @@
 # Forbes Command Center Integration
 
-IntroAlignment now uses the **Forbes Command Center** API for all email sending via Port 25.
+SovereigntyIntroAlignment now uses the **Forbes Command Center** API for all email sending via Port 25.
 
 ## Overview
 
@@ -69,7 +69,7 @@ Content-Type: application/json
 - **MFS** - Maggie Forbes Strategies
 - **GMP** - Growth Manager Pro
 - **IC** - IntroConnected
-- **IA** - IntroAlignment ✅
+- **IA** - SovereigntyIntroAlignment ✅
 - **FF** - Frequency and Form
 
 ## API Response Format
@@ -110,7 +110,7 @@ curl -X POST http://5.78.139.9:3000/api/email-api \
 }
 ```
 
-### Test Email Sending via IntroAlignment
+### Test Email Sending via SovereigntyIntroAlignment
 ```bash
 curl http://localhost:3000/api/test-email
 ```
@@ -197,7 +197,7 @@ ufw allow 3000/tcp
 ## Email Delivery Flow
 
 ```
-IntroAlignment App
+SovereigntyIntroAlignment App
     ↓
     ↓ HTTP POST /api/email-api
     ↓ API Key: forbes-command-2026

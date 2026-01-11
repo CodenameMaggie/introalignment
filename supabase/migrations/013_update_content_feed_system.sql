@@ -1,4 +1,4 @@
--- IntroAlignment Content Feed System
+-- SovereigntyIntroAlignment Content Feed System
 -- Migration 014: Update content_articles and content_interactions for new feed system
 
 -- ============================================
@@ -34,7 +34,7 @@ SET
     excerpt = COALESCE(summary, subtitle),
     content = body_html,
     cover_image_url = image_url,
-    author_name = COALESCE(author, 'IntroAlignment Team'),
+    author_name = COALESCE(author, 'SovereigntyIntroAlignment Team'),
     is_published = (is_active = TRUE AND published_at IS NOT NULL),
     read_time_minutes = GREATEST(1, LENGTH(body_html) / 1000) -- Estimate: ~200 words per minute, ~5 chars per word
 WHERE excerpt IS NULL OR content IS NULL;

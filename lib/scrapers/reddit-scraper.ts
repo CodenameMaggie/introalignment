@@ -118,11 +118,12 @@ export class RedditScraper {
   }
 
   private async fetchPosts(): Promise<RedditPost[]> {
-    const url = `https://www.reddit.com/r/${this.config.subreddit}/${this.config.sort}.json?t=${this.config.time_filter}&limit=100`;
+    // Increased from 100 to 1000 for 10X lead collection speed
+    const url = `https://www.reddit.com/r/${this.config.subreddit}/${this.config.sort}.json?t=${this.config.time_filter}&limit=1000`;
 
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'IntroAlignment/1.0 (Lead Discovery)'
+        'User-Agent': 'SovereigntyIntroAlignment/1.0 (Lead Discovery)'
       }
     });
 
@@ -138,7 +139,7 @@ export class RedditScraper {
     try {
       const url = `https://www.reddit.com/user/${username}/about.json`;
       const response = await fetch(url, {
-        headers: { 'User-Agent': 'IntroAlignment/1.0' }
+        headers: { 'User-Agent': 'SovereigntyIntroAlignment/1.0' }
       });
 
       if (!response.ok) {

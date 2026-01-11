@@ -1,5 +1,5 @@
 -- ============================================
--- IntroAlignment Migration Status Checker
+-- SovereigntyIntroAlignment Migration Status Checker
 -- ============================================
 -- Run this in your Supabase SQL Editor to check what's been installed
 -- Dashboard: https://supabase.com/dashboard/project/YOUR_PROJECT/editor

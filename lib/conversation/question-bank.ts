@@ -1,5 +1,5 @@
 /**
- * IntroAlignment Conversation Question Bank
+ * SovereigntyIntroAlignment Conversation Question Bank
  * 49 questions across 7 chapters
  * Each question designed to extract specific psychological insights
  */

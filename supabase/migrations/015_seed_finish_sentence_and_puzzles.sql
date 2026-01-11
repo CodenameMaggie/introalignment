@@ -1,4 +1,4 @@
--- IntroAlignment Game Components
+-- SovereigntyIntroAlignment Game Components
 -- Migration 016: Seed Finish the Sentence & Daily Puzzles
 
 -- ============================================

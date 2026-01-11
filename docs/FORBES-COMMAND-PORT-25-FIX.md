@@ -112,7 +112,7 @@ tail -f /var/log/mail.log
 
 ## After Configuration
 
-Once port 25 is open, IntroAlignment will automatically connect:
+Once port 25 is open, SovereigntyIntroAlignment will automatically connect:
 
 **Already configured in .env.local:**
 ```bash

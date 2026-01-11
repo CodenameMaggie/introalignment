@@ -1,5 +1,5 @@
 /**
- * IntroAlignment - Supabase Connection Test
+ * SovereigntyIntroAlignment - Supabase Connection Test
  */
 
 import { readFileSync } from 'fs';

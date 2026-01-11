@@ -168,7 +168,7 @@ export default function Questionnaire({ userId, onComplete }: QuestionnaireProps
         {/* Brand footer */}
         <div className="text-center">
           <p className="text-sm font-serif italic text-medium-gray">
-            Beyond compatibility. Into alignment.
+            How you legally architect your dynasty
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
-# IntroAlignment Platform
+# SovereigntyIntroAlignment Platform
 
-> Beyond compatibility. Into alignment.
+> How you legally architect your dynasty
 
 A sophisticated matchmaking service that helps people find genuine alignment through comprehensive profiling and thoughtful introductions. We use conversational insights, psychometric analysis, and multi-dimensional compatibility algorithms to facilitate meaningful connections.
 
@@ -25,7 +25,7 @@ npm install
 ### 2. Set Up Supabase
 
 1. Go to [supabase.com](https://supabase.com) and create a new project
-2. Name it "IntroAlignment"
+2. Name it "SovereigntyIntroAlignment"
 3. Wait for the project to be created
 4. Get your credentials:
    - Go to Settings → API

@@ -1,4 +1,4 @@
--- IntroAlignment Content Feed System
+-- SovereigntyIntroAlignment Content Feed System
 -- Migration 015: Seed content articles
 
 -- ============================================
@@ -38,7 +38,7 @@ INSERT INTO content_articles (
     '["communication", "conflict resolution", "relationships", "emotional intelligence"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '7 days'
 ),
@@ -71,7 +71,7 @@ INSERT INTO content_articles (
     '["communication", "active listening", "relationships", "connection"]',
     NULL,
     3,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '5 days'
 ),
@@ -113,7 +113,7 @@ INSERT INTO content_articles (
     '["attachment theory", "psychology", "self-awareness", "relationships"]',
     NULL,
     5,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '10 days'
 ),
@@ -152,7 +152,7 @@ INSERT INTO content_articles (
     '["attachment theory", "relationships", "personal growth", "communication"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '3 days'
 ),
@@ -210,7 +210,7 @@ INSERT INTO content_articles (
     '["dating", "first dates", "relationships", "compatibility"]',
     NULL,
     3,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '12 days'
 ),
@@ -253,7 +253,7 @@ INSERT INTO content_articles (
     '["dating", "relationships", "commitment", "communication"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '6 days'
 ),
@@ -305,7 +305,7 @@ INSERT INTO content_articles (
     '["dating", "online dating", "red flags", "relationships"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '2 days'
 ),
@@ -365,7 +365,7 @@ INSERT INTO content_articles (
     '["self-worth", "personal growth", "self-improvement", "dating"]',
     NULL,
     5,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '15 days'
 ),
@@ -411,7 +411,7 @@ INSERT INTO content_articles (
     '["self-compassion", "heartbreak", "healing", "personal growth"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '8 days'
 ),
@@ -457,7 +457,7 @@ INSERT INTO content_articles (
     '["lifestyle", "personal growth", "independence", "self-improvement"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '11 days'
 ),
@@ -493,7 +493,7 @@ INSERT INTO content_articles (
     '["lifestyle", "work-life balance", "career", "relationships", "dating"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '4 days'
 ),
@@ -543,7 +543,7 @@ INSERT INTO content_articles (
     '["wellness", "stress", "mental health", "relationships"]',
     NULL,
     5,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '9 days'
 ),
@@ -592,7 +592,7 @@ INSERT INTO content_articles (
     '["wellness", "sleep", "health", "relationships"]',
     NULL,
     4,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '1 day'
 ),
@@ -639,7 +639,7 @@ INSERT INTO content_articles (
     '["career", "ambition", "work-life balance", "relationships"]',
     NULL,
     5,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '13 days'
 ),
@@ -697,7 +697,7 @@ INSERT INTO content_articles (
     '["family", "kids", "relationships", "life goals", "communication"]',
     NULL,
     5,
-    'IntroAlignment Team',
+    'SovereigntyIntroAlignment Team',
     TRUE,
     NOW() - INTERVAL '14 days'
 );

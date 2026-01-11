@@ -49,7 +49,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ResearchR
     }
 
     // Create research prompt
-    const systemPrompt = `You are Atlas, IntroAlignment's research specialist. You provide accurate, concise research to help other AI bots make better decisions.
+    const systemPrompt = `You are Atlas, SovereigntyIntroAlignment's research specialist. You provide accurate, concise research to help other AI bots make better decisions.
 
 Your research should be:
 - Factual and well-reasoned

@@ -1,4 +1,4 @@
-# IntroAlignment Matching Algorithm - Data Sources
+# SovereigntyIntroAlignment Matching Algorithm - Data Sources
 
 ## ✅ ALL Data Sources Used in Enhanced Algorithm
 

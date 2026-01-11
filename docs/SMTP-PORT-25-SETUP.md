@@ -1,6 +1,6 @@
 # SMTP Port 25 Setup Guide
 
-IntroAlignment now uses **direct SMTP port 25** for email delivery.
+SovereigntyIntroAlignment now uses **direct SMTP port 25** for email delivery.
 
 ## ⚠️ Important: Port 25 Requirements
 
@@ -24,7 +24,7 @@ IntroAlignment now uses **direct SMTP port 25** for email delivery.
 
 ```
 ┌──────────────────────────────────────────────┐
-│         IntroAlignment Application           │
+│         SovereigntyIntroAlignment Application           │
 │              (Node.js/Next.js)               │
 └─────────────────┬────────────────────────────┘
                   │
@@ -102,7 +102,7 @@ telnet localhost 25
 # 220 localhost ESMTP Postfix
 ```
 
-### Configure IntroAlignment
+### Configure SovereigntyIntroAlignment
 
 **Update .env.local:**
 ```bash
@@ -291,7 +291,7 @@ curl -X POST https://introalignment.com/api/waitlist \
 ┌──────────────────────────────┐
 │   Application Server         │
 │   (Railway/Vercel/VPS)      │
-│   - IntroAlignment app      │
+│   - SovereigntyIntroAlignment app      │
 └──────────┬───────────────────┘
            │
            │ SMTP Port 25
@@ -424,9 +424,9 @@ export async function GET() {
   // Send test email
   const result = await sendEmail({
     to: 'test@example.com',
-    subject: 'IntroAlignment SMTP Test',
-    html: '<p>This is a test email from IntroAlignment.</p>',
-    text: 'This is a test email from IntroAlignment.'
+    subject: 'SovereigntyIntroAlignment SMTP Test',
+    html: '<p>This is a test email from SovereigntyIntroAlignment.</p>',
+    text: 'This is a test email from SovereigntyIntroAlignment.'
   });
 
   return NextResponse.json({
@@ -646,7 +646,7 @@ sudo ufw deny 25/tcp
 
 ## Summary
 
-IntroAlignment now uses **direct SMTP port 25** for email delivery:
+SovereigntyIntroAlignment now uses **direct SMTP port 25** for email delivery:
 
 ✅ **Code updated:**
 - `lib/email/smtp.ts` - SMTP email service

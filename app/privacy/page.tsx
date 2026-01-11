@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
       <nav className="bg-white border-b border-cream-dark">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <Link href="/" className="font-serif text-2xl font-semibold text-navy">
-            IntroAlignment
+            SovereigntyIntroAlignment
           </Link>
         </div>
       </nav>
@@ -21,10 +21,10 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">1. Introduction</h2>
             <p className="text-navy-light mb-4">
-              IntroAlignment ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our matchmaking service.
+              SovereigntyIntroAlignment ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our matchmaking service.
             </p>
             <p className="text-navy-light">
-              By using IntroAlignment, you consent to the data practices described in this policy. If you do not agree with this policy, please do not use our service.
+              By using SovereigntyIntroAlignment, you consent to the data practices described in this policy. If you do not agree with this policy, please do not use our service.
             </p>
           </section>
 
@@ -143,7 +143,7 @@ export default function PrivacyPolicyPage() {
 
             <h3 className="font-serif text-xl text-navy mb-3 mt-4">4.4 Business Transfers</h3>
             <p className="text-navy-light mb-3">
-              If IntroAlignment is involved in a merger, acquisition, or sale of assets, your information may be transferred. We will notify you before your information becomes subject to a different privacy policy.
+              If SovereigntyIntroAlignment is involved in a merger, acquisition, or sale of assets, your information may be transferred. We will notify you before your information becomes subject to a different privacy policy.
             </p>
 
             <h3 className="font-serif text-xl text-navy mb-3 mt-4">4.5 Aggregated Data</h3>
@@ -202,7 +202,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <p className="text-navy-light mt-4">
-              To exercise these rights, please contact us at privacy@introalignment.com.
+              To exercise these rights, please contact us at privacy@sovereigntyintroalignment.com.
             </p>
           </section>
 
@@ -222,7 +222,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">8. Children's Privacy</h2>
             <p className="text-navy-light">
-              IntroAlignment is not intended for individuals under 18 years of age. We do not knowingly collect information from children. If we learn that we have collected information from a child under 18, we will delete it immediately.
+              SovereigntyIntroAlignment is not intended for individuals under 18 years of age. We do not knowingly collect information from children. If we learn that we have collected information from a child under 18, we will delete it immediately.
             </p>
           </section>
 
@@ -245,7 +245,7 @@ export default function PrivacyPolicyPage() {
               <li>Right to non-discrimination for exercising your privacy rights</li>
             </ul>
             <p className="text-navy-light mt-4">
-              To exercise these rights, contact us at privacy@introalignment.com.
+              To exercise these rights, contact us at privacy@sovereigntyintroalignment.com.
             </p>
           </section>
 
@@ -295,9 +295,9 @@ export default function PrivacyPolicyPage() {
               If you have questions or concerns about this Privacy Policy, please contact us:
             </p>
             <p className="text-navy-light">
-              Email: privacy@introalignment.com<br />
+              Email: privacy@sovereigntyintroalignment.com<br />
               Subject: Privacy Inquiry<br />
-              IntroAlignment, Inc.
+              SovereigntyIntroAlignment, Inc.
             </p>
           </section>
         </div>

@@ -1,6 +1,6 @@
 # Lead Pipeline - Complete Flow
 
-IntroAlignment's automated lead pipeline converts Reddit users into qualified users through enrichment and outreach.
+SovereigntyIntroAlignment's automated lead pipeline converts Reddit users into qualified users through enrichment and outreach.
 
 ## Pipeline Overview
 
@@ -101,7 +101,7 @@ Since leads are from Reddit (no direct email access), we use heuristics:
 ### Email Sequences
 
 **High Intent Singles Sequence:**
-1. **Day 0**: Introduction to IntroAlignment's approach
+1. **Day 0**: Introduction to SovereigntyIntroAlignment's approach
 2. **Day 3**: How we're different from dating apps
 3. **Day 7**: Founder story + founding member invitation
 4. **Day 14**: Last chance to join launch group
@@ -182,7 +182,7 @@ Every 6 hours:  /api/cron/generate-matches (for users)
 All emails sent via **Forbes Command Center**:
 - **Server**: 5.78.139.9:3000
 - **API**: `/api/email-api`
-- **Business Code**: `IA` (IntroAlignment)
+- **Business Code**: `IA` (SovereigntyIntroAlignment)
 - **From**: henry@maggieforbesstrategies.com
 - **Provider**: Port 25 SMTP with DKIM
 

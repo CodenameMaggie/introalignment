@@ -1,4 +1,4 @@
-# IntroAlignment Deployment Status
+# SovereigntyIntroAlignment Deployment Status
 
 **Date:** January 9, 2026
 **Status:** ✅ LIVE ON RAILWAY (SSL Certificate Pending)

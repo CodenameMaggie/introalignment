@@ -1,4 +1,4 @@
-// IntroAlignment Compatibility Matching Algorithm
+// SovereigntyIntroAlignment Compatibility Matching Algorithm
 // Combines psychological, intellectual, values, and astrological compatibility
 
 import { Profile, AstroProfile } from '@/types/database';

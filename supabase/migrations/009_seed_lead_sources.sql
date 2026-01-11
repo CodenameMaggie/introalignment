@@ -72,7 +72,7 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 
 <p>I came across your post about looking for a serious relationship, and I wanted to reach out personally.</p>
 
-<p>I''m part of a team building something different - <strong>IntroAlignment</strong>. We''re not another dating app with endless swiping. Instead, we use deep conversation and validated psychology to understand who you really are, then introduce you only to people who could genuinely be right for you.</p>
+<p>I''m part of a team building something different - <strong>SovereigntyIntroAlignment</strong>. We''re not another dating app with endless swiping. Instead, we use deep conversation and validated psychology to understand who you really are, then introduce you only to people who could genuinely be right for you.</p>
 
 <p>The idea is simple: instead of you searching through thousands of profiles, we do the work to find someone actually aligned with your life and values.</p>
 
@@ -81,14 +81,14 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 <p>Would you like to learn more?</p>
 
 <p>Best,<br>
-The IntroAlignment Team</p>
+The SovereigntyIntroAlignment Team</p>
 
 <p style="font-size: 12px; color: #666;">P.S. No pressure at all. Just thought this might resonate with what you''re looking for.</p>',
 'Hi {{first_name}},
 
 I came across your post about looking for a serious relationship, and I wanted to reach out personally.
 
-I''m part of a team building something different - IntroAlignment. We''re not another dating app with endless swiping. Instead, we use deep conversation and validated psychology to understand who you really are, then introduce you only to people who could genuinely be right for you.
+I''m part of a team building something different - SovereigntyIntroAlignment. We''re not another dating app with endless swiping. Instead, we use deep conversation and validated psychology to understand who you really are, then introduce you only to people who could genuinely be right for you.
 
 The idea is simple: instead of you searching through thousands of profiles, we do the work to find someone actually aligned with your life and values.
 
@@ -97,7 +97,7 @@ We''re launching soon with a small founding group. I thought you might be intere
 Would you like to learn more?
 
 Best,
-The IntroAlignment Team
+The SovereigntyIntroAlignment Team
 
 P.S. No pressure at all. Just thought this might resonate with what you''re looking for.');
 
@@ -108,7 +108,7 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 'The problem with dating apps (and what we''re doing differently)',
 '<p>Hi {{first_name}},</p>
 
-<p>I wanted to follow up with a bit more about why we built IntroAlignment.</p>
+<p>I wanted to follow up with a bit more about why we built SovereigntyIntroAlignment.</p>
 
 <p>Here''s the thing: dating apps are designed to keep you swiping. Their business model depends on you <em>not</em> finding someone. The more frustrated you are, the more you use the app.</p>
 
@@ -127,10 +127,10 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 <p>Just reply to this email and I''ll send you the link.</p>
 
 <p>Best,<br>
-The IntroAlignment Team</p>',
+The SovereigntyIntroAlignment Team</p>',
 'Hi {{first_name}},
 
-I wanted to follow up with a bit more about why we built IntroAlignment.
+I wanted to follow up with a bit more about why we built SovereigntyIntroAlignment.
 
 Here''s the thing: dating apps are designed to keep you swiping. Their business model depends on you not finding someone. The more frustrated you are, the more you use the app.
 
@@ -147,7 +147,7 @@ We''re accepting founding members now. Interested in joining?
 Just reply to this email and I''ll send you the link.
 
 Best,
-The IntroAlignment Team');
+The SovereigntyIntroAlignment Team');
 
 -- Email 3 - 7 days later
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
@@ -158,22 +158,22 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 
 <p>I''m curious - what would a service need to offer for you to actually trust it to help you find a partner?</p>
 
-<p>We''re still in early stages with IntroAlignment, and understanding what people actually need is really valuable.</p>
+<p>We''re still in early stages with SovereigntyIntroAlignment, and understanding what people actually need is really valuable.</p>
 
 <p>No pitch this time - just genuinely interested in your perspective if you have a moment.</p>
 
 <p>Thanks,<br>
-The IntroAlignment Team</p>',
+The SovereigntyIntroAlignment Team</p>',
 'Hi {{first_name}},
 
 I''m curious - what would a service need to offer for you to actually trust it to help you find a partner?
 
-We''re still in early stages with IntroAlignment, and understanding what people actually need is really valuable.
+We''re still in early stages with SovereigntyIntroAlignment, and understanding what people actually need is really valuable.
 
 No pitch this time - just genuinely interested in your perspective if you have a moment.
 
 Thanks,
-The IntroAlignment Team');
+The SovereigntyIntroAlignment Team');
 
 -- Email 4 - 14 days later (final)
 INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line, body_html, body_text) VALUES
@@ -184,26 +184,26 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 
 <p>This will be my last email - I don''t want to be a bother.</p>
 
-<p>If IntroAlignment isn''t for you, that''s completely okay. Dating is personal, and everyone has their own path.</p>
+<p>If SovereigntyIntroAlignment isn''t for you, that''s completely okay. Dating is personal, and everyone has their own path.</p>
 
 <p>But if you ever want to try something different than the typical app experience, we''ll be here: <a href="https://introalignment.com">introalignment.com</a></p>
 
 <p>Wishing you the best in finding what you''re looking for.</p>
 
 <p>Take care,<br>
-The IntroAlignment Team</p>',
+The SovereigntyIntroAlignment Team</p>',
 'Hi {{first_name}},
 
 This will be my last email - I don''t want to be a bother.
 
-If IntroAlignment isn''t for you, that''s completely okay. Dating is personal, and everyone has their own path.
+If SovereigntyIntroAlignment isn''t for you, that''s completely okay. Dating is personal, and everyone has their own path.
 
 But if you ever want to try something different than the typical app experience, we''ll be here: introalignment.com
 
 Wishing you the best in finding what you''re looking for.
 
 Take care,
-The IntroAlignment Team');
+The SovereigntyIntroAlignment Team');
 
 -- Dating App Frustrated Sequence
 INSERT INTO outreach_sequences (name, description, target_fit_score_min, total_emails) VALUES
@@ -220,7 +220,7 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 
 <p>Swiping endlessly. Conversations that go nowhere. The same disappointing experiences over and over.</p>
 
-<p>We''re building IntroAlignment because we believe there has to be a better way.</p>
+<p>We''re building SovereigntyIntroAlignment because we believe there has to be a better way.</p>
 
 <p>Instead of showing you thousands of profiles, we have a real conversation with you to understand who you are. Then we do the work of finding people who actually make sense for your life.</p>
 
@@ -229,14 +229,14 @@ INSERT INTO sequence_emails (sequence_id, step_number, delay_days, subject_line,
 <p>We''re launching soon. If you''re interested in trying something genuinely different, I''d love to tell you more.</p>
 
 <p>Best,<br>
-The IntroAlignment Team</p>',
+The SovereigntyIntroAlignment Team</p>',
 'Hi {{first_name}},
 
 I saw your post about dating apps, and I completely understand the frustration.
 
 Swiping endlessly. Conversations that go nowhere. The same disappointing experiences over and over.
 
-We''re building IntroAlignment because we believe there has to be a better way.
+We''re building SovereigntyIntroAlignment because we believe there has to be a better way.
 
 Instead of showing you thousands of profiles, we have a real conversation with you to understand who you are. Then we do the work of finding people who actually make sense for your life.
 
@@ -245,7 +245,7 @@ No swiping. No ghosting epidemic. Just thoughtful introductions to people with r
 We''re launching soon. If you''re interested in trying something genuinely different, I''d love to tell you more.
 
 Best,
-The IntroAlignment Team');
+The SovereigntyIntroAlignment Team');
 
 -- Verify seeds
 SELECT 'Lead sources seeded:' as status, COUNT(*) as count FROM lead_sources;

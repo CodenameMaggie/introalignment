@@ -1,4 +1,4 @@
-# IntroAlignment Master Database Schema
+# SovereigntyIntroAlignment Master Database Schema
 
 **Last Updated:** 2026-01-09
 **Migration Version:** 019

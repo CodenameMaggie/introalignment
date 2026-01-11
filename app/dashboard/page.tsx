@@ -89,7 +89,7 @@ function DashboardContent() {
       <nav className="bg-white border-b border-cream-dark">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/dashboard" className="font-serif text-2xl font-semibold text-navy">
-            IntroAlignment
+            SovereigntyIntroAlignment
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="text-navy hover:text-navy transition">
@@ -113,7 +113,7 @@ function DashboardContent() {
         {showWelcome && (
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-gold">
             <h2 className="font-serif text-2xl text-navy mb-3">
-              Welcome to IntroAlignment! 🎉
+              Welcome to SovereigntyIntroAlignment! 🎉
             </h2>
             <p className="text-navy-light mb-4">
               Thank you for sharing your story with us. We're now getting to know you deeply and
@@ -242,7 +242,7 @@ function DashboardContent() {
                 Have questions about the matching process or want to update your preferences?
               </p>
               <a
-                href="mailto:support@introalignment.com"
+                href="mailto:support@sovereigntyintroalignment.com"
                 className="block text-center py-2 px-4 bg-white text-navy rounded-lg hover:bg-cream transition text-sm font-medium"
               >
                 Contact Support

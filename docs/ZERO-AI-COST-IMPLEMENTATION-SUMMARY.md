@@ -350,7 +350,7 @@ Example:
 
 **Everything is configured and working.**
 
-Your IntroAlignment platform can now:
+Your SovereigntyIntroAlignment platform can now:
 - ✅ Accept new user signups
 - ✅ Collect deep compatibility data (49 questions)
 - ✅ Save everything to database

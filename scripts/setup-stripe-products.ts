@@ -32,7 +32,7 @@ async function setupStripeProducts() {
     try {
       // Create Stripe product
       const product = await stripe.products.create({
-        name: `IntroAlignment ${plan.name}`,
+        name: `SovereigntyIntroAlignment ${plan.name}`,
         description: plan.description,
         metadata: {
           plan_id: plan.id,

@@ -7,7 +7,7 @@ export default function TermsOfServicePage() {
       <nav className="bg-white border-b border-cream-dark">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <Link href="/" className="font-serif text-2xl font-semibold text-navy">
-            IntroAlignment
+            SovereigntyIntroAlignment
           </Link>
         </div>
       </nav>
@@ -21,17 +21,17 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">1. Acceptance of Terms</h2>
             <p className="text-navy-light mb-4">
-              Welcome to IntroAlignment. By accessing or using our matchmaking service, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our service.
+              Welcome to SovereigntyIntroAlignment. By accessing or using our matchmaking service, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our service.
             </p>
             <p className="text-navy-light">
-              IntroAlignment is a premium matchmaking service that uses comprehensive data analysis, including conversational AI, psychometric profiling, and compatibility algorithms, to facilitate meaningful introductions between members seeking long-term relationships.
+              SovereigntyIntroAlignment is a premium matchmaking service that uses comprehensive data analysis, including conversational AI, psychometric profiling, and compatibility algorithms, to facilitate meaningful introductions between members seeking long-term relationships.
             </p>
           </section>
 
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">2. Eligibility</h2>
             <p className="text-navy-light mb-4">
-              You must be at least 18 years of age to use IntroAlignment. By creating an account, you represent and warrant that:
+              You must be at least 18 years of age to use SovereigntyIntroAlignment. By creating an account, you represent and warrant that:
             </p>
             <ul className="list-disc list-inside space-y-2 text-navy-light ml-4">
               <li>You are legally able to enter into a binding contract</li>
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">3. Account Registration and Security</h2>
             <p className="text-navy-light mb-4">
-              To use IntroAlignment, you must create an account by providing accurate and complete information. You are responsible for:
+              To use SovereigntyIntroAlignment, you must create an account by providing accurate and complete information. You are responsible for:
             </p>
             <ul className="list-disc list-inside space-y-2 text-navy-light ml-4">
               <li>Maintaining the confidentiality of your account credentials</li>
@@ -58,7 +58,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">4. Service Description</h2>
             <p className="text-navy-light mb-4">
-              IntroAlignment provides a curated matchmaking service that includes:
+              SovereigntyIntroAlignment provides a curated matchmaking service that includes:
             </p>
             <ul className="list-disc list-inside space-y-2 text-navy-light ml-4">
               <li>Conversational onboarding to understand your personality, values, and goals</li>
@@ -75,7 +75,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">5. Subscription and Payments</h2>
             <p className="text-navy-light mb-4">
-              IntroAlignment offers subscription-based access to our service. By subscribing, you agree to:
+              SovereigntyIntroAlignment offers subscription-based access to our service. By subscribing, you agree to:
             </p>
             <ul className="list-disc list-inside space-y-2 text-navy-light ml-4">
               <li>Pay all fees associated with your chosen subscription plan</li>
@@ -91,7 +91,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">6. User Conduct</h2>
             <p className="text-navy-light mb-4">
-              You agree not to use IntroAlignment to:
+              You agree not to use SovereigntyIntroAlignment to:
             </p>
             <ul className="list-disc list-inside space-y-2 text-navy-light ml-4">
               <li>Harass, abuse, or harm another person</li>
@@ -111,10 +111,10 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">7. Content and Intellectual Property</h2>
             <p className="text-navy-light mb-4">
-              You retain ownership of any content you submit to IntroAlignment. However, by submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and display your content solely for the purpose of operating and improving our service.
+              You retain ownership of any content you submit to SovereigntyIntroAlignment. However, by submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, and display your content solely for the purpose of operating and improving our service.
             </p>
             <p className="text-navy-light">
-              All IntroAlignment branding, design, algorithms, and technology are our intellectual property and may not be used without our express written permission.
+              All SovereigntyIntroAlignment branding, design, algorithms, and technology are our intellectual property and may not be used without our express written permission.
             </p>
           </section>
 
@@ -128,7 +128,7 @@ export default function TermsOfServicePage() {
               , which is incorporated into these Terms by reference.
             </p>
             <p className="text-navy-light">
-              By using IntroAlignment, you consent to our use of your data for matchmaking purposes, including psychometric analysis and compatibility scoring.
+              By using SovereigntyIntroAlignment, you consent to our use of your data for matchmaking purposes, including psychometric analysis and compatibility scoring.
             </p>
           </section>
 
@@ -150,7 +150,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">10. Disclaimers and Limitation of Liability</h2>
             <p className="text-navy-light mb-4">
-              IntroAlignment is provided "as is" without warranties of any kind. We do not guarantee:
+              SovereigntyIntroAlignment is provided "as is" without warranties of any kind. We do not guarantee:
             </p>
             <ul className="list-disc list-inside space-y-2 text-navy-light ml-4">
               <li>That you will find a compatible match</li>
@@ -159,7 +159,7 @@ export default function TermsOfServicePage() {
               <li>Uninterrupted or error-free service</li>
             </ul>
             <p className="text-navy-light mt-4">
-              To the maximum extent permitted by law, IntroAlignment and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the service.
+              To the maximum extent permitted by law, SovereigntyIntroAlignment and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the service.
             </p>
           </section>
 
@@ -182,7 +182,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">12. Dispute Resolution</h2>
             <p className="text-navy-light mb-4">
-              Any disputes arising from these Terms or your use of IntroAlignment shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association. You waive your right to participate in class action lawsuits.
+              Any disputes arising from these Terms or your use of SovereigntyIntroAlignment shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association. You waive your right to participate in class action lawsuits.
             </p>
             <p className="text-navy-light">
               These Terms are governed by the laws of the State of Delaware, without regard to conflict of law principles.
@@ -192,7 +192,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="font-serif text-2xl text-navy mb-4">13. Changes to Terms</h2>
             <p className="text-navy-light">
-              We may update these Terms from time to time. We will notify you of material changes via email or through the service. Your continued use of IntroAlignment after such notice constitutes acceptance of the updated Terms.
+              We may update these Terms from time to time. We will notify you of material changes via email or through the service. Your continued use of SovereigntyIntroAlignment after such notice constitutes acceptance of the updated Terms.
             </p>
           </section>
 
@@ -202,8 +202,8 @@ export default function TermsOfServicePage() {
               If you have questions about these Terms, please contact us:
             </p>
             <p className="text-navy-light">
-              Email: legal@introalignment.com<br />
-              IntroAlignment, Inc.
+              Email: legal@sovereigntyintroalignment.com<br />
+              SovereigntyIntroAlignment, Inc.
             </p>
           </section>
         </div>

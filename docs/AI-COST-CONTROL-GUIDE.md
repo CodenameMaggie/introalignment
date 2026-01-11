@@ -1,4 +1,4 @@
-# IntroAlignment: AI Cost Control Guide
+# SovereigntyIntroAlignment: AI Cost Control Guide
 
 ## 🎯 Summary
 

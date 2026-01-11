@@ -14,7 +14,7 @@ export interface EmailParams {
 
 const FORBES_COMMAND_API = process.env.FORBES_COMMAND_API_URL || 'http://5.78.139.9:3000/api/email-api';
 const FORBES_COMMAND_KEY = process.env.FORBES_COMMAND_API_KEY || 'forbes-command-2026';
-const BUSINESS_CODE = 'IA'; // IntroAlignment business code
+const BUSINESS_CODE = 'IA'; // SovereigntyIntroAlignment business code
 
 /**
  * Send email via Forbes Command Center API
@@ -120,16 +120,16 @@ export async function sendWaitlistWelcome(params: {
       </head>
       <body>
         <div class="header">
-          <h1>IntroAlignment</h1>
-          <p>Beyond compatibility. Into alignment.</p>
+          <h1>SovereigntyIntroAlignment</h1>
+          <p>How you legally architect your dynasty</p>
         </div>
 
         <div class="content">
           <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #2C3E50;">Welcome, ${params.firstName}!</h2>
 
-          <p>Thank you for joining the IntroAlignment waitlist. We're building something truly different — a matchmaking service that goes beyond surface-level compatibility to help you find genuine alignment.</p>
+          <p>Thank you for joining the SovereigntyIntroAlignment waitlist. We're building something truly different — a matchmaking service that goes beyond surface-level compatibility to help you find genuine alignment.</p>
 
-          <p><strong>What makes IntroAlignment different?</strong></p>
+          <p><strong>What makes SovereigntyIntroAlignment different?</strong></p>
 
           <ul>
             <li><strong>Depth over volume:</strong> No endless swiping. We focus on quality introductions that have real potential.</li>
@@ -139,14 +139,14 @@ export async function sendWaitlistWelcome(params: {
 
           <p>We're currently in our beta phase and will be opening to new members soon. You'll be among the first to know when we launch.</p>
 
-          <p>In the meantime, feel free to reach out if you have any questions about IntroAlignment.</p>
+          <p>In the meantime, feel free to reach out if you have any questions about SovereigntyIntroAlignment.</p>
 
           <p style="margin-top: 40px;">Looking forward to helping you find your person,</p>
-          <p style="margin: 0;"><strong>The IntroAlignment Team</strong></p>
+          <p style="margin: 0;"><strong>The SovereigntyIntroAlignment Team</strong></p>
         </div>
 
         <div class="footer">
-          <p>IntroAlignment, Inc.<br />
+          <p>SovereigntyIntroAlignment, Inc.<br />
           Email: hello@introalignment.com</p>
           <p style="margin-top: 20px; font-size: 12px;">
             You're receiving this email because you joined our waitlist at introalignment.com.
@@ -156,11 +156,11 @@ export async function sendWaitlistWelcome(params: {
     </html>
   `;
 
-  const text = `Welcome to IntroAlignment, ${params.firstName}!
+  const text = `Welcome to SovereigntyIntroAlignment, ${params.firstName}!
 
 Thank you for joining our waitlist. We're building something truly different — a matchmaking service that goes beyond surface-level compatibility to help you find genuine alignment.
 
-What makes IntroAlignment different?
+What makes SovereigntyIntroAlignment different?
 - Depth over volume: No endless swiping. We focus on quality introductions that have real potential.
 - Thoughtful matching: We use comprehensive data analysis to understand who you truly are.
 - Curated introductions: Every match is thoughtfully considered and purposefully made.
@@ -168,14 +168,14 @@ What makes IntroAlignment different?
 We're currently in beta and will be opening to new members soon. You'll be among the first to know when we launch.
 
 Looking forward to helping you find your person,
-The IntroAlignment Team
+The SovereigntyIntroAlignment Team
 
-IntroAlignment, Inc.
+SovereigntyIntroAlignment, Inc.
 Email: hello@introalignment.com`;
 
   return sendEmail({
     to: params.email,
-    subject: `Welcome to IntroAlignment, ${params.firstName}!`,
+    subject: `Welcome to SovereigntyIntroAlignment, ${params.firstName}!`,
     html,
     text,
     replyTo: 'hello@introalignment.com'
@@ -242,7 +242,7 @@ export async function sendPaymentFailedNotification(params: {
       </head>
       <body>
         <div class="header">
-          <h1 style="font-family: 'Playfair Display', Georgia, serif; margin: 0;">IntroAlignment</h1>
+          <h1 style="font-family: 'Playfair Display', Georgia, serif; margin: 0;">SovereigntyIntroAlignment</h1>
         </div>
 
         <div style="padding: 40px 0;">
@@ -263,7 +263,7 @@ export async function sendPaymentFailedNotification(params: {
           </ul>
 
           <p><strong>What happens next?</strong></p>
-          <p>To maintain uninterrupted access to IntroAlignment, please update your payment method within the next 7 days.</p>
+          <p>To maintain uninterrupted access to SovereigntyIntroAlignment, please update your payment method within the next 7 days.</p>
 
           <p style="text-align: center;">
             <a href="${process.env.NEXT_PUBLIC_APP_URL}/settings/billing" class="button">Update Payment Method</a>
@@ -272,11 +272,11 @@ export async function sendPaymentFailedNotification(params: {
           <p>If you have any questions or need assistance, please don't hesitate to reach out to us at billing@introalignment.com.</p>
 
           <p style="margin-top: 40px;">Thank you,<br />
-          <strong>The IntroAlignment Team</strong></p>
+          <strong>The SovereigntyIntroAlignment Team</strong></p>
         </div>
 
         <div class="footer">
-          <p>IntroAlignment, Inc.<br />
+          <p>SovereigntyIntroAlignment, Inc.<br />
           Email: billing@introalignment.com</p>
         </div>
       </body>
@@ -291,14 +291,14 @@ We were unable to process your recent payment of ${formattedAmount}.
 
 This could be due to insufficient funds, an expired card, card issuer decline, or billing address mismatch.
 
-To maintain uninterrupted access to IntroAlignment, please update your payment method within the next 7 days.
+To maintain uninterrupted access to SovereigntyIntroAlignment, please update your payment method within the next 7 days.
 
 Update your payment method at: ${process.env.NEXT_PUBLIC_APP_URL}/settings/billing
 
 If you have questions, contact us at billing@introalignment.com.
 
 Thank you,
-The IntroAlignment Team`;
+The SovereigntyIntroAlignment Team`;
 
   return sendEmail({
     to: params.email,

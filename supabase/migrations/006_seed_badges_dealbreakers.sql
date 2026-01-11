@@ -1,4 +1,4 @@
--- IntroAlignment Interactive Dashboard
+-- SovereigntyIntroAlignment Interactive Dashboard
 -- Migration 006: Seed Badges & Deal Breakers
 
 -- ============================================

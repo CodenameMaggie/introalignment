@@ -1,6 +1,6 @@
 # Aggressive Lead Scraping - Path to 100K
 
-IntroAlignment is configured for aggressive lead acquisition until reaching 100,000 leads.
+SovereigntyIntroAlignment is configured for aggressive lead acquisition until reaching 100,000 leads.
 
 ## Current Configuration
 

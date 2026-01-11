@@ -1,4 +1,4 @@
-// Core Database Types for IntroAlignment
+// Core Database Types for SovereigntyIntroAlignment
 
 export type UserStatus = 'waitlist' | 'onboarding' | 'active' | 'paused' | 'inactive';
 export type SubscriptionTier = 'free' | 'premium' | 'elite';

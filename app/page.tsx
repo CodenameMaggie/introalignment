@@ -36,7 +36,7 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-cream/95 backdrop-blur-sm z-50 border-b border-navy/10 px-8 py-6 flex justify-between items-center">
         <Link href="/" className="font-serif text-2xl font-semibold text-navy">
-          IntroAlignment
+          SovereigntyIntroAlignment
         </Link>
         <ul className="hidden md:flex gap-8 list-none">
           <li><a href="#difference" className="text-navy hover:text-gold transition-colors">The Difference</a></li>
@@ -48,10 +48,10 @@ export default function LandingPage() {
       <section className="min-h-screen flex items-center justify-center text-center px-4 pt-32 pb-16">
         <div className="max-w-3xl">
           <h1 className="font-serif text-5xl md:text-6xl font-semibold text-navy mb-4">
-            IntroAlignment
+            SovereigntyIntroAlignment
           </h1>
           <p className="font-serif text-xl md:text-2xl italic text-gold mb-8">
-            Beyond compatibility. Into alignment.
+            How you legally architect your dynasty
           </p>
           <p className="text-lg text-gray-600 mb-12 leading-relaxed">
             A matchmaking service dedicated to helping you find the person who is truly aligned with your life and your purpose.
@@ -115,7 +115,7 @@ export default function LandingPage() {
       <section id="waitlist" className="py-24 px-4 bg-gradient-to-br from-navy to-navy-dark">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-serif text-4xl text-white mb-6">Be Among the First</h2>
-          <p className="text-xl text-white/90 mb-12">Join our waitlist to be notified when IntroAlignment opens for new members.</p>
+          <p className="text-xl text-white/90 mb-12">Join our waitlist to be notified when SovereigntyIntroAlignment opens for new members.</p>
 
           {!formSubmitted ? (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -159,7 +159,7 @@ export default function LandingPage() {
           ) : (
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-12">
               <h3 className="font-serif text-3xl text-white mb-4">You're on the list!</h3>
-              <p className="text-white/90 text-lg">Thank you for joining IntroAlignment. We'll be in touch soon!</p>
+              <p className="text-white/90 text-lg">Thank you for joining SovereigntyIntroAlignment. We'll be in touch soon!</p>
             </div>
           )}
         </div>

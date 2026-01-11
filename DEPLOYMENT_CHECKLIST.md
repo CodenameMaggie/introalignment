@@ -1,4 +1,4 @@
-# IntroAlignment - Railway Deployment Checklist
+# SovereigntyIntroAlignment - Railway Deployment Checklist
 
 ## ✅ Pre-Deployment (Completed)
 

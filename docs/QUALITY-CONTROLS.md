@@ -1,6 +1,6 @@
 # Lead Quality Controls - Ensuring High Standards
 
-IntroAlignment uses multiple quality gates to ensure only high-intent, genuine leads receive invitations.
+SovereigntyIntroAlignment uses multiple quality gates to ensure only high-intent, genuine leads receive invitations.
 
 ## Quality Philosophy
 

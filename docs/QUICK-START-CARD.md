@@ -1,4 +1,4 @@
-# 🚀 IntroAlignment - Zero AI Cost Quick Start
+# 🚀 SovereigntyIntroAlignment - Zero AI Cost Quick Start
 
 ## ✅ CURRENT STATUS
 

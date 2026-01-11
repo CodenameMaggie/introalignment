@@ -75,10 +75,10 @@ export async function GET() {
     try {
       const emailTest = await sendEmail({
         to: process.env.ADMIN_EMAIL,
-        subject: 'IntroAlignment SMTP Test',
+        subject: 'SovereigntyIntroAlignment SMTP Test',
         html: `
           <h2>SMTP Connection Test</h2>
-          <p>This is a test email from IntroAlignment.</p>
+          <p>This is a test email from SovereigntyIntroAlignment.</p>
           <p><strong>Server:</strong> ${process.env.SMTP_HOST}:${process.env.SMTP_PORT}</p>
           <p><strong>Time:</strong> ${new Date().toISOString()}</p>
         `,

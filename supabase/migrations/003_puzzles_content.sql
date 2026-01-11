@@ -1,4 +1,4 @@
--- IntroAlignment Interactive Dashboard
+-- SovereigntyIntroAlignment Interactive Dashboard
 -- Migration 003: Puzzles & Content
 
 -- ============================================

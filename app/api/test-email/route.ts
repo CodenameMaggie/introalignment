@@ -21,7 +21,7 @@ export async function GET() {
     // Send test email
     const testResult = await sendEmail({
       to: process.env.ADMIN_EMAIL || 'henry@introalignment.com',
-      subject: 'IntroAlignment - Forbes Command Center Test',
+      subject: 'SovereigntyIntroAlignment - Forbes Command Center Test',
       html: `
         <h1>Email Test via Forbes Command Center</h1>
         <p>This email was sent through the Forbes Command Center API.</p>

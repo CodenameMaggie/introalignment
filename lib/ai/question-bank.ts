@@ -1,4 +1,4 @@
-// Question Bank with Extraction Mappings for IntroAlignment
+// Question Bank with Extraction Mappings for SovereigntyIntroAlignment
 
 export interface ExtractionTarget {
   framework: string; // 'big_five', 'attachment', 'eq', 'enneagram', etc.

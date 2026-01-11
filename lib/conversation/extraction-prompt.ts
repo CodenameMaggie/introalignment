@@ -1,5 +1,5 @@
 /**
- * IntroAlignment Extraction Prompt
+ * SovereigntyIntroAlignment Extraction Prompt
  * Analyzes user responses to extract psychological insights
  */
 
