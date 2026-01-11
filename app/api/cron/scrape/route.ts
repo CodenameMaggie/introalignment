@@ -1,11 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { RedditScraper } from '@/lib/scrapers/reddit-scraper';
-import { QuoraScraper } from '@/lib/scrapers/quora-scraper';
-import { ForumScraper } from '@/lib/scrapers/forum-scraper';
-import { MeetupScraper } from '@/lib/scrapers/meetup-scraper';
-import { WebScraper } from '@/lib/scrapers/web-scraper';
-import { WikipediaScraper } from '@/lib/scrapers/wikipedia-scraper';
 import { IRSScraper } from '@/lib/scrapers/irs-scraper';
 import { LegalCaseLawScraper } from '@/lib/scrapers/legal-caselaw-scraper';
 import { SECEdgarScraper } from '@/lib/scrapers/sec-edgar-scraper';
@@ -61,36 +55,6 @@ export async function GET(request: NextRequest) {
 
         // Create appropriate scraper based on source type
         switch (source.source_type) {
-          case 'reddit':
-            scraper = new RedditScraper(source.id, source.scrape_config);
-            result = await scraper.scrape();
-            break;
-
-          case 'quora':
-            scraper = new QuoraScraper(source.id, source.scrape_config);
-            result = await scraper.scrape();
-            break;
-
-          case 'forum':
-            scraper = new ForumScraper(source.id, source.scrape_config);
-            result = await scraper.scrape();
-            break;
-
-          case 'meetup':
-            scraper = new MeetupScraper(source.id, source.scrape_config);
-            result = await scraper.scrape();
-            break;
-
-          case 'web':
-            scraper = new WebScraper(source.id, source.scrape_config);
-            result = await scraper.scrape();
-            break;
-
-          case 'wikipedia':
-            scraper = new WikipediaScraper(source.id, source.scrape_config);
-            result = await scraper.scrape();
-            break;
-
           case 'irs':
             scraper = new IRSScraper(source.id, source.scrape_config);
             result = await scraper.scrape();
