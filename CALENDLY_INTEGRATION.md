@@ -71,6 +71,7 @@ https://introalignment.com → Scroll to Podcast section → "Schedule Podcast D
 - **Event Name:** "sovereigndesign.it.com Podcast Discussion"
 - **Duration:** 30-45 minutes
 - **Location:** Zoom/Google Meet (automated link)
+- **Availability:** Wednesdays (Legal professionals and attorneys)
 
 ### Questions to Ask Invitees:
 1. "What is your area of legal expertise?"
@@ -80,12 +81,12 @@ https://introalignment.com → Scroll to Podcast section → "Schedule Podcast D
 
 ### Confirmation Message:
 ```
-Thank you for scheduling a podcast discussion for sovereigndesign.it.com!
+Thank you for scheduling your Wednesday podcast discussion for sovereigndesign.it.com!
 
 We're excited to discuss your expertise in [Topic] and how you help
 high-net-worth families build generational wealth.
 
-Before our call, please prepare:
+Your session is scheduled for Wednesday. Before our call, please prepare:
 - 2-3 topics you'd like to discuss
 - Any notable cases or achievements to share
 - Your preferred recording platform (Zoom/StreamYard)

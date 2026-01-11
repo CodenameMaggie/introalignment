@@ -76,14 +76,20 @@ export default function PartnersPage() {
           </p>
           <div className="space-y-4">
             {formData.podcast_interest && (
-              <a
-                href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-8 py-3 rounded-lg transition-all shadow-luxury mr-4"
-              >
-                Schedule Your Podcast Call Now
-              </a>
+              <div className="bg-sage/10 p-6 rounded-lg border-l-4 border-gold mb-4">
+                <p className="font-body text-charcoal mb-4">
+                  <strong className="font-heading text-obsidian">Great! We book legal professionals on Wednesdays.</strong><br />
+                  Schedule your podcast discussion below:
+                </p>
+                <a
+                  href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-8 py-3 rounded-lg transition-all shadow-luxury"
+                >
+                  Schedule Wednesday Podcast Session
+                </a>
+              </div>
             )}
             <Link
               href="/"
@@ -139,7 +145,7 @@ export default function PartnersPage() {
             <div className="bg-white p-8 rounded-lg shadow-luxury border-t-4 border-gold">
               <h3 className="font-heading text-2xl font-bold text-obsidian mb-4">Podcast Platform</h3>
               <p className="font-body text-charcoal leading-relaxed mb-4">
-                Share your expertise on the sovereigndesign.it.com podcast and establish yourself as a thought leader in wealth preservation.
+                Share your expertise on the sovereigndesign.it.com podcast and establish yourself as a thought leader in wealth preservation. We book legal professionals and attorneys on Wednesdays.
               </p>
               <a
                 href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
@@ -147,7 +153,7 @@ export default function PartnersPage() {
                 rel="noopener noreferrer"
                 className="inline-block text-gold hover:text-gold-dark font-ui font-semibold underline text-sm"
               >
-                Schedule a podcast discussion →
+                Schedule your Wednesday session →
               </a>
             </div>
             <div className="bg-white p-8 rounded-lg shadow-luxury border-t-4 border-gold">

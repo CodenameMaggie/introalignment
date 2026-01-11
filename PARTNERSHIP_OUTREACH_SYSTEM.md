@@ -196,7 +196,8 @@ Would you be interested in joining us for a 45-minute conversation about
 [Topic]? We'll promote the episode across our network and provide full
 video/audio distribution.
 
-If you're interested, you can schedule a time to discuss at your convenience:
+We book legal professionals and attorneys on Wednesdays. If you're interested,
+you can schedule a Wednesday session here:
 https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1
 
 Looking forward to connecting!
