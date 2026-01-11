@@ -1,91 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf9f7;
+  --foreground: #1a1a1a;
 
-  /* SovereigntyIntroAlignment Classic Romance Palette */
+  /* IntroAlignment Color Palette */
 
-  /* Primary - Deep Navy (trust, grounding, sophistication) */
-  --navy: #2C3E50;
-  --navy-light: #3D5166;
-  --navy-dark: #1A252F;
+  /* Primary - Obsidian (sophistication, authority, depth) */
+  --obsidian: #1a1a1a;
+  --obsidian-light: #2d2d2d;
+  --obsidian-lighter: #404040;
 
-  /* Romantic - Soft Blush (warmth, romance, tenderness) */
-  --blush: #F4E4E1;
-  --blush-light: #FAF2F0;
-  --blush-dark: #E8D0CC;
-  --blush-medium: #DBBEB8;
+  /* Secondary - Charcoal (grounding, elegance) */
+  --charcoal: #2d2d2d;
+  --charcoal-light: #3d3d3d;
+  --charcoal-dark: #1d1d1d;
 
-  /* Accent - Warm Gold (elegance, premium, timeless) */
-  --gold: #D4A574;
-  --gold-light: #E2BB8E;
-  --gold-dark: #B8895A;
-  --gold-muted: #C9B896;
+  /* Accent - Gold (prosperity, excellence, legacy) */
+  --gold: #9a7b4f;
+  --gold-light: #b8956f;
+  --gold-dark: #7d6340;
+  --gold-muted: #c5ad88;
 
-  /* Neutrals */
-  --cream: #FFFEF5;
-  --cream-dark: #FAF7F2;
-  --soft-gray: #E2E0DB;
-  --medium-gray: #A0998F;
+  /* Neutrals - Sophisticated backgrounds */
+  --pearl: #e8e4df;
+  --cream: #faf9f7;
+  --ivory: #f5f3f0;
+  --soft-gray: #d6d4d0;
+  --medium-gray: #a8a6a2;
 
-  /* Supporting */
-  --sage: #7C9A8E;
-  --sage-light: #9FB8AD;
-  --sage-dark: #5D7A6E;
-  --rose: #C4A4A4;
-  --rose-light: #D9C4C4;
+  /* Supporting tones */
+  --sage: #7c8c7a;
+  --sage-light: #9aa89a;
+  --sage-dark: #5d6d5b;
+  --bronze: #8b6f47;
+  --bronze-light: #a38959;
 
-  /* Status */
-  --success: #7C9A8E;
-  --warning: #D4A574;
-  --error: #C75D5D;
-  --info: #6B8CAE;
+  /* Status colors */
+  --success: #7c8c7a;
+  --warning: #9a7b4f;
+  --error: #b85c5c;
+  --info: #6b7c8c;
 
-  /* Text */
-  --text-primary: #2C3E50;
-  --text-secondary: #3D5166;
-  --text-muted: #718096;
-  --text-on-dark: #FFFEF5;
-  --text-on-gold: #1A252F;
+  /* Text hierarchy */
+  --text-primary: #1a1a1a;
+  --text-secondary: #2d2d2d;
+  --text-muted: #6b6b6b;
+  --text-on-dark: #faf9f7;
+  --text-on-gold: #1a1a1a;
+  --text-on-cream: #2d2d2d;
 
   /* Backgrounds */
-  --bg-page: #FFFEF5;
-  --bg-card: #FFFFFF;
-  --bg-elevated: #FAF7F2;
-  --bg-dark: #2C3E50;
+  --bg-page: #faf9f7;
+  --bg-card: #ffffff;
+  --bg-elevated: #f5f3f0;
+  --bg-dark: #1a1a1a;
+  --bg-charcoal: #2d2d2d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Brand colors for Tailwind */
-  --color-navy: var(--navy);
-  --color-navy-light: var(--navy-light);
-  --color-navy-dark: var(--navy-dark);
-  --color-blush: var(--blush);
-  --color-blush-light: var(--blush-light);
-  --color-blush-dark: var(--blush-dark);
-  --color-blush-medium: var(--blush-medium);
+  /* IntroAlignment brand colors for Tailwind */
+  --color-obsidian: var(--obsidian);
+  --color-obsidian-light: var(--obsidian-light);
+  --color-obsidian-lighter: var(--obsidian-lighter);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-light: var(--charcoal-light);
+  --color-charcoal-dark: var(--charcoal-dark);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-gold-dark: var(--gold-dark);
   --color-gold-muted: var(--gold-muted);
+  --color-pearl: var(--pearl);
   --color-cream: var(--cream);
-  --color-cream-dark: var(--cream-dark);
+  --color-ivory: var(--ivory);
   --color-soft-gray: var(--soft-gray);
   --color-medium-gray: var(--medium-gray);
   --color-sage: var(--sage);
   --color-sage-light: var(--sage-light);
   --color-sage-dark: var(--sage-dark);
-  --color-rose: var(--rose);
-  --color-rose-light: var(--rose-light);
+  --color-bronze: var(--bronze);
+  --color-bronze-light: var(--bronze-light);
 
-  /* Font families */
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Font families - IntroAlignment Typography */
+  --font-heading: 'Cinzel', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Raleway', system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Raleway', system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -98,5 +103,44 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* IntroAlignment Typography Classes */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+/* IntroAlignment Custom Styles */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-obsidian-gradient {
+  background: linear-gradient(135deg, var(--obsidian) 0%, var(--charcoal) 100%);
+}
+
+.border-gold-accent {
+  border-color: var(--gold);
+  border-width: 1px;
+}
+
+.shadow-luxury {
+  box-shadow: 0 4px 20px rgba(154, 123, 79, 0.15);
+}
+
+.section-dark {
+  background: var(--obsidian);
+  color: var(--text-on-dark);
 }
