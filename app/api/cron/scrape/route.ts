@@ -4,6 +4,13 @@ import { RedditScraper } from '@/lib/scrapers/reddit-scraper';
 import { QuoraScraper } from '@/lib/scrapers/quora-scraper';
 import { ForumScraper } from '@/lib/scrapers/forum-scraper';
 import { MeetupScraper } from '@/lib/scrapers/meetup-scraper';
+import { WebScraper } from '@/lib/scrapers/web-scraper';
+import { WikipediaScraper } from '@/lib/scrapers/wikipedia-scraper';
+import { IRSScraper } from '@/lib/scrapers/irs-scraper';
+import { LegalCaseLawScraper } from '@/lib/scrapers/legal-caselaw-scraper';
+import { SECEdgarScraper } from '@/lib/scrapers/sec-edgar-scraper';
+import { StateBusinessScraper } from '@/lib/scrapers/state-business-scraper';
+import { LegalKnowledgeScraper } from '@/lib/scrapers/legal-knowledge-scraper';
 
 function getSupabase() {
   return createClient(
@@ -71,6 +78,41 @@ export async function GET(request: NextRequest) {
 
           case 'meetup':
             scraper = new MeetupScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'web':
+            scraper = new WebScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'wikipedia':
+            scraper = new WikipediaScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'irs':
+            scraper = new IRSScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'legal_caselaw':
+            scraper = new LegalCaseLawScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'sec_edgar':
+            scraper = new SECEdgarScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'state_business':
+            scraper = new StateBusinessScraper(source.id, source.scrape_config);
+            result = await scraper.scrape();
+            break;
+
+          case 'legal_knowledge':
+            scraper = new LegalKnowledgeScraper(source.id, source.scrape_config);
             result = await scraper.scrape();
             break;
 

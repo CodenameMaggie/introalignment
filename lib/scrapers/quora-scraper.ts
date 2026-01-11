@@ -111,8 +111,8 @@ export class QuoraScraper {
         }
       }
 
-      // Limit to prevent overload
-      return questions.slice(0, 20);
+      // Increased limit to get more data
+      return questions.slice(0, 100);
 
     } catch (error: any) {
       throw new Error(`Failed to scrape ${topic}: ${error.message}`);

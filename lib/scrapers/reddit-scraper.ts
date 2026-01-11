@@ -48,36 +48,49 @@ export class RedditScraper {
     const runId = await this.startRun();
 
     try {
-      // Fetch posts from Reddit (using public JSON API)
-      const posts = await this.fetchPosts();
+      // Fetch posts from Reddit with pagination (up to 1000 posts)
+      const posts = await this.fetchAllPosts();
 
       let leadsFound = 0;
       let newLeads = 0;
       let duplicates = 0;
 
-      for (const post of posts) {
-        // Skip deleted/removed
-        if (post.author === '[deleted]' || post.author === '[removed]') continue;
+      // Filter posts by keywords first
+      const matchingPosts = posts.filter(post => {
+        if (post.author === '[deleted]' || post.author === '[removed]') return false;
+        if (!this.matchesKeywords(post)) return false;
+        if (this.matchesExcludeKeywords(post)) return false;
+        return true;
+      });
 
-        // Check if matches keywords
-        if (!this.matchesKeywords(post)) continue;
+      leadsFound = matchingPosts.length;
 
-        // Check if excluded
-        if (this.matchesExcludeKeywords(post)) continue;
+      // Batch check for duplicates
+      const fingerprints = matchingPosts.map(post =>
+        this.generateFingerprint('reddit', post.author)
+      );
+      const existingFingerprints = await this.checkDuplicatesBatch(fingerprints);
+      const existingSet = new Set(existingFingerprints);
 
-        leadsFound++;
-
-        // Check for duplicate
+      // Filter out duplicates
+      const newPosts = matchingPosts.filter(post => {
         const fingerprint = this.generateFingerprint('reddit', post.author);
-        const existing = await this.checkDuplicate(fingerprint);
-
-        if (existing) {
+        if (existingSet.has(fingerprint)) {
           duplicates++;
-          continue;
+          return false;
         }
+        return true;
+      });
 
-        // Get author info
-        const authorInfo = await this.getAuthorInfo(post.author);
+      // Batch fetch author info in parallel (chunks of 10 to avoid rate limits)
+      const uniqueAuthors = [...new Set(newPosts.map(p => p.author))];
+      const authorInfoMap = await this.getAuthorInfoBatch(uniqueAuthors);
+
+      // Prepare leads for batch insert
+      const leadsToInsert = [];
+
+      for (const post of newPosts) {
+        const authorInfo = authorInfoMap.get(post.author) || { karma: 0, accountAgeDays: 0 };
 
         // Check karma and account age
         if (authorInfo.karma < this.config.min_karma) continue;
@@ -85,9 +98,9 @@ export class RedditScraper {
 
         // Extract info from post
         const extractedInfo = this.extractInfo(post, authorInfo);
+        const fingerprint = this.generateFingerprint('reddit', post.author);
 
-        // Create lead
-        await this.createLead({
+        leadsToInsert.push({
           source_id: this.sourceId,
           source_type: 'reddit',
           source_identifier: post.author,
@@ -98,8 +111,12 @@ export class RedditScraper {
           fingerprint,
           ...extractedInfo
         });
+      }
 
-        newLeads++;
+      // Batch insert leads
+      if (leadsToInsert.length > 0) {
+        await this.createLeadsBatch(leadsToInsert);
+        newLeads = leadsToInsert.length;
       }
 
       await this.completeRun(runId, {
@@ -117,9 +134,45 @@ export class RedditScraper {
     }
   }
 
-  private async fetchPosts(): Promise<RedditPost[]> {
-    // Increased from 100 to 1000 for 10X lead collection speed
-    const url = `https://www.reddit.com/r/${this.config.subreddit}/${this.config.sort}.json?t=${this.config.time_filter}&limit=1000`;
+  private async fetchAllPosts(): Promise<RedditPost[]> {
+    const allPosts: RedditPost[] = [];
+    let after: string | null = null;
+    const maxPages = 10; // Fetch up to 10 pages (1000 posts total)
+    let currentPage = 0;
+
+    while (currentPage < maxPages) {
+      try {
+        const posts = await this.fetchPostsPage(after);
+
+        if (posts.length === 0) break;
+
+        allPosts.push(...posts);
+
+        // Get the 'after' token for next page
+        const lastPost = posts[posts.length - 1];
+        if (lastPost && posts.length === 100) {
+          after = lastPost.id;
+          currentPage++;
+          // Small delay to respect rate limits
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        } else {
+          break; // No more posts available
+        }
+      } catch (error: any) {
+        // If we get rate limited or error, return what we have
+        console.error(`Reddit pagination error on page ${currentPage}:`, error.message);
+        break;
+      }
+    }
+
+    return allPosts;
+  }
+
+  private async fetchPostsPage(after: string | null = null): Promise<RedditPost[]> {
+    let url = `https://www.reddit.com/r/${this.config.subreddit}/${this.config.sort}.json?t=${this.config.time_filter}&limit=100`;
+    if (after) {
+      url += `&after=t3_${after}`;
+    }
 
     const response = await fetch(url, {
       headers: {
@@ -128,6 +181,9 @@ export class RedditScraper {
     });
 
     if (!response.ok) {
+      if (response.status === 429) {
+        throw new Error('Rate limited');
+      }
       throw new Error(`Reddit API error: ${response.status}`);
     }
 
@@ -155,6 +211,36 @@ export class RedditScraper {
     } catch {
       return { karma: 0, accountAgeDays: 0 };
     }
+  }
+
+  private async getAuthorInfoBatch(usernames: string[]): Promise<Map<string, { karma: number; accountAgeDays: number }>> {
+    const authorInfoMap = new Map<string, { karma: number; accountAgeDays: number }>();
+    const chunkSize = 10; // Process 10 authors at a time to avoid rate limits
+
+    for (let i = 0; i < usernames.length; i += chunkSize) {
+      const chunk = usernames.slice(i, i + chunkSize);
+
+      // Fetch all author info in parallel for this chunk
+      const results = await Promise.allSettled(
+        chunk.map(username => this.getAuthorInfo(username))
+      );
+
+      chunk.forEach((username, index) => {
+        const result = results[index];
+        if (result.status === 'fulfilled') {
+          authorInfoMap.set(username, result.value);
+        } else {
+          authorInfoMap.set(username, { karma: 0, accountAgeDays: 0 });
+        }
+      });
+
+      // Small delay between chunks to respect rate limits
+      if (i + chunkSize < usernames.length) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+    }
+
+    return authorInfoMap;
   }
 
   private matchesKeywords(post: RedditPost): boolean {
@@ -247,9 +333,38 @@ export class RedditScraper {
     return !!data;
   }
 
+  private async checkDuplicatesBatch(fingerprints: string[]): Promise<string[]> {
+    if (fingerprints.length === 0) return [];
+
+    const supabase = this.getSupabase();
+    const { data } = await supabase
+      .from('leads')
+      .select('fingerprint')
+      .in('fingerprint', fingerprints);
+
+    return data?.map(row => row.fingerprint) || [];
+  }
+
   private async createLead(lead: any): Promise<void> {
     const supabase = this.getSupabase();
     await supabase.from('leads').insert(lead);
+  }
+
+  private async createLeadsBatch(leads: any[]): Promise<void> {
+    if (leads.length === 0) return;
+
+    const supabase = this.getSupabase();
+    const chunkSize = 100; // Insert 100 leads at a time
+
+    for (let i = 0; i < leads.length; i += chunkSize) {
+      const chunk = leads.slice(i, i + chunkSize);
+      const { error } = await supabase.from('leads').insert(chunk);
+
+      if (error) {
+        console.error(`Error inserting batch ${i / chunkSize + 1}:`, error);
+        // Continue with next batch even if this one fails
+      }
+    }
   }
 
   private async startRun(): Promise<string> {

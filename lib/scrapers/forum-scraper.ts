@@ -132,7 +132,7 @@ export class ForumScraper {
       }
     }
 
-    return posts.slice(0, 20);
+    return posts.slice(0, 100);
   }
 
   private parseENotAlone(html: string, baseUrl: string): ForumPost[] {
@@ -162,7 +162,7 @@ export class ForumScraper {
       }
     }
 
-    return posts.slice(0, 20);
+    return posts.slice(0, 100);
   }
 
   private parseTalkAboutMarriage(html: string, baseUrl: string): ForumPost[] {
@@ -230,7 +230,7 @@ export class ForumScraper {
       }
     }
 
-    return posts.slice(0, 15);
+    return posts.slice(0, 100);
   }
 
   private matchesKeywords(text: string): boolean {

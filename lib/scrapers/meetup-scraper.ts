@@ -100,7 +100,7 @@ export class MeetupScraper {
         index === self.findIndex((e) => e.url === event.url)
       );
 
-      return uniqueEvents.slice(0, 15);
+      return uniqueEvents.slice(0, 100);
 
     } catch (error: any) {
       throw new Error(`Failed to scrape ${city}: ${error.message}`);
