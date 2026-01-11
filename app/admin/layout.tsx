@@ -65,11 +65,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = [
     { href: '/admin', label: 'Overview', icon: '📊' },
     { href: '/admin/users', label: 'Users', icon: '👥' },
+    { href: '/admin/partners', label: 'Partners', icon: '🤝' },
     { href: '/admin/red-flags', label: 'Red Flags', icon: '🚩', alert: true },
     { href: '/admin/matches', label: 'Matches', icon: '💕' },
+    { href: '/admin/leads', label: 'Leads', icon: '🎯' },
     { href: '/admin/revenue', label: 'Revenue', icon: '💰' },
     { href: '/admin/extractions', label: 'Extractions', icon: '🧠' },
-    { href: '/admin/leads', label: 'Leads', icon: '🎯' },
     { href: '/admin/system', label: 'System Health', icon: '⚙️' },
     { href: '/admin/migrations', label: 'SQL Migrations', icon: '🗄️' }
   ];
@@ -79,7 +80,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <div className="w-64 bg-navy text-white flex-shrink-0">
         <div className="p-6">
-          <h1 className="font-serif text-2xl font-semibold mb-2">SovereigntyIntroAlignment</h1>
+          <h1 className="font-serif text-2xl font-semibold mb-2">IntroAlignment</h1>
           <p className="text-sm text-white/70">Admin Dashboard</p>
         </div>
 
