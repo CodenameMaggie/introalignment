@@ -276,22 +276,54 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Legal Disclaimer */}
+      <section className="bg-ivory py-12 px-6 border-t-4 border-gold">
+        <div className="max-w-5xl mx-auto">
+          <h3 className="font-heading text-2xl font-bold text-obsidian mb-6 text-center">Legal Disclaimer</h3>
+          <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-sage">
+            <div className="space-y-4 font-body text-sm text-charcoal leading-relaxed">
+              <p>
+                <strong>Not Legal Advice:</strong> The information provided on this website is for general informational and educational purposes only and does not constitute legal, tax, financial, or professional advice. IntroAlignment is a professional network platform connecting attorneys with clients and does not practice law or provide legal services directly.
+              </p>
+              <p>
+                <strong>No Attorney-Client Relationship:</strong> Use of this website does not create an attorney-client relationship between you and IntroAlignment or any attorney in our network. An attorney-client relationship is formed only through a separate written engagement agreement with a specific attorney.
+              </p>
+              <p>
+                <strong>State-Specific Requirements:</strong> Legal requirements vary significantly by jurisdiction. Estate planning, asset protection, and tax strategies must be tailored to your specific state laws, federal regulations, and individual circumstances. Always consult with a licensed attorney in your state before making legal decisions.
+              </p>
+              <p>
+                <strong>No Guarantees:</strong> Past performance and case examples do not guarantee future results. Legal outcomes depend on numerous factors including changes in law, court interpretations, and specific facts of each case. We make no warranties or guarantees regarding legal strategies or outcomes.
+              </p>
+              <p>
+                <strong>Professional Network Only:</strong> IntroAlignment operates as a professional networking platform. All legal services are provided independently by licensed attorneys in our network who maintain their own professional liability insurance and bar memberships. We do not supervise, direct, or control the legal services provided by network attorneys.
+              </p>
+              <p>
+                <strong>Consult Qualified Professionals:</strong> Before implementing any estate planning, asset protection, or tax strategy, you should consult with qualified legal, tax, and financial professionals licensed in your jurisdiction who can evaluate your specific circumstances.
+              </p>
+              <p className="pt-4 border-t border-sage/30 text-xs text-medium-gray">
+                <strong>Compliance Note:</strong> IntroAlignment operates in accordance with state bar rules regarding lawyer advertising and referral services. All attorneys in our network maintain active bar licenses and professional liability insurance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-charcoal text-pearl py-12 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-heading text-2xl font-bold text-gold mb-4">IntroAlignment</h3>
             <p className="font-body text-sm leading-relaxed">
-              Legal Architecture for Sovereign Living. Dynasty trusts, asset protection, and generational wealth strategies.
+              Professional legal network connecting estate planning attorneys with high-net-worth clients. Dynasty trusts, asset protection, and generational wealth strategies.
             </p>
           </div>
           <div>
-            <h4 className="font-ui font-semibold text-gold mb-4">Services</h4>
+            <h4 className="font-ui font-semibold text-gold mb-4">Network Services</h4>
             <ul className="font-body text-sm space-y-2">
-              <li><a href="#services" className="hover:text-gold transition-colors">Dynasty Trusts</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">Asset Protection</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">Entity Structures</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">Cross-Border Planning</a></li>
+              <li><a href="#services" className="hover:text-gold transition-colors">Attorney Matching</a></li>
+              <li><a href="#services" className="hover:text-gold transition-colors">Professional Referrals</a></li>
+              <li><a href="#services" className="hover:text-gold transition-colors">Legal Network Access</a></li>
+              <li><a href="#services" className="hover:text-gold transition-colors">Podcast Platform</a></li>
             </ul>
           </div>
           <div>
@@ -301,13 +333,15 @@ export default function HomePage() {
               <li><Link href="/partners" className="hover:text-gold transition-colors">Partner With Us</Link></li>
               <li><Link href="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-gold transition-colors">Terms of Service</Link></li>
-              <li><Link href="/admin" className="hover:text-gold transition-colors">Admin</Link></li>
             </ul>
           </div>
         </div>
         <div className="max-w-6xl mx-auto mt-8 pt-8 border-t border-charcoal-light text-center">
           <p className="font-ui text-sm text-medium-gray">
-            © {new Date().getFullYear()} IntroAlignment. All rights reserved. This site provides general information only and does not constitute legal advice.
+            © {new Date().getFullYear()} IntroAlignment. All rights reserved. IntroAlignment is a professional networking platform and does not provide legal services.
+          </p>
+          <p className="font-ui text-xs text-medium-gray mt-2">
+            This website does not constitute legal advice. Consult a licensed attorney for legal guidance.
           </p>
         </div>
       </footer>
