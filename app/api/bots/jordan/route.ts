@@ -232,8 +232,8 @@ export async function GET(): Promise<NextResponse> {
       qualified_partners: qualifiedPartners,
       podcast_interested: podcastInterested,
       partner_target: 1000,
-      progress: `${totalPartners}/${1000} (${Math.round((totalPartners || 0) / 1000 * 100)}%)`,
-      qualification_rate: totalPartners > 0 ? `${Math.round((qualifiedPartners || 0) / totalPartners * 100)}%` : 'N/A'
+      progress: `${totalPartners || 0}/${1000} (${Math.round((totalPartners || 0) / 1000 * 100)}%)`,
+      qualification_rate: (totalPartners || 0) > 0 ? `${Math.round((qualifiedPartners || 0) / (totalPartners || 1) * 100)}%` : 'N/A'
     },
     bot_system_health: botHealth,
     capabilities: [

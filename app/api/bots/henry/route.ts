@@ -201,7 +201,7 @@ export async function GET(): Promise<NextResponse> {
       total_partners: totalPartners,
       unsubscribed: unsubscribed,
       active_email_list: (totalPartners || 0) - (unsubscribed || 0),
-      unsubscribe_rate: totalPartners > 0 ? `${((unsubscribed || 0) / totalPartners * 100).toFixed(1)}%` : 'N/A'
+      unsubscribe_rate: (totalPartners || 0) > 0 ? `${((unsubscribed || 0) / (totalPartners || 1) * 100).toFixed(1)}%` : 'N/A'
     },
     capabilities: [
       'Partnership invitation emails to estate planning attorneys',
