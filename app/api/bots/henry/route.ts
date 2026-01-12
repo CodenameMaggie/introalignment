@@ -57,8 +57,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       .rpc('check_email_blacklist', { p_email: partner.email })
       .single();
 
-    if (blacklisted?.is_blacklisted) {
-      console.log(`[Henry] Email ${partner.email} is blacklisted: ${blacklisted.reason}`);
+    if (blacklisted && (blacklisted as any).is_blacklisted) {
+      console.log(`[Henry] Email ${partner.email} is blacklisted: ${(blacklisted as any).reason}`);
       return NextResponse.json({
         success: false,
         message: 'Email address is blacklisted'
@@ -74,11 +74,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       })
       .single();
 
-    if (duplicateCheck?.is_duplicate) {
-      console.log(`[Henry] Duplicate email detected for ${partner.email}. Last sent ${duplicateCheck.days_since_last_sent} days ago`);
+    if (duplicateCheck && (duplicateCheck as any).is_duplicate) {
+      console.log(`[Henry] Duplicate email detected for ${partner.email}. Last sent ${(duplicateCheck as any).days_since_last_sent} days ago`);
       return NextResponse.json({
         success: false,
-        message: `Email already sent ${duplicateCheck.days_since_last_sent} days ago. Minimum 30-day gap required.`
+        message: `Email already sent ${(duplicateCheck as any).days_since_last_sent} days ago. Minimum 30-day gap required.`
       }, { status: 400 });
     }
 
@@ -90,8 +90,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       })
       .single();
 
-    if (frequencyCheck && frequencyCheck.email_count >= 3) {
-      console.log(`[Henry] Email frequency limit reached for ${partner.email}: ${frequencyCheck.email_count} emails in last 7 days`);
+    if (frequencyCheck && (frequencyCheck as any).email_count >= 3) {
+      console.log(`[Henry] Email frequency limit reached for ${partner.email}: ${(frequencyCheck as any).email_count} emails in last 7 days`);
       return NextResponse.json({
         success: false,
         message: 'Email frequency limit reached (max 3 per week)'
