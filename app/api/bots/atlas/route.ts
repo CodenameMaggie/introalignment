@@ -49,13 +49,33 @@ export async function POST(request: NextRequest): Promise<NextResponse<ResearchR
     }
 
     // Create research prompt
-    const systemPrompt = `You are Atlas, SovereigntyIntroAlignment's research specialist. You provide accurate, concise research to help other AI bots make better decisions.
+    const systemPrompt = `You are Atlas, IntroAlignment's legal research specialist. You provide accurate, concise research to help other AI bots make better decisions about estate planning, dynasty trusts, asset protection, and legal professional networking.
 
-Your research should be:
+**IntroAlignment Business Context:**
+- Legal services network connecting estate planning attorneys with high-net-worth clients
+- Focus: Dynasty trusts, asset protection, sophisticated estate structures
+- Target attorneys: 5+ years experience, specializations in trusts & estates
+- Target clients: $10M+ net worth, family offices, multi-generational wealth
+- Podcast: sovereigndesign.it.com (guests: estate planning experts)
+
+**Your Legal Expertise Covers:**
+- Dynasty Trusts & Irrevocable Trusts
+- Asset Protection Strategies
+- Estate Planning for High-Net-Worth Families
+- Tax Planning & Wealth Preservation
+- Family Office Structures
+- Charitable Planning & Foundations
+- Multi-Generational Wealth Transfer
+- State Bar Compliance & Attorney Ethics
+- Legal Professional Credentials (ACTEC, AEP, Board Certified)
+
+**Your research should be:**
 - Factual and well-reasoned
 - Concise (focus on key insights)
 - Actionable (include specific recommendations when relevant)
-- Data-driven when possible`;
+- Legally informed (understand trust law, estate planning, professional responsibility)
+- Professional (appropriate for attorney audience)
+- Current with modern estate planning trends`;
 
     const userPrompt = context
       ? `Research Topic: ${research_topic}\n\nContext: ${context}\n\nProvide a comprehensive yet concise research summary.`
@@ -202,17 +222,40 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({
       bot_name: 'atlas',
+      role: 'Legal Research Specialist',
+      business_model: 'IntroAlignment - Legal Services Network',
       status: health?.status || 'unknown',
       health,
       recent_actions: recentActions,
       available_providers: availableProviders,
       capabilities: [
-        'General research queries',
-        'Market analysis',
-        'User behavior insights',
-        'Dating trend research',
-        'Compatibility research'
-      ]
+        'Estate planning and trust law research',
+        'Dynasty trust strategy analysis',
+        'Asset protection legal research',
+        'Attorney qualification criteria',
+        'High-net-worth estate planning trends',
+        'Legal professional credential evaluation',
+        'State bar compliance research',
+        'Email outreach strategy for legal professionals',
+        'Client-attorney matching criteria',
+        'Legal network analytics insights'
+      ],
+      legal_expertise: [
+        'Dynasty Trusts & Irrevocable Trusts',
+        'Asset Protection Strategies',
+        'Estate Planning for High-Net-Worth ($10M+)',
+        'Tax Planning & Wealth Preservation',
+        'Family Office Planning',
+        'Charitable Foundations & Planning',
+        'Multi-Generational Wealth Transfer',
+        'Attorney Ethics & State Bar Rules',
+        'Legal Credentials (ACTEC Fellow, AEP, Board Certified)'
+      ],
+      target_audience: {
+        attorneys: 'Estate planning specialists, 5+ years experience, trusts & estates focus',
+        clients: 'High-net-worth families ($10M+), family offices, multi-generational wealth'
+      },
+      podcast: 'sovereigndesign.it.com - Legal architecture for sovereign living'
     });
 
   } catch (error: any) {

@@ -1,17 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminClient } from '@/lib/db/supabase';
-import { askAtlas } from '@/lib/bots/inter-bot-client';
+import { askAtlas, reportActionCompleted, reportCriticalIssue } from '@/lib/bots/inter-bot-client';
 
 /**
- * Annie - The Conversation & Onboarding Bot
- * Handles user conversations during onboarding
- * Queries Atlas for research on user behavior and conversation strategies
+ * Annie - The Legal Professional Onboarding & Conversation Bot
+ *
+ * PURPOSE: Handles onboarding for estate planning attorneys joining IntroAlignment
+ * FOCUS: Application assistance, qualification questions, partnership guidance
+ * REPORTS TO: MFS C-Suite Bot
+ *
+ * RESPONSIBILITIES:
+ * - Answer questions from attorneys considering partnership
+ * - Guide through partner application process
+ * - Explain IntroAlignment network benefits
+ * - Provide podcast guest information (sovereigndesign.it.com)
+ * - Handle inquiries about referral terms and client types
+ * - Escalate complex questions to Maggie Forbes
  */
 
 interface ConversationRequest {
-  user_id: string;
+  partner_id?: string;
   message: string;
   conversation_history?: Array<{ role: string; content: string }>;
+  context?: 'partnership_inquiry' | 'podcast_interest' | 'application_help' | 'general';
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -20,28 +31,39 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   try {
     const body: ConversationRequest = await request.json();
-    const { user_id, message, conversation_history = [] } = body;
+    const { partner_id, message, conversation_history = [], context = 'general' } = body;
 
-    // Example: Annie can query Atlas for conversation strategy research
-    // This helps Annie provide better responses based on research
+    // Get partner context if provided
+    let partner = null;
+    if (partner_id) {
+      const { data } = await supabase
+        .from('partners')
+        .select('*')
+        .eq('id', partner_id)
+        .single();
+      partner = data;
+    }
 
-    // Check if this is a complex topic that needs research
-    const needsResearch = message.toLowerCase().includes('relationship') ||
-                          message.toLowerCase().includes('dating') ||
-                          message.toLowerCase().includes('compatibility');
+    // Check if message needs Atlas research
+    const needsResearch =
+      message.toLowerCase().includes('dynasty trust') ||
+      message.toLowerCase().includes('asset protection') ||
+      message.toLowerCase().includes('estate planning') ||
+      message.toLowerCase().includes('referral') ||
+      message.toLowerCase().includes('clients');
 
     let researchInsight = null;
 
     if (needsResearch) {
-      console.log('[Annie] Detected complex topic, querying Atlas for research...');
+      console.log('[Annie] Detected legal topic, querying Atlas for research...');
 
-      // Query Atlas for research on the topic
       const atlasResponse = await askAtlas(
         'annie',
-        `User mentioned: "${message}". Provide brief insights on how to respond helpfully in a dating app onboarding conversation.`,
+        `An estate planning attorney is asking about: "${message}". Provide a brief, professional response about IntroAlignment's network for dynasty trusts, asset protection, and high-net-worth estate planning. Focus on: attorney benefits, client referrals, podcast opportunities.`,
         {
-          max_tokens: 256,
-          prefer_provider: 'bedrock' // Use cheapest option for quick insights
+          context: `Attorney context: ${partner ? `${partner.first_name} ${partner.last_name}, ${partner.experience_years} years experience, specializes in ${partner.specializations?.join(', ')}` : 'Prospective attorney'}`,
+          max_tokens: 384,
+          prefer_provider: 'bedrock'
         }
       );
 
@@ -51,9 +73,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }
     }
 
-    // Annie's response logic would go here
-    // For now, this is a demonstration of how Annie integrates with Atlas
-
     const responseTime = Date.now() - startTime;
 
     // Log action
@@ -61,9 +80,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       .from('bot_actions_log')
       .insert({
         bot_name: 'annie',
-        action_type: 'conversation_response',
+        action_type: 'legal_professional_conversation',
         action_details: {
-          user_id,
+          partner_id,
+          context,
           message_length: message.length,
           used_atlas_research: !!researchInsight,
           response_time_ms: responseTime
@@ -71,7 +91,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         status: 'completed'
       });
 
-    // Update Annie's health status
+    // Update Annie's health
     await supabase
       .from('ai_bot_health')
       .upsert({
@@ -80,29 +100,61 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         last_active_at: new Date().toISOString(),
         average_response_time: responseTime,
         metadata: {
-          last_user_id: user_id,
+          last_context: context,
           used_atlas: !!researchInsight
         }
       }, {
         onConflict: 'bot_name'
       });
 
+    // Report to C-Suite
+    await reportActionCompleted('annie', {
+      action_type: 'legal_professional_conversation',
+      details: {
+        context,
+        partner_id
+      },
+      success: true,
+      metrics: {
+        used_atlas_research: !!researchInsight
+      }
+    }).catch(err => {
+      console.error('[Annie] Failed to report to C-Suite:', err);
+    });
+
     return NextResponse.json({
       success: true,
       bot: 'annie',
-      response: 'Annie would respond here (demonstration endpoint)',
-      research_used: !!researchInsight,
-      research_insight: researchInsight
+      role: 'Legal Professional Onboarding & Conversation',
+      message: 'Annie provides conversational support for attorneys joining IntroAlignment',
+      research_insight: researchInsight,
+      partner_info: partner ? {
+        name: `${partner.first_name} ${partner.last_name}`,
+        experience: `${partner.experience_years} years`,
+        specializations: partner.specializations
+      } : null,
+      context,
+      note: 'Annie would generate a conversational AI response here using Claude Sonnet',
+      reported_to_csuite: true
     });
 
   } catch (error: any) {
     console.error('[Annie] Error:', error);
 
+    // Report critical failure to C-Suite
+    await reportCriticalIssue('annie', {
+      error_type: 'conversation_failure',
+      error_message: error.message,
+      affected_systems: ['legal_professional_conversation'],
+      recovery_attempted: false,
+      requires_human_intervention: true
+    }, 'urgent').catch(console.error);
+
     await supabase
       .from('bot_actions_log')
       .insert({
         bot_name: 'annie',
-        action_type: 'conversation_response',
+        action_type: 'legal_professional_conversation',
         action_details: {
           error_message: error.message
         },
@@ -127,13 +179,43 @@ export async function GET(): Promise<NextResponse> {
 
   return NextResponse.json({
     bot_name: 'annie',
-    role: 'Conversation & Onboarding',
+    role: 'Legal Professional Onboarding & Conversation',
+    business_model: 'IntroAlignment - Legal Services Network',
     status: health?.status || 'unknown',
     capabilities: [
-      'User onboarding conversations',
-      'Question answering',
-      'Personality assessment through dialogue',
-      'Integrates with Atlas for conversation strategy research'
+      'Attorney partnership inquiry handling',
+      'Partner application guidance',
+      'Podcast guest information (sovereigndesign.it.com)',
+      'Network benefits explanation',
+      'Client referral process details',
+      'Calendly scheduling assistance (Wednesday bookings)',
+      'Conversational AI using Claude Sonnet',
+      'Integrates with Atlas for legal topic research',
+      'Reports to MFS C-Suite Bot'
+    ],
+    common_questions: [
+      'What types of clients does IntroAlignment refer?',
+      'How does the partnership model work?',
+      'What are the podcast guest requirements?',
+      'When are podcast recordings scheduled? (Wednesdays)',
+      'What specializations are you looking for?',
+      'How do referrals work?',
+      'What are the partnership tiers?',
+      'Do I need specific credentials to join?'
+    ],
+    conversation_contexts: [
+      'Partnership Inquiry - General interest in joining network',
+      'Podcast Interest - sovereigndesign.it.com guest spot',
+      'Application Help - Assistance completing partner form',
+      'Referral Questions - How client referrals work',
+      'Credential Verification - Bar numbers, certifications',
+      'General - Other questions about IntroAlignment'
+    ],
+    escalation_triggers: [
+      'Pricing or fee structure questions → Escalate to Maggie',
+      'Legal advice requests → Refer to appropriate attorney',
+      'Complaints or disputes → Escalate to Maggie',
+      'Complex partnership terms → Escalate to Maggie'
     ]
   });
 }
