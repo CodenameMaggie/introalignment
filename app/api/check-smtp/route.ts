@@ -1,88 +1,45 @@
 import { NextResponse } from 'next/server';
-import { verifyConnection, sendEmail } from '@/lib/email/smtp';
-import { Socket } from 'net';
+import { verifyConnection, sendEmail } from '@/lib/email/forbes-command-center';
 
 export async function GET() {
   const results: any = {
     timestamp: new Date().toISOString(),
     config: {
-      host: process.env.SMTP_HOST || 'localhost',
-      port: process.env.SMTP_PORT || '25',
-      domain: process.env.SMTP_DOMAIN || 'introalignment.com'
+      system: 'Forbes Command Center (Port 25)',
+      api_url: process.env.FORBES_COMMAND_API_URL || 'http://5.78.139.9:3000/api/email-api',
+      business_code: 'IA'
     },
     tests: {}
   };
 
-  // Test 1: TCP Port connectivity
+  // Test 1: Forbes Command Center API connectivity
   try {
-    await new Promise((resolve, reject) => {
-      const socket = new Socket();
-      socket.setTimeout(5000);
-      socket.connect(
-        parseInt(process.env.SMTP_PORT || '25', 10),
-        process.env.SMTP_HOST || 'localhost'
-      );
-
-      socket.on('connect', () => {
-        results.tests.tcpConnection = {
-          status: 'SUCCESS',
-          message: `Port ${process.env.SMTP_PORT} is reachable`
-        };
-        socket.end();
-        resolve(true);
-      });
-
-      socket.on('error', (err: Error) => {
-        results.tests.tcpConnection = {
-          status: 'FAILED',
-          error: err.message
-        };
-        reject(err);
-      });
-
-      socket.on('timeout', () => {
-        results.tests.tcpConnection = {
-          status: 'FAILED',
-          error: 'Connection timeout'
-        };
-        socket.destroy();
-        reject(new Error('Connection timeout'));
-      });
-    });
+    const apiTest = await verifyConnection();
+    results.tests.apiConnection = {
+      status: apiTest.success ? 'SUCCESS' : 'FAILED',
+      message: apiTest.success ? 'Forbes Command Center API connected' : apiTest.error
+    };
   } catch (error: any) {
-    results.tests.tcpConnection = {
+    results.tests.apiConnection = {
       status: 'FAILED',
       error: error.message
     };
   }
 
-  // Test 2: SMTP Connection verification
-  try {
-    const smtpTest = await verifyConnection();
-    results.tests.smtpVerification = {
-      status: smtpTest.success ? 'SUCCESS' : 'FAILED',
-      message: smtpTest.success ? 'SMTP handshake successful' : smtpTest.error
-    };
-  } catch (error: any) {
-    results.tests.smtpVerification = {
-      status: 'FAILED',
-      error: error.message
-    };
-  }
-
-  // Test 3: Send test email (if admin email configured)
+  // Test 2: Send test email (if admin email configured)
   if (process.env.ADMIN_EMAIL && process.env.ADMIN_EMAIL !== 'henry@introalignment.com') {
     try {
       const emailTest = await sendEmail({
         to: process.env.ADMIN_EMAIL,
-        subject: 'SovereigntyIntroAlignment SMTP Test',
+        subject: 'IntroAlignment Email System Test',
         html: `
-          <h2>SMTP Connection Test</h2>
-          <p>This is a test email from SovereigntyIntroAlignment.</p>
-          <p><strong>Server:</strong> ${process.env.SMTP_HOST}:${process.env.SMTP_PORT}</p>
+          <h2>Forbes Command Center Email Test</h2>
+          <p>This is a test email from IntroAlignment legal services network.</p>
+          <p><strong>System:</strong> Forbes Command Center (Port 25)</p>
+          <p><strong>Business Code:</strong> IA</p>
           <p><strong>Time:</strong> ${new Date().toISOString()}</p>
         `,
-        text: `SMTP Connection Test from ${process.env.SMTP_HOST}:${process.env.SMTP_PORT}`
+        text: `Forbes Command Center Email Test for IntroAlignment (IA) - ${new Date().toISOString()}`
       });
 
       results.tests.emailSend = {

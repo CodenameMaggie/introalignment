@@ -120,62 +120,62 @@ export async function sendWaitlistWelcome(params: {
       </head>
       <body>
         <div class="header">
-          <h1>SovereigntyIntroAlignment</h1>
-          <p>How you legally architect your dynasty</p>
+          <h1>IntroAlignment</h1>
+          <p>Elite Legal Network for Estate Planning Attorneys</p>
         </div>
 
         <div class="content">
           <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #2C3E50;">Welcome, ${params.firstName}!</h2>
 
-          <p>Thank you for joining the SovereigntyIntroAlignment waitlist. We're building something truly different — a matchmaking service that goes beyond surface-level compatibility to help you find genuine alignment.</p>
+          <p>Thank you for your interest in IntroAlignment. We're building an exclusive network connecting estate planning attorneys with high-net-worth clients seeking sophisticated legal services.</p>
 
-          <p><strong>What makes SovereigntyIntroAlignment different?</strong></p>
+          <p><strong>What makes IntroAlignment different?</strong></p>
 
           <ul>
-            <li><strong>Depth over volume:</strong> No endless swiping. We focus on quality introductions that have real potential.</li>
-            <li><strong>Thoughtful matching:</strong> We use comprehensive data analysis, including psychometric profiling and compatibility algorithms, to understand who you truly are.</li>
-            <li><strong>Curated introductions:</strong> Every match is thoughtfully considered and purposefully made.</li>
+            <li><strong>Quality over quantity:</strong> We focus on qualified estate planning attorneys (5+ years experience) serving $10M+ estates.</li>
+            <li><strong>Specialized matching:</strong> Dynasty trusts, asset protection, multi-generational wealth planning.</li>
+            <li><strong>Professional support:</strong> Podcast opportunities, client referrals, and networking.</li>
           </ul>
 
-          <p>We're currently in our beta phase and will be opening to new members soon. You'll be among the first to know when we launch.</p>
+          <p>We're currently building our network and will be contacting qualified attorneys soon. You'll be among the first to know when partnership opportunities become available.</p>
 
-          <p>In the meantime, feel free to reach out if you have any questions about SovereigntyIntroAlignment.</p>
+          <p>In the meantime, feel free to reach out if you have any questions about IntroAlignment.</p>
 
-          <p style="margin-top: 40px;">Looking forward to helping you find your person,</p>
-          <p style="margin: 0;"><strong>The SovereigntyIntroAlignment Team</strong></p>
+          <p style="margin-top: 40px;">Looking forward to building together,</p>
+          <p style="margin: 0;"><strong>The IntroAlignment Team</strong></p>
         </div>
 
         <div class="footer">
-          <p>SovereigntyIntroAlignment, Inc.<br />
+          <p>IntroAlignment Legal Network<br />
           Email: hello@introalignment.com</p>
           <p style="margin-top: 20px; font-size: 12px;">
-            You're receiving this email because you joined our waitlist at introalignment.com.
+            You're receiving this email because you expressed interest in joining our legal network at introalignment.com.
           </p>
         </div>
       </body>
     </html>
   `;
 
-  const text = `Welcome to SovereigntyIntroAlignment, ${params.firstName}!
+  const text = `Welcome to IntroAlignment, ${params.firstName}!
 
-Thank you for joining our waitlist. We're building something truly different — a matchmaking service that goes beyond surface-level compatibility to help you find genuine alignment.
+Thank you for your interest in IntroAlignment. We're building an exclusive network connecting estate planning attorneys with high-net-worth clients seeking sophisticated legal services.
 
-What makes SovereigntyIntroAlignment different?
-- Depth over volume: No endless swiping. We focus on quality introductions that have real potential.
-- Thoughtful matching: We use comprehensive data analysis to understand who you truly are.
-- Curated introductions: Every match is thoughtfully considered and purposefully made.
+What makes IntroAlignment different?
+- Quality over quantity: We focus on qualified estate planning attorneys (5+ years experience) serving $10M+ estates.
+- Specialized matching: Dynasty trusts, asset protection, multi-generational wealth planning.
+- Professional support: Podcast opportunities (sovereigndesign.it.com), client referrals, and networking.
 
-We're currently in beta and will be opening to new members soon. You'll be among the first to know when we launch.
+We're currently building our network and will be contacting qualified attorneys soon. You'll be among the first to know when partnership opportunities become available.
 
-Looking forward to helping you find your person,
-The SovereigntyIntroAlignment Team
+Looking forward to building together,
+The IntroAlignment Team
 
-SovereigntyIntroAlignment, Inc.
+IntroAlignment Legal Network
 Email: hello@introalignment.com`;
 
   return sendEmail({
     to: params.email,
-    subject: `Welcome to SovereigntyIntroAlignment, ${params.firstName}!`,
+    subject: `Welcome to IntroAlignment Legal Network, ${params.firstName}`,
     html,
     text,
     replyTo: 'hello@introalignment.com'
@@ -242,11 +242,11 @@ export async function sendPaymentFailedNotification(params: {
       </head>
       <body>
         <div class="header">
-          <h1 style="font-family: 'Playfair Display', Georgia, serif; margin: 0;">SovereigntyIntroAlignment</h1>
+          <h1 style="font-family: 'Playfair Display', Georgia, serif; margin: 0;">IntroAlignment</h1>
         </div>
 
         <div style="padding: 40px 0;">
-          <h2 style="color: #2C3E50;">Payment Issue with Your Subscription</h2>
+          <h2 style="color: #2C3E50;">Payment Issue with Your Partnership</h2>
 
           <p>Hi ${params.firstName},</p>
 
@@ -263,7 +263,7 @@ export async function sendPaymentFailedNotification(params: {
           </ul>
 
           <p><strong>What happens next?</strong></p>
-          <p>To maintain uninterrupted access to SovereigntyIntroAlignment, please update your payment method within the next 7 days.</p>
+          <p>To maintain your IntroAlignment partnership benefits, please update your payment method within the next 7 days.</p>
 
           <p style="text-align: center;">
             <a href="${process.env.NEXT_PUBLIC_APP_URL}/settings/billing" class="button">Update Payment Method</a>
@@ -272,18 +272,18 @@ export async function sendPaymentFailedNotification(params: {
           <p>If you have any questions or need assistance, please don't hesitate to reach out to us at billing@introalignment.com.</p>
 
           <p style="margin-top: 40px;">Thank you,<br />
-          <strong>The SovereigntyIntroAlignment Team</strong></p>
+          <strong>The IntroAlignment Team</strong></p>
         </div>
 
         <div class="footer">
-          <p>SovereigntyIntroAlignment, Inc.<br />
+          <p>IntroAlignment Legal Network<br />
           Email: billing@introalignment.com</p>
         </div>
       </body>
     </html>
   `;
 
-  const text = `Payment Issue with Your Subscription
+  const text = `Payment Issue with Your Partnership
 
 Hi ${params.firstName},
 
@@ -291,14 +291,14 @@ We were unable to process your recent payment of ${formattedAmount}.
 
 This could be due to insufficient funds, an expired card, card issuer decline, or billing address mismatch.
 
-To maintain uninterrupted access to SovereigntyIntroAlignment, please update your payment method within the next 7 days.
+To maintain your IntroAlignment partnership benefits, please update your payment method within the next 7 days.
 
 Update your payment method at: ${process.env.NEXT_PUBLIC_APP_URL}/settings/billing
 
 If you have questions, contact us at billing@introalignment.com.
 
 Thank you,
-The SovereigntyIntroAlignment Team`;
+The IntroAlignment Team`;
 
   return sendEmail({
     to: params.email,
