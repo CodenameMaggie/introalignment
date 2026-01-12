@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminClient } from '@/lib/db/supabase';
 import { askAtlas, reportActionCompleted, reportCriticalIssue } from '@/lib/bots/inter-bot-client';
+import { sendPodcastInvitation } from '@/lib/email/forbes-command-center';
 
 /**
  * Henry - The Legal Professional Email Outreach Bot
@@ -119,6 +120,31 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const responseTime = Date.now() - startTime;
 
+    // Send actual email based on campaign type
+    let emailResult: { success: boolean; error?: string } | null = null;
+
+    if (campaign_type === 'podcast_invitation') {
+      emailResult = await sendPodcastInvitation({
+        email: partner.email,
+        firstName: partner.first_name || partner.full_name?.split(' ')[0] || 'there',
+        professionalTitle: partner.professional_title,
+        specializations: partner.specializations
+      });
+
+      if (!emailResult.success) {
+        console.error(`[Henry] Failed to send podcast invitation to ${partner.email}:`, emailResult.error);
+        return NextResponse.json({
+          success: false,
+          error: `Failed to send email: ${emailResult.error}`
+        }, { status: 500 });
+      }
+
+      console.log(`[Henry] ✅ Podcast invitation sent to ${partner.email}`);
+    } else {
+      // For other campaign types, just log (implement later if needed)
+      console.log(`[Henry] ℹ️  ${campaign_type} campaign logged but not sent (not implemented yet)`);
+    }
+
     // Log to outreach email tracking (deduplication)
     await supabase
       .from('outreach_email_log')
@@ -127,14 +153,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         recipient_type: 'partner',
         recipient_id: partner_id,
         campaign_type,
-        sender_email: 'hello@introalignment.com',
-        status: 'sent',
+        sender_email: campaign_type === 'podcast_invitation' ? 'maggie@maggieforbesstrategies.com' : 'hello@introalignment.com',
+        status: emailResult?.success ? 'sent' : 'logged',
         sent_at: new Date().toISOString(),
         provider: 'forbes-command-center',
         metadata: {
           partner_name: `${partner.first_name} ${partner.last_name}`,
           specializations: partner.specializations,
-          used_atlas_research: !!emailStrategy
+          used_atlas_research: !!emailStrategy,
+          email_actually_sent: !!emailResult?.success
         }
       });
 
@@ -204,7 +231,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       success: true,
       bot: 'henry',
       role: 'Legal Professional Email Outreach',
-      message: 'Henry would send email here (demonstration endpoint)',
+      message: emailResult?.success
+        ? `✅ ${campaign_type === 'podcast_invitation' ? 'Podcast invitation' : 'Email'} sent to ${partner.email}`
+        : `ℹ️  ${campaign_type} campaign logged (email sending not implemented for this type yet)`,
+      email_sent: !!emailResult?.success,
       email_strategy: emailStrategy,
       partner: {
         id: partner_id,
@@ -214,7 +244,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         experience_years: partner.experience_years
       },
       campaign_type,
-      note: 'Actual emails sent via email service integration (Resend/SendGrid)',
       reported_to_csuite: true
     });
 

@@ -74,29 +74,62 @@ export default function PartnersPage() {
           <p className="font-body text-xl text-charcoal mb-8">
             Thank you for your interest in partnering with IntroAlignment. We'll review your application and be in touch within 3-5 business days.
           </p>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {formData.podcast_interest && (
-              <div className="bg-sage/10 p-6 rounded-lg border-l-4 border-gold mb-4">
-                <p className="font-body text-charcoal mb-4">
-                  <strong className="font-heading text-obsidian">Great! We book legal professionals on Wednesdays.</strong><br />
-                  Schedule your podcast discussion below:
-                </p>
-                <a
-                  href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-8 py-3 rounded-lg transition-all shadow-luxury"
-                >
-                  Schedule Wednesday Podcast Session
-                </a>
+              <div className="bg-sage/10 p-8 rounded-lg border-l-4 border-gold">
+                <div className="text-center mb-6">
+                  <div className="text-5xl mb-3">🎙️</div>
+                  <h2 className="font-heading text-2xl font-bold text-obsidian mb-2">
+                    Let's Schedule Your Podcast Session!
+                  </h2>
+                  <p className="font-body text-charcoal">
+                    We're excited to feature you on sovereigndesign.it.com. Sessions are recorded on Wednesdays.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-lg mb-4">
+                  <h3 className="font-heading text-lg font-bold text-obsidian mb-3">What to Expect:</h3>
+                  <ul className="space-y-2 font-body text-charcoal">
+                    <li className="flex items-start">
+                      <span className="text-gold mr-2">→</span>
+                      <span>45-60 minute conversation about your area of expertise</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-gold mr-2">→</span>
+                      <span>Recorded via Zoom on Wednesdays (flexible scheduling)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-gold mr-2">→</span>
+                      <span>Published to our network of high-net-worth clients and professionals</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-gold mr-2">→</span>
+                      <span>Full promotional support across our channels</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="text-center">
+                  <a
+                    href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-10 py-4 rounded-lg transition-all shadow-luxury text-lg"
+                  >
+                    Schedule Your Wednesday Session
+                  </a>
+                  <p className="font-body text-sm text-charcoal mt-3">
+                    Or we'll send you a calendar invitation within 1-2 business days
+                  </p>
+                </div>
               </div>
             )}
-            <Link
-              href="/"
-              className="inline-block bg-charcoal hover:bg-charcoal-light text-cream font-ui font-semibold px-8 py-3 rounded-lg transition-all"
-            >
-              Return Home
-            </Link>
+            <div className="text-center">
+              <Link
+                href="/"
+                className="inline-block bg-charcoal hover:bg-charcoal-light text-cream font-ui font-semibold px-8 py-3 rounded-lg transition-all"
+              >
+                Return Home
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -395,11 +428,29 @@ export default function PartnersPage() {
                       <option value="consultant">Consultant (Per-case basis)</option>
                       <option value="advisor">Advisory Role (Ongoing collaboration)</option>
                       <option value="featured_partner">Featured Partner (Full partnership)</option>
+                      <option value="podcast_only">Podcast Guest Only</option>
                     </select>
+                    {formData.partnership_interest === 'podcast_only' && (
+                      <p className="font-body text-sm text-charcoal mt-2">
+                        Perfect! We book legal professionals on Wednesdays. After submitting, you can schedule your session immediately.
+                      </p>
+                    )}
                   </div>
 
-                  <div className="bg-ivory p-6 rounded-lg border-l-4 border-gold">
-                    <label className="flex items-center cursor-pointer">
+                  <div className="bg-sage/10 p-6 rounded-lg border-l-4 border-gold">
+                    <div className="flex items-start mb-4">
+                      <div className="text-3xl mr-4">🎙️</div>
+                      <div>
+                        <h4 className="font-heading text-lg font-bold text-obsidian mb-2">
+                          sovereigndesign.it.com Podcast
+                        </h4>
+                        <p className="font-body text-charcoal text-sm mb-3">
+                          Share your expertise on dynasty trusts, asset protection, and wealth preservation strategies. Recording sessions on Wednesdays.
+                        </p>
+                      </div>
+                    </div>
+
+                    <label className="flex items-center cursor-pointer mb-4">
                       <input
                         type="checkbox"
                         name="podcast_interest"
@@ -408,23 +459,38 @@ export default function PartnersPage() {
                         className="w-5 h-5 text-gold border-gold rounded focus:ring-gold mr-3"
                       />
                       <span className="font-ui font-medium text-obsidian">
-                        I'm interested in being a guest on the sovereigndesign.it.com podcast
+                        Yes, I'm interested in being a podcast guest
                       </span>
                     </label>
 
                     {formData.podcast_interest && (
-                      <div className="mt-4">
-                        <label className="block font-ui font-medium text-charcoal mb-2">
-                          Topics you can speak about
-                        </label>
-                        <textarea
-                          name="podcast_topics"
-                          value={formData.podcast_topics}
-                          onChange={handleChange}
-                          rows={3}
-                          placeholder="e.g., Dynasty trust structures, offshore asset protection, C-corp tax optimization..."
-                          className="w-full px-4 py-3 border border-soft-gray rounded-lg font-body focus:outline-none focus:border-gold text-obsidian"
-                        />
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block font-ui font-medium text-charcoal mb-2">
+                            Topics you can speak about *
+                          </label>
+                          <textarea
+                            name="podcast_topics"
+                            value={formData.podcast_topics}
+                            onChange={handleChange}
+                            rows={3}
+                            placeholder="e.g., Dynasty trust structures, offshore asset protection, C-corp tax optimization, estate tax planning..."
+                            className="w-full px-4 py-3 border border-soft-gray rounded-lg font-body focus:outline-none focus:border-gold text-obsidian"
+                          />
+                        </div>
+                        <div className="bg-white p-4 rounded-lg">
+                          <p className="font-body text-sm text-charcoal mb-3">
+                            <strong>Prefer to schedule now?</strong> Book your Wednesday podcast session:
+                          </p>
+                          <a
+                            href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-6 py-2 rounded-lg transition-all text-sm"
+                          >
+                            Schedule Wednesday Session →
+                          </a>
+                        </div>
                       </div>
                     )}
                   </div>

@@ -310,6 +310,190 @@ The IntroAlignment Team`;
 }
 
 /**
+ * Send podcast invitation email
+ */
+export async function sendPodcastInvitation(params: {
+  email: string;
+  firstName: string;
+  professionalTitle?: string;
+  specializations?: string[];
+}): Promise<{success: boolean; error?: string}> {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2C3E50;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid #D4A574;
+          }
+          .header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            margin: 0;
+            color: #2C3E50;
+          }
+          .header p {
+            font-style: italic;
+            color: #D4A574;
+            margin-top: 8px;
+          }
+          .content {
+            padding: 40px 0;
+          }
+          .podcast-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+          }
+          .button {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: #D4A574;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 20px 0;
+          }
+          .benefits {
+            background-color: #F7FAFC;
+            padding: 20px;
+            border-left: 4px solid #D4A574;
+            margin: 20px 0;
+            border-radius: 4px;
+          }
+          .footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #E2E0DB;
+            color: #718096;
+            font-size: 14px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>IntroAlignment</h1>
+          <p>Elite Legal Network & Podcast</p>
+        </div>
+
+        <div class="content">
+          <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #2C3E50;">🎙️ Podcast Invitation</h2>
+
+          <p>Hi ${params.firstName},</p>
+
+          <p>I came across your profile${params.professionalTitle ? ` as ${params.professionalTitle}` : ''} and was impressed by your expertise${params.specializations && params.specializations.length > 0 ? ` in ${params.specializations.join(', ')}` : ''}.</p>
+
+          <p>I'd love to invite you to be a guest on <strong>sovereigndesign.it.com</strong>, our podcast focused on dynasty trusts, asset protection, and legal strategies for generational wealth. We feature top estate planning attorneys sharing insights with our audience of high-net-worth clients and fellow professionals.</p>
+
+          <div class="podcast-badge">
+            <h3 style="margin: 0 0 10px 0; font-size: 24px;">🎙️ sovereigndesign.it.com</h3>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9;">Legal Architecture for Sovereign Living</p>
+          </div>
+
+          <div class="benefits">
+            <p style="margin-top: 0;"><strong>What You'll Gain:</strong></p>
+            <ul style="margin-bottom: 0;">
+              <li><strong>Exposure:</strong> Reach high-net-worth clients actively seeking estate planning counsel</li>
+              <li><strong>Authority:</strong> Establish yourself as a thought leader in wealth preservation</li>
+              <li><strong>Networking:</strong> Connect with other top-tier legal professionals</li>
+              <li><strong>Flexibility:</strong> 45-60 minute Zoom recordings on Wednesdays</li>
+            </ul>
+          </div>
+
+          <p><strong>Typical Topics:</strong></p>
+          <ul>
+            <li>Dynasty trust structures and generational wealth transfer</li>
+            <li>Asset protection strategies for high-net-worth families</li>
+            <li>Cross-border estate planning and international tax</li>
+            <li>Advanced tax optimization techniques</li>
+            <li>Family office legal considerations</li>
+          </ul>
+
+          <p style="text-align: center; margin: 40px 0;">
+            <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1" class="button">Schedule Your Podcast Session</a>
+          </p>
+
+          <p>Sessions are recorded on Wednesdays and typically last 45-60 minutes. We handle all promotion and distribution across our network.</p>
+
+          <p>If you'd prefer to discuss this opportunity first, simply reply to this email. I'd be happy to answer any questions.</p>
+
+          <p style="margin-top: 40px;">Looking forward to featuring your expertise,</p>
+          <p style="margin: 0;"><strong>Maggie Forbes</strong><br />
+          Host, sovereigndesign.it.com<br />
+          IntroAlignment Legal Network</p>
+        </div>
+
+        <div class="footer">
+          <p>IntroAlignment Legal Network<br />
+          Email: hello@introalignment.com</p>
+          <p style="margin-top: 20px; font-size: 12px;">
+            You're receiving this email because your professional profile indicates expertise in estate planning and wealth preservation. <br />
+            Not interested? <a href="mailto:hello@introalignment.com?subject=Unsubscribe%20from%20Podcast%20Invitations" style="color: #718096;">Let us know</a>.
+          </p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  const text = `🎙️ Podcast Invitation - sovereigndesign.it.com
+
+Hi ${params.firstName},
+
+I came across your profile${params.professionalTitle ? ` as ${params.professionalTitle}` : ''} and was impressed by your expertise${params.specializations && params.specializations.length > 0 ? ` in ${params.specializations.join(', ')}` : ''}.
+
+I'd love to invite you to be a guest on sovereigndesign.it.com, our podcast focused on dynasty trusts, asset protection, and legal strategies for generational wealth.
+
+What You'll Gain:
+- Exposure: Reach high-net-worth clients actively seeking estate planning counsel
+- Authority: Establish yourself as a thought leader in wealth preservation
+- Networking: Connect with other top-tier legal professionals
+- Flexibility: 45-60 minute Zoom recordings on Wednesdays
+
+Typical Topics:
+- Dynasty trust structures and generational wealth transfer
+- Asset protection strategies for high-net-worth families
+- Cross-border estate planning and international tax
+- Advanced tax optimization techniques
+- Family office legal considerations
+
+Schedule Your Session: https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1
+
+If you'd prefer to discuss this opportunity first, simply reply to this email.
+
+Looking forward to featuring your expertise,
+
+Maggie Forbes
+Host, sovereigndesign.it.com
+IntroAlignment Legal Network
+
+---
+You're receiving this email because your professional profile indicates expertise in estate planning. Not interested? Reply with "unsubscribe".`;
+
+  return sendEmail({
+    to: params.email,
+    subject: `Podcast Invitation: Share Your Expertise on sovereigndesign.it.com`,
+    html,
+    text,
+    replyTo: 'hello@introalignment.com',
+    from: 'maggie@maggieforbesstrategies.com'
+  });
+}
+
+/**
  * Verify Forbes Command Center API connectivity
  */
 export async function verifyConnection(): Promise<{success: boolean; error?: string}> {
