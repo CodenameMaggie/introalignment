@@ -229,12 +229,12 @@ Best,
 
 ## Database Migration
 
-**File:** `/Users/Kristi/Desktop/020_partnership_outreach_system.sql`
+**File:** `supabase/migrations/020_partnership_outreach_system.sql`
 
 **To Apply:**
 1. Open Supabase Dashboard
 2. Go to SQL Editor
-3. Copy contents of `020_partnership_outreach_system.sql`
+3. Copy contents of `supabase/migrations/020_partnership_outreach_system.sql`
 4. Run migration
 5. Verify tables created successfully
 
