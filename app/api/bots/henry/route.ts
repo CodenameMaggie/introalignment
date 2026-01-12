@@ -52,6 +52,52 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }, { status: 400 });
     }
 
+    // Check email blacklist
+    const { data: blacklisted } = await supabase
+      .rpc('check_email_blacklist', { p_email: partner.email })
+      .single();
+
+    if (blacklisted?.is_blacklisted) {
+      console.log(`[Henry] Email ${partner.email} is blacklisted: ${blacklisted.reason}`);
+      return NextResponse.json({
+        success: false,
+        message: 'Email address is blacklisted'
+      }, { status: 400 });
+    }
+
+    // Check for duplicate emails (same campaign within 30 days)
+    const { data: duplicateCheck } = await supabase
+      .rpc('check_duplicate_email', {
+        p_recipient_email: partner.email,
+        p_campaign_type: campaign_type,
+        p_days_threshold: 30
+      })
+      .single();
+
+    if (duplicateCheck?.is_duplicate) {
+      console.log(`[Henry] Duplicate email detected for ${partner.email}. Last sent ${duplicateCheck.days_since_last_sent} days ago`);
+      return NextResponse.json({
+        success: false,
+        message: `Email already sent ${duplicateCheck.days_since_last_sent} days ago. Minimum 30-day gap required.`
+      }, { status: 400 });
+    }
+
+    // Check email frequency (max 3 emails per week)
+    const { data: frequencyCheck } = await supabase
+      .rpc('get_recent_email_count', {
+        p_recipient_email: partner.email,
+        p_days: 7
+      })
+      .single();
+
+    if (frequencyCheck && frequencyCheck.email_count >= 3) {
+      console.log(`[Henry] Email frequency limit reached for ${partner.email}: ${frequencyCheck.email_count} emails in last 7 days`);
+      return NextResponse.json({
+        success: false,
+        message: 'Email frequency limit reached (max 3 per week)'
+      }, { status: 429 });
+    }
+
     // Query Atlas for email strategy research
     console.log(`[Henry] Crafting ${campaign_type} email for ${partner.first_name} ${partner.last_name}, querying Atlas...`);
 
@@ -73,6 +119,25 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const responseTime = Date.now() - startTime;
 
+    // Log to outreach email tracking (deduplication)
+    await supabase
+      .from('outreach_email_log')
+      .insert({
+        recipient_email: partner.email,
+        recipient_type: 'partner',
+        recipient_id: partner_id,
+        campaign_type,
+        sender_email: 'hello@introalignment.com',
+        status: 'sent',
+        sent_at: new Date().toISOString(),
+        provider: 'forbes-command-center',
+        metadata: {
+          partner_name: `${partner.first_name} ${partner.last_name}`,
+          specializations: partner.specializations,
+          used_atlas_research: !!emailStrategy
+        }
+      });
+
     // Log action
     await supabase
       .from('bot_actions_log')
@@ -81,6 +146,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         action_type: 'legal_professional_email',
         action_details: {
           partner_id,
+          partner_email: partner.email,
           campaign_type,
           attorney_name: `${partner.first_name} ${partner.last_name}`,
           specializations: partner.specializations,
@@ -90,6 +156,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         },
         status: 'completed'
       });
+
+    // Update partner last contact date
+    await supabase
+      .from('partners')
+      .update({
+        last_contact_date: new Date().toISOString().split('T')[0], // Just the date part
+        partner_type: partner.partner_type === 'prospect' ? 'contacted' : partner.partner_type
+      })
+      .eq('id', partner_id);
 
     // Update Henry's health
     await supabase
