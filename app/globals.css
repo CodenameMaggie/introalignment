@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -18,10 +18,14 @@
   --charcoal-dark: #1d1d1d;
 
   /* Accent - Gold (prosperity, excellence, legacy) */
-  --gold: #9a7b4f;
-  --gold-light: #b8956f;
-  --gold-dark: #7d6340;
+  --gold: #B8935F;
+  --gold-light: #D4B896;
+  --gold-dark: #9a7b4f;
   --gold-muted: #c5ad88;
+
+  /* MFS Typography Colors */
+  --mfs-primary: #1C2833;
+  --mfs-charcoal: #2c3e50;
 
   /* Neutrals - Sophisticated backgrounds */
   --pearl: #e8e4df;
