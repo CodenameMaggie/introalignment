@@ -141,8 +141,125 @@ IntroAlignment - Elite Legal Network
       // Don't fail the inquiry if email fails
     }
 
+    // Send notification to admin team
+    try {
+      await sendEmail({
+        from: 'henry@introalignment.com',
+        to: 'henry@introalignment.com',
+        subject: `🎯 New Client Inquiry: ${data.full_name} - ${data.estate_size}`,
+        html: `
+          <div style="font-family: 'Courier New', monospace; max-width: 700px; margin: 0 auto; padding: 20px; background: #f5f5f5;">
+            <div style="background: #1a1a1a; color: #D4AF37; padding: 20px; border-radius: 8px 8px 0 0;">
+              <h1 style="margin: 0; font-size: 24px;">🎯 NEW CLIENT INQUIRY</h1>
+              <p style="margin: 5px 0 0 0; opacity: 0.8;">IntroAlignment Lead Alert</p>
+            </div>
+
+            <div style="background: white; padding: 30px; border-radius: 0 0 8px 8px;">
+              <h2 style="color: #1a1a1a; margin-top: 0; border-bottom: 2px solid #D4AF37; padding-bottom: 10px;">Client Details</h2>
+
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                  <td style="padding: 8px 0; color: #666; width: 180px;"><strong>Full Name:</strong></td>
+                  <td style="padding: 8px 0; color: #1a1a1a;">${data.full_name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
+                  <td style="padding: 8px 0;"><a href="mailto:${data.email}" style="color: #D4AF37;">${data.email}</a></td>
+                </tr>
+                ${data.phone ? `
+                <tr>
+                  <td style="padding: 8px 0; color: #666;"><strong>Phone:</strong></td>
+                  <td style="padding: 8px 0; color: #1a1a1a;">${data.phone}</td>
+                </tr>
+                ` : ''}
+                <tr>
+                  <td style="padding: 8px 0; color: #666;"><strong>Estate Size:</strong></td>
+                  <td style="padding: 8px 0; color: #1a1a1a; font-weight: bold;">${data.estate_size}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #666;"><strong>Primary Residence:</strong></td>
+                  <td style="padding: 8px 0; color: #1a1a1a;">${data.primary_residence}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #666;"><strong>Urgency:</strong></td>
+                  <td style="padding: 8px 0; color: #1a1a1a;">${data.urgency || 'next_3_months'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #666;"><strong>Source:</strong></td>
+                  <td style="padding: 8px 0; color: #1a1a1a;">${data.how_found || 'website_signup'}</td>
+                </tr>
+              </table>
+
+              <h3 style="color: #1a1a1a; margin-top: 20px; border-bottom: 2px solid #D4AF37; padding-bottom: 10px;">Legal Needs</h3>
+              <ul style="margin: 10px 0; padding-left: 20px; color: #1a1a1a; line-height: 1.8;">
+                ${data.legal_needs.map((need: string) => `<li>${need}</li>`).join('')}
+              </ul>
+
+              ${data.additional_info ? `
+              <h3 style="color: #1a1a1a; margin-top: 20px; border-bottom: 2px solid #D4AF37; padding-bottom: 10px;">Additional Information</h3>
+              <div style="background: #f9f9f9; padding: 15px; border-radius: 4px; color: #1a1a1a; line-height: 1.6;">
+                ${data.additional_info}
+              </div>
+              ` : ''}
+
+              <div style="margin-top: 30px; padding: 20px; background: #f0f8ff; border-left: 4px solid #4a90e2; border-radius: 4px;">
+                <h3 style="margin-top: 0; color: #4a90e2;">Next Steps</h3>
+                <ol style="margin: 10px 0; padding-left: 20px; color: #333;">
+                  <li>Review client's estate size and legal needs</li>
+                  <li>Match with qualified attorneys in ${data.primary_residence}</li>
+                  <li>Send attorney profiles to client within 1-2 business days</li>
+                  <li>Track consultation bookings and conversions</li>
+                </ol>
+              </div>
+
+              <div style="margin-top: 20px; padding: 15px; background: #fffbf0; border: 1px solid #D4AF37; border-radius: 4px; text-align: center;">
+                <p style="margin: 0; color: #666; font-size: 12px;">
+                  <strong>Client ID:</strong> ${client.id}<br>
+                  <strong>Inquiry Date:</strong> ${new Date().toLocaleString()}<br>
+                  <strong>Status:</strong> New (Pending Match)
+                </p>
+              </div>
+            </div>
+          </div>
+        `,
+        text: `
+🎯 NEW CLIENT INQUIRY - IntroAlignment
+
+CLIENT DETAILS
+===============
+Name: ${data.full_name}
+Email: ${data.email}
+${data.phone ? `Phone: ${data.phone}` : ''}
+Estate Size: ${data.estate_size}
+Primary Residence: ${data.primary_residence}
+Urgency: ${data.urgency || 'next_3_months'}
+Source: ${data.how_found || 'website_signup'}
+
+LEGAL NEEDS
+===========
+${data.legal_needs.map((need: string) => `• ${need}`).join('\n')}
+
+${data.additional_info ? `ADDITIONAL INFORMATION\n======================\n${data.additional_info}\n\n` : ''}
+NEXT STEPS
+==========
+1. Review client's estate size and legal needs
+2. Match with qualified attorneys in ${data.primary_residence}
+3. Send attorney profiles to client within 1-2 business days
+4. Track consultation bookings and conversions
+
+---
+Client ID: ${client.id}
+Inquiry Date: ${new Date().toLocaleString()}
+Status: New (Pending Match)
+        `
+      });
+      console.log(`[Client Inquiry] Admin notification sent to henry@introalignment.com`);
+    } catch (emailError) {
+      console.error('[Client Inquiry] Error sending admin notification:', emailError);
+      // Don't fail the inquiry if email fails
+    }
+
     // TODO: Trigger Dave bot to match with attorneys
-    // TODO: Send notification to admin team
 
     return NextResponse.json({
       success: true,
