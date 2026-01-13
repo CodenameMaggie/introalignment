@@ -17,6 +17,14 @@
       "schedule": "*/10 * * * *"
     },
     {
+      "path": "/api/cron/scrape-attorneys",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/cron/podcast-outreach",
+      "schedule": "*/10 * * * *"
+    },
+    {
       "path": "/api/cron/generate-matches",
       "schedule": "0 */6 * * *"
     }

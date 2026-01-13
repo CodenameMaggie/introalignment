@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminClient } from '@/lib/db/supabase';
+import { PartnerOutreachEngine } from '@/lib/outreach/partner-outreach-engine';
 
 /**
  * CSV Import API for Podcast Guest Prospects
@@ -161,19 +162,35 @@ export async function POST(request: NextRequest) {
         activity_title: 'Prospect Imported via CSV',
         activity_description: `Podcast guest prospect imported: ${partner.full_name}`,
         outcome: 'positive',
-        next_steps: 'Review prospect and send podcast invitation'
+        next_steps: 'Auto-enrolled in podcast outreach sequence'
       }));
 
       await supabase.from('partner_activities').insert(activities);
+
+      // AUTO-ENROLL in podcast outreach sequence (100% automated)
+      const engine = new PartnerOutreachEngine();
+      let enrolledCount = 0;
+
+      for (const partner of insertedPartners) {
+        try {
+          await engine.enrollPartner(partner.id);
+          enrolledCount++;
+        } catch (error) {
+          console.error(`[Import] Failed to enroll ${partner.email}:`, error);
+        }
+      }
+
+      console.log(`[Import] ✅ Auto-enrolled ${enrolledCount}/${insertedPartners.length} prospects in podcast sequence`);
     }
 
     return NextResponse.json({
       success: true,
-      message: `Imported ${insertedPartners?.length} prospects`,
+      message: `Imported ${insertedPartners?.length} prospects and enrolled in outreach sequence`,
       imported: insertedPartners?.length || 0,
       duplicates: duplicateCount,
       total: partners.length,
-      prospects: insertedPartners
+      prospects: insertedPartners,
+      auto_enrolled: insertedPartners?.length || 0
     });
 
   } catch (error: any) {

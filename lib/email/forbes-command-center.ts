@@ -317,7 +317,7 @@ export async function sendPodcastInvitation(params: {
   firstName: string;
   professionalTitle?: string;
   specializations?: string[];
-}): Promise<{success: boolean; error?: string}> {
+}): Promise<{success: boolean; error?: string; messageId?: string}> {
   const html = `
     <!DOCTYPE html>
     <html>
