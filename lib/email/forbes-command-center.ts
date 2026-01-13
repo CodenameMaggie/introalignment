@@ -424,7 +424,7 @@ export async function sendPodcastInvitation(params: {
           </ul>
 
           <p style="text-align: center; margin: 40px 0;">
-            <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1" class="button">Schedule Your Podcast Session</a>
+            <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment" class="button">Schedule Your Podcast Session</a>
           </p>
 
           <p>Sessions are recorded on Wednesdays and typically last 45-60 minutes. We handle all promotion and distribution across our network.</p>
@@ -470,7 +470,7 @@ Typical Topics:
 - Advanced tax optimization techniques
 - Family office legal considerations
 
-Schedule Your Session: https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1
+Schedule Your Session: https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 If you'd prefer to discuss this opportunity first, simply reply to this email.
 

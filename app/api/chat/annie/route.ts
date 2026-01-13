@@ -127,7 +127,7 @@ What would you like to know about?`;
    - Wednesday recordings available
    - Platform to establish thought leadership
    - Discuss dynasty trusts, asset protection, wealth preservation
-   - Book at: https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1
+   - Book at: https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 3. **Client Referrals**
    - High-net-worth families ($10M+ estates)

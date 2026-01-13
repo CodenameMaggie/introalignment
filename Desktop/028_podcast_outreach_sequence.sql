@@ -109,7 +109,7 @@ INSERT INTO sequence_emails (
             <p>Your expertise in estate planning would be invaluable to our audience, and I'd be honored to feature your insights.</p>
 
             <div class="cta">
-                <a href="https://calendly.com/maggieforbesstrategies/podcast-guest-interview" target="_blank">Schedule Your Recording Session</a>
+                <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment" target="_blank">Schedule Your Recording Session</a>
             </div>
 
             <p>Looking forward to connecting with you and sharing your expertise with our community.</p>
@@ -152,7 +152,7 @@ TYPICAL TOPICS:
 Your expertise in estate planning would be invaluable to our audience, and I'd be honored to feature your insights.
 
 SCHEDULE YOUR RECORDING SESSION:
-https://calendly.com/maggieforbesstrategies/podcast-guest-interview
+https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 Looking forward to connecting with you and sharing your expertise with our community.
 
@@ -214,7 +214,7 @@ INSERT INTO sequence_emails (
         <p>Our audience includes high-net-worth individuals, family offices, and fellow legal professionals who value advanced estate planning strategies.</p>
 
         <p>If you're interested, you can schedule a time that works for you here:<br>
-        <a href="https://calendly.com/maggieforbesstrategies/podcast-guest-interview">https://calendly.com/maggieforbesstrategies/podcast-guest-interview</a></p>
+        <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment">https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment</a></p>
 
         <p>If the timing isn't right, no problem at all - feel free to reach out when your schedule opens up.</p>
 
@@ -242,7 +242,7 @@ I understand you're busy managing your practice, so I wanted to make this as eas
 Our audience includes high-net-worth individuals, family offices, and fellow legal professionals who value advanced estate planning strategies.
 
 If you're interested, schedule a time here:
-https://calendly.com/maggieforbesstrategies/podcast-guest-interview
+https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 If the timing isn't right, no problem at all - feel free to reach out when your schedule opens up.
 
@@ -295,7 +295,7 @@ INSERT INTO sequence_emails (
         <p><strong>Quick reminder:</strong> This is an opportunity to share your expertise with high-net-worth clients and establish your authority in estate planning and asset protection.</p>
 
         <p>If you're interested, the door is still open:<br>
-        <a href="https://calendly.com/maggieforbesstrategies/podcast-guest-interview">Schedule Your Session</a></p>
+        <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment">Schedule Your Session</a></p>
 
         <p>If now isn't the right time, I completely understand. Feel free to reach out in the future if you'd like to participate.</p>
 
@@ -319,7 +319,7 @@ I don't want to clutter your inbox, but I did want to give you one more chance t
 QUICK REMINDER: This is an opportunity to share your expertise with high-net-worth clients and establish your authority in estate planning and asset protection.
 
 If you're interested, the door is still open:
-https://calendly.com/maggieforbesstrategies/podcast-guest-interview
+https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 If now isn't the right time, I completely understand. Feel free to reach out in the future if you'd like to participate.
 

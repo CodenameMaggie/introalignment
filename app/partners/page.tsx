@@ -109,7 +109,7 @@ export default function PartnersPage() {
                 </div>
                 <div className="text-center">
                   <a
-                    href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
+                    href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-10 py-4 rounded-lg transition-all shadow-luxury text-lg"
@@ -181,7 +181,7 @@ export default function PartnersPage() {
                 Share your expertise on the sovereigndesign.it.com podcast and establish yourself as a thought leader in wealth preservation. We book legal professionals and attorneys on Wednesdays.
               </p>
               <a
-                href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
+                href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block text-gold hover:text-gold-dark font-ui font-semibold underline text-sm"
@@ -483,7 +483,7 @@ export default function PartnersPage() {
                             <strong>Prefer to schedule now?</strong> Book your Wednesday podcast session:
                           </p>
                           <a
-                            href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
+                            href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-6 py-2 rounded-lg transition-all text-sm"

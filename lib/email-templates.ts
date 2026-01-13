@@ -67,7 +67,7 @@ export function getPartnerOutreachTemplate(vars: TemplateVariables): EmailTempla
         <a href="https://introalignment.com/partners" class="button">Apply as Partner</a>
       </div>
 
-      <p>Or schedule a brief call to discuss: <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1" style="color: #9a7b4f;">Book Wednesday Call</a></p>
+      <p>Or schedule a brief call to discuss: <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment" style="color: #9a7b4f;">Book Wednesday Call</a></p>
 
       <p>Best regards,<br>
       <strong>Maggie Forbes</strong><br>
@@ -109,7 +109,7 @@ Benefits:
 - Collaboration with top-tier attorneys and CPAs
 
 Apply as Partner: https://introalignment.com/partners
-Or schedule a brief call: https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1
+Or schedule a brief call: https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 Best regards,
 Maggie Forbes
@@ -168,7 +168,7 @@ export function getPodcastInvitationTemplate(vars: TemplateVariables): EmailTemp
       <p><strong>We book legal professionals on Wednesdays.</strong></p>
 
       <div class="cta">
-        <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1" class="button">Schedule Wednesday Session</a>
+        <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment" class="button">Schedule Wednesday Session</a>
       </div>
 
       <p>Looking forward to connecting!</p>
@@ -207,7 +207,7 @@ Would you be interested in joining us for a 45-minute conversation? We'll promot
 
 We book legal professionals on Wednesdays.
 
-Schedule your Wednesday session: https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1
+Schedule your Wednesday session: https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment
 
 Looking forward to connecting!
 
