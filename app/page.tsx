@@ -1,349 +1,316 @@
-import Link from 'next/link';
-
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-cream">
-      {/* Navigation */}
-      <nav className="bg-obsidian text-cream py-4 px-6 sticky top-0 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="font-heading text-2xl font-bold text-gold">IntroAlignment</h1>
-          <div className="flex gap-6 font-ui">
-            <a href="#services" className="hover:text-gold transition-colors">Services</a>
-            <a href="#structures" className="hover:text-gold transition-colors">Structures</a>
-            <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Podcast</a>
-            <Link href="/partners" className="hover:text-gold transition-colors">Partner With Us</Link>
-            <Link href="/login" className="hover:text-gold transition-colors">Login</Link>
-          </div>
+    <div style={{ margin: 0, padding: 0, boxSizing: 'border-box' }}>
+      <style jsx global>{`
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1C2833;
+            --gold: #B8935F;
+            --gold-light: #D4B896;
+            --cream: #f8f6f3;
+            --charcoal: #2c3e50;
+            --white: #ffffff;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: var(--primary);
+            background: var(--cream);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--charcoal) 100%);
+            color: var(--cream);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .hero .gold-text {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-decoration: none;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+        }
+
+        /* Content Section */
+        .content {
+            background: var(--cream);
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .content > p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.9;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 4px;
+            border-top: 2px solid var(--gold);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--white);
+            padding: 4rem 2rem;
+        }
+
+        .process-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            min-width: 50px;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer h4 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Nav */
+        .nav {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+      `}</style>
+
+      {/* Font imports */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+      {/* Nav */}
+      <nav className="nav">
+        <a href="#" className="nav-logo">IntroAlignment</a>
+        <div className="nav-links">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="bg-obsidian-gradient text-cream py-32 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Legal Architecture for <span className="text-gold-gradient">Sovereign Living</span>
-          </h1>
-          <p className="font-body text-2xl md:text-3xl mb-8 text-pearl max-w-3xl mx-auto leading-relaxed">
-            Dynasty trusts, asset protection structures, and cross-border planning for families building generational wealth
-          </p>
-          <a
-            href="#contact"
-            className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-10 py-4 rounded-lg transition-all shadow-luxury text-lg"
-          >
-            Add Your Name for Inquiries
-          </a>
-        </div>
+      {/* Hero */}
+      <section className="hero">
+        <h1>Legal Architecture for <span className="gold-text">Sovereign Living</span></h1>
+        <p>Dynasty trusts, asset protection structures, and cross-border planning for families building generational wealth</p>
+        <a href="#contact" className="btn-gold">Schedule Consultation</a>
       </section>
 
-      {/* Problem Section */}
-      <section className="py-20 px-6 bg-ivory">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-obsidian">
-            The Challenge
-          </h2>
-          <p className="font-body text-xl md:text-2xl text-charcoal leading-relaxed mb-8">
-            High-net-worth families face a labyrinth of tax codes, estate laws, and asset protection requirements
-            that span multiple jurisdictions. A single misstep can cost millions in unnecessary taxes or expose
-            assets to litigation.
-          </p>
-          <p className="font-body text-xl md:text-2xl text-charcoal leading-relaxed">
-            You need sophisticated legal structures that preserve wealth across generations—not just a will or
-            basic trust, but a comprehensive tax-optimized architecture.
-          </p>
-        </div>
-      </section>
+      {/* Services */}
+      <section className="content" id="services">
+        <h2>Our Services</h2>
+        <p>High-net-worth families face a labyrinth of tax codes, estate laws, and asset protection requirements spanning multiple jurisdictions. We design sophisticated legal structures that preserve wealth across generations.</p>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 px-6 bg-cream">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-12 text-center text-obsidian">
-            Our Services
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Dynasty Trusts',
-                description: 'Multi-generational wealth preservation structures designed to last centuries, not decades.'
-              },
-              {
-                title: 'Asset Protection',
-                description: 'Fortress-level shielding against creditors, litigation, and unforeseen liabilities.'
-              },
-              {
-                title: 'Entity Structures',
-                description: 'C-corps, LLCs, and hybrid structures optimized for tax efficiency and operational flexibility.'
-              },
-              {
-                title: 'Cross-Border Planning',
-                description: 'International trust structures, offshore entities, and tax treaty optimization.'
-              },
-              {
-                title: 'Succession Planning',
-                description: 'Seamless wealth transfer strategies that minimize estate taxes and family conflict.'
-              },
-              {
-                title: 'Legal Compliance',
-                description: 'Continuous monitoring of IRS regulations, SEC filings, and state-specific requirements.'
-              }
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="bg-white p-8 rounded-lg shadow-luxury border-t-4 border-gold hover:shadow-xl transition-shadow"
-              >
-                <h3 className="font-heading text-2xl font-bold mb-4 text-obsidian">
-                  {service.title}
-                </h3>
-                <p className="font-body text-lg text-charcoal leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            ))}
+        <div className="cards">
+          <div className="card">
+            <h3>Dynasty Trusts</h3>
+            <p>Multi-generational wealth preservation structures designed to last centuries, not decades.</p>
+          </div>
+          <div className="card">
+            <h3>Asset Protection</h3>
+            <p>Fortress-level shielding against creditors, litigation, and unforeseen liabilities.</p>
+          </div>
+          <div className="card">
+            <h3>Cross-Border Planning</h3>
+            <p>International trust structures, offshore entities, and tax treaty optimization.</p>
           </div>
         </div>
       </section>
 
-      {/* Structures Section */}
-      <section id="structures" className="py-20 px-6 bg-charcoal text-cream">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-12 text-center">
-            Legal Structures We Create
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                category: 'Trusts',
-                items: [
-                  'Irrevocable Life Insurance Trusts (ILITs)',
-                  'Grantor Retained Annuity Trusts (GRATs)',
-                  'Charitable Remainder Trusts (CRTs)',
-                  'Qualified Personal Residence Trusts (QPRTs)',
-                  'Special Needs Trusts',
-                  'Spendthrift Trusts'
-                ]
-              },
-              {
-                category: 'Entities',
-                items: [
-                  'Family Limited Partnerships (FLPs)',
-                  'C-Corporations with optimal tax structures',
-                  'Delaware Statutory Trusts (DSTs)',
-                  'Private Trust Companies (PTCs)',
-                  'Offshore LLCs and IBCs',
-                  'Series LLCs for asset segmentation'
-                ]
-              }
-            ].map((structure, index) => (
-              <div key={index} className="bg-obsidian-light p-8 rounded-lg">
-                <h3 className="font-heading text-3xl font-bold mb-6 text-gold">
-                  {structure.category}
-                </h3>
-                <ul className="space-y-3">
-                  {structure.items.map((item, i) => (
-                    <li key={i} className="font-body text-lg flex items-start">
-                      <span className="text-gold mr-3 text-xl">→</span>
-                      <span className="text-pearl">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Process */}
+      <section className="process" id="process">
+        <div className="process-inner">
+          <h2>Our Process</h2>
 
-      {/* Process Section */}
-      <section id="process" className="py-20 px-6 bg-ivory">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-12 text-center text-obsidian">
-            Our Process
-          </h2>
-          <div className="space-y-8">
-            {[
-              {
-                step: '01',
-                title: 'Comprehensive Analysis',
-                description: 'We map your entire financial landscape—assets, liabilities, tax exposure, succession goals, and jurisdictional considerations.'
-              },
-              {
-                step: '02',
-                title: 'Custom Architecture Design',
-                description: 'Every structure is bespoke. We design trust and entity frameworks tailored to your family\'s unique needs and long-term vision.'
-              },
-              {
-                step: '03',
-                title: 'Implementation & Documentation',
-                description: 'Precision execution with meticulous documentation. All filings, transfers, and legal instruments handled with institutional rigor.'
-              },
-              {
-                step: '04',
-                title: 'Ongoing Stewardship',
-                description: 'Tax laws evolve. We provide continuous monitoring, annual reviews, and proactive adjustments to keep your structures optimized.'
-              }
-            ].map((step, index) => (
-              <div key={index} className="flex gap-6 items-start bg-white p-8 rounded-lg shadow-luxury">
-                <div className="font-heading text-5xl font-bold text-gold flex-shrink-0">
-                  {step.step}
-                </div>
-                <div>
-                  <h3 className="font-heading text-2xl font-bold mb-3 text-obsidian">
-                    {step.title}
-                  </h3>
-                  <p className="font-body text-lg text-charcoal leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+          <div className="step">
+            <div className="step-number">01</div>
+            <div className="step-content">
+              <h3>Comprehensive Analysis</h3>
+              <p>We map your entire financial landscape—assets, liabilities, tax exposure, succession goals, and jurisdictional considerations.</p>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Philosophy Section */}
-      <section id="philosophy" className="py-20 px-6 bg-cream">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-8 text-obsidian">
-            Our Philosophy
-          </h2>
-          <p className="font-body text-xl md:text-2xl text-charcoal leading-relaxed mb-6">
-            Wealth preservation is not about avoiding taxes—it&apos;s about intelligent design. We believe in
-            leveraging every legal mechanism available to protect what you&apos;ve built and ensure it serves
-            your family for generations.
-          </p>
-          <p className="font-body text-xl md:text-2xl text-charcoal leading-relaxed mb-6">
-            Our approach is rooted in deep knowledge of IRS regulations, SEC requirements, state business laws,
-            and international tax treaties. We don&apos;t take shortcuts. We build fortresses.
-          </p>
-          <div className="inline-block bg-gold-muted/20 border-l-4 border-gold px-8 py-6 mt-8">
-            <p className="font-body text-xl italic text-obsidian">
-              &ldquo;A legacy isn&apos;t what you leave for your heirs—it&apos;s what you leave in them.
-              The right legal structures ensure both are protected.&rdquo;
-            </p>
+          <div className="step">
+            <div className="step-number">02</div>
+            <div className="step-content">
+              <h3>Custom Architecture Design</h3>
+              <p>Every structure is bespoke. We design trust and entity frameworks tailored to your family&apos;s unique needs and long-term vision.</p>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Podcast Section */}
-      <section className="py-20 px-6 bg-sage text-cream">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6">
-            sovereigndesign.it.com Podcast
-          </h2>
-          <p className="font-body text-xl md:text-2xl mb-8 text-pearl leading-relaxed">
-            Join us for in-depth conversations on dynasty trusts, asset protection, and legal structures for generational wealth. We feature top attorneys, CPAs, and wealth strategists sharing their expertise. Recording sessions available on Wednesdays.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-10 py-4 rounded-lg transition-all shadow-luxury text-lg"
-            >
-              Schedule Podcast Discussion
-            </a>
-            <Link
-              href="/partners"
-              className="inline-block bg-transparent border-2 border-cream hover:bg-cream/10 text-cream font-ui font-semibold px-10 py-4 rounded-lg transition-all text-lg"
-            >
-              Apply as Guest
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section id="contact" className="py-20 px-6 bg-obsidian-gradient text-cream">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6">
-            Interested in Legal Architecture Services?
-          </h2>
-          <p className="font-body text-xl md:text-2xl mb-10 text-pearl leading-relaxed">
-            We&apos;re building our network of legal professionals. Add your name to receive updates when consultation services become available.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/signup"
-              className="inline-block bg-gold hover:bg-gold-light text-obsidian font-ui font-semibold px-10 py-4 rounded-lg transition-all shadow-luxury text-lg"
-            >
-              Add Your Name for Inquiries
-            </Link>
-            <a
-              href="#services"
-              className="inline-block bg-transparent border-2 border-gold hover:bg-gold/10 text-gold font-ui font-semibold px-10 py-4 rounded-lg transition-all text-lg"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Legal Disclaimer */}
-      <section className="bg-ivory py-12 px-6 border-t-4 border-gold">
-        <div className="max-w-5xl mx-auto">
-          <h3 className="font-heading text-2xl font-bold text-obsidian mb-6 text-center">Legal Disclaimer</h3>
-          <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-sage">
-            <div className="space-y-4 font-body text-sm text-charcoal leading-relaxed">
-              <p>
-                <strong>Not Legal Advice:</strong> The information provided on this website is for general informational and educational purposes only and does not constitute legal, tax, financial, or professional advice. IntroAlignment is a professional network platform connecting attorneys with clients and does not practice law or provide legal services directly.
-              </p>
-              <p>
-                <strong>No Attorney-Client Relationship:</strong> Use of this website does not create an attorney-client relationship between you and IntroAlignment or any attorney in our network. An attorney-client relationship is formed only through a separate written engagement agreement with a specific attorney.
-              </p>
-              <p>
-                <strong>State-Specific Requirements:</strong> Legal requirements vary significantly by jurisdiction. Estate planning, asset protection, and tax strategies must be tailored to your specific state laws, federal regulations, and individual circumstances. Always consult with a licensed attorney in your state before making legal decisions.
-              </p>
-              <p>
-                <strong>No Guarantees:</strong> Past performance and case examples do not guarantee future results. Legal outcomes depend on numerous factors including changes in law, court interpretations, and specific facts of each case. We make no warranties or guarantees regarding legal strategies or outcomes.
-              </p>
-              <p>
-                <strong>Professional Network Only:</strong> IntroAlignment operates as a professional networking platform. All legal services are provided independently by licensed attorneys in our network who maintain their own professional liability insurance and bar memberships. We do not supervise, direct, or control the legal services provided by network attorneys.
-              </p>
-              <p>
-                <strong>Consult Qualified Professionals:</strong> Before implementing any estate planning, asset protection, or tax strategy, you should consult with qualified legal, tax, and financial professionals licensed in your jurisdiction who can evaluate your specific circumstances.
-              </p>
-              <p className="pt-4 border-t border-sage/30 text-xs text-medium-gray">
-                <strong>Compliance Note:</strong> IntroAlignment operates in accordance with state bar rules regarding lawyer advertising and referral services. All attorneys in our network maintain active bar licenses and professional liability insurance.
-              </p>
+          <div className="step">
+            <div className="step-number">03</div>
+            <div className="step-content">
+              <h3>Implementation & Stewardship</h3>
+              <p>Precision execution with meticulous documentation, plus continuous monitoring and proactive adjustments as laws evolve.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-charcoal text-pearl py-12 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="font-heading text-2xl font-bold text-gold mb-4">IntroAlignment</h3>
-            <p className="font-body text-sm leading-relaxed">
-              Professional legal network connecting estate planning attorneys with high-net-worth clients. Dynasty trusts, asset protection, and generational wealth strategies.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-ui font-semibold text-gold mb-4">Network Services</h4>
-            <ul className="font-body text-sm space-y-2">
-              <li><a href="#services" className="hover:text-gold transition-colors">Attorney Matching</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">Professional Referrals</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">Legal Network Access</a></li>
-              <li><a href="#services" className="hover:text-gold transition-colors">Podcast Platform</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-ui font-semibold text-gold mb-4">Resources</h4>
-            <ul className="font-body text-sm space-y-2">
-              <li><a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-call-1" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">sovereigndesign.it.com Podcast</a></li>
-              <li><Link href="/partners" className="hover:text-gold transition-colors">Partner With Us</Link></li>
-              <li><Link href="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-gold transition-colors">Terms of Service</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-8 pt-8 border-t border-charcoal-light text-center">
-          <p className="font-ui text-sm text-medium-gray">
-            © {new Date().getFullYear()} IntroAlignment. All rights reserved. IntroAlignment is a professional networking platform and does not provide legal services.
-          </p>
-          <p className="font-ui text-xs text-medium-gray mt-2">
-            This website does not constitute legal advice. Consult a licensed attorney for legal guidance.
-          </p>
-        </div>
+      <footer className="footer" id="contact">
+        <h4>IntroAlignment</h4>
+        <p>Professional legal network for estate planning</p>
       </footer>
     </div>
   );
