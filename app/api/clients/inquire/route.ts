@@ -144,8 +144,8 @@ IntroAlignment - Elite Legal Network
     // Send notification to admin team
     try {
       await sendEmail({
-        from: 'henry@introalignment.com',
-        to: 'henry@introalignment.com',
+        from: 'henry@introconnected.com',
+        to: 'henry@introconnected.com',
         subject: `🎯 New Client Inquiry: ${data.full_name} - ${data.estate_size}`,
         html: `
           <div style="font-family: 'Courier New', monospace; max-width: 700px; margin: 0 auto; padding: 20px; background: #f5f5f5;">
@@ -253,7 +253,7 @@ Inquiry Date: ${new Date().toLocaleString()}
 Status: New (Pending Match)
         `
       });
-      console.log(`[Client Inquiry] Admin notification sent to henry@introalignment.com`);
+      console.log(`[Client Inquiry] Admin notification sent to henry@introconnected.com`);
     } catch (emailError) {
       console.error('[Client Inquiry] Error sending admin notification:', emailError);
       // Don't fail the inquiry if email fails

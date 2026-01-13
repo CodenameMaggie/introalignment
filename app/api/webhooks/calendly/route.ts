@@ -71,8 +71,8 @@ async function handleBookingCreated(eventData: any) {
 
     // Send email notification to admin
     await sendEmail({
-      from: 'henry@introalignment.com',
-      to: 'henry@introalignment.com',
+      from: 'henry@introconnected.com',
+      to: 'henry@introconnected.com',
       subject: `📅 New Calendly Booking: ${inviteeName} - ${eventName}`,
       html: `
         <div style="font-family: 'Courier New', monospace; max-width: 700px; margin: 0 auto; padding: 20px; background: #f5f5f5;">
@@ -189,7 +189,7 @@ Invitee URI: ${invitee?.uri || 'N/A'}
       `
     });
 
-    console.log('[Calendly Webhook] Booking notification sent to henry@introalignment.com');
+    console.log('[Calendly Webhook] Booking notification sent to henry@introconnected.com');
 
   } catch (error) {
     console.error('[Calendly Webhook] Error handling booking created:', error);
@@ -211,8 +211,8 @@ async function handleBookingCanceled(eventData: any) {
 
     // Send cancellation notification
     await sendEmail({
-      from: 'henry@introalignment.com',
-      to: 'henry@introalignment.com',
+      from: 'henry@introconnected.com',
+      to: 'henry@introconnected.com',
       subject: `❌ Calendly Booking Canceled: ${inviteeName} - ${eventName}`,
       html: `
         <div style="font-family: 'Courier New', monospace; max-width: 700px; margin: 0 auto; padding: 20px; background: #f5f5f5;">
@@ -270,7 +270,7 @@ Consider reaching out to reschedule or understand their concerns.
       `
     });
 
-    console.log('[Calendly Webhook] Cancellation notification sent to henry@introalignment.com');
+    console.log('[Calendly Webhook] Cancellation notification sent to henry@introconnected.com');
 
   } catch (error) {
     console.error('[Calendly Webhook] Error handling booking canceled:', error);

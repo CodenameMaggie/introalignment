@@ -88,8 +88,8 @@ export async function POST(request: NextRequest) {
     // Send notification to admin team
     try {
       await sendEmail({
-        from: 'henry@introalignment.com',
-        to: 'henry@introalignment.com',
+        from: 'henry@introconnected.com',
+        to: 'henry@introconnected.com',
         subject: `⚖️ New Partner Application: ${data.full_name} - ${data.professional_title}`,
         html: `
           <div style="font-family: 'Courier New', monospace; max-width: 700px; margin: 0 auto; padding: 20px; background: #f5f5f5;">
@@ -250,7 +250,7 @@ Application Date: ${new Date().toLocaleString()}
 Status: Pending Review
         `
       });
-      console.log(`[Partner Application] Admin notification sent to henry@introalignment.com`);
+      console.log(`[Partner Application] Admin notification sent to henry@introconnected.com`);
     } catch (emailError) {
       console.error('[Partner Application] Error sending admin notification:', emailError);
       // Don't fail the application if email fails
