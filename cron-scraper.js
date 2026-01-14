@@ -60,9 +60,18 @@ async function main() {
           .single();
 
         if (!existing) {
-          await supabase.from('partners').insert([attorney]);
-          console.log(`  ✅ ${attorney.full_name} (${attorney.email})`);
-          created++;
+          const { data, error: insertError } = await supabase
+            .from('partners')
+            .insert([attorney])
+            .select();
+
+          if (insertError) {
+            console.error(`  ❌ Failed to insert ${attorney.full_name}:`, insertError.message);
+            errors.push(insertError.message);
+          } else {
+            console.log(`  ✅ ${attorney.full_name} (${attorney.email})`);
+            created++;
+          }
         } else {
           console.log(`  ⏭️  ${attorney.full_name} (already exists)`);
         }
@@ -164,7 +173,6 @@ function parseACTECHTML(html, state) {
         status: 'pending',
         podcast_status: 'not_contacted',
         partner_type: 'prospect',
-        actec_fellow: true,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       });
@@ -199,7 +207,6 @@ function getFallbackAttorneys() {
       status: 'pending',
       podcast_status: 'not_contacted',
       partner_type: 'prospect',
-      actec_fellow: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     },
