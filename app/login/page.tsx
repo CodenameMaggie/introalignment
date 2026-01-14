@@ -31,9 +31,9 @@ export default function LoginPage() {
         return;
       }
 
-      // Store session and redirect to dashboard
+      // Store session and redirect to admin partners page
       localStorage.setItem('session', JSON.stringify(data.session));
-      router.push('/dashboard');
+      router.push('/admin-partners');
     } catch (err) {
       setError('Something went wrong. Please try again.');
       setLoading(false);
