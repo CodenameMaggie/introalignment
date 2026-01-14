@@ -31,13 +31,23 @@ export default function HomePage() {
             textDecoration: 'none',
             opacity: 0.8
           }}>Process</a>
-          <a href="#contact" style={{
+          <a href="/partners" style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: '0.85rem',
             color: '#f8f6f3',
             textDecoration: 'none',
             opacity: 0.8
-          }}>Contact</a>
+          }}>For Attorneys</a>
+          <a href="/signup" style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.85rem',
+            color: '#f8f6f3',
+            textDecoration: 'none',
+            background: '#B8935F',
+            padding: '0.5rem 1rem',
+            borderRadius: '3px',
+            opacity: 1
+          }}>Get Started</a>
         </div>
       </nav>
 
@@ -71,7 +81,7 @@ export default function HomePage() {
         }}>
           Dynasty trusts, asset protection structures, and cross-border planning for families building generational wealth
         </p>
-        <a href="#contact" style={{
+        <a href="/signup" style={{
           display: 'inline-block',
           background: '#B8935F',
           color: '#1C2833',
@@ -302,8 +312,37 @@ export default function HomePage() {
         <p style={{
           fontFamily: 'Inter, sans-serif',
           fontSize: '0.9rem',
-          opacity: 0.7
+          opacity: 0.7,
+          marginBottom: '1.5rem'
         }}>Professional legal network for estate planning</p>
+        <div style={{
+          display: 'flex',
+          gap: '2rem',
+          justifyContent: 'center',
+          marginBottom: '1rem'
+        }}>
+          <a href="/signup" style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.85rem',
+            color: '#f8f6f3',
+            textDecoration: 'none',
+            opacity: 0.8
+          }}>Get Started</a>
+          <a href="/partners" style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.85rem',
+            color: '#f8f6f3',
+            textDecoration: 'none',
+            opacity: 0.8
+          }}>For Attorneys</a>
+          <a href="/login" style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.75rem',
+            color: '#f8f6f3',
+            textDecoration: 'none',
+            opacity: 0.5
+          }}>Admin</a>
+        </div>
       </footer>
     </>
   );
