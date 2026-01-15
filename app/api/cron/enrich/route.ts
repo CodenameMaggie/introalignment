@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LeadEnricher } from '@/lib/enrichment/lead-enricher';
 
+// Force dynamic rendering - prevent build-time execution
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
 /**
  * Cron job to enrich leads with email addresses using business logic
  * Runs regularly to enrich qualified leads (fit_score >= 40)

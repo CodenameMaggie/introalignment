@@ -6,6 +6,10 @@ import { SECEdgarScraper } from '@/lib/scrapers/sec-edgar-scraper';
 import { StateBusinessScraper } from '@/lib/scrapers/state-business-scraper';
 import { LegalKnowledgeScraper } from '@/lib/scrapers/legal-knowledge-scraper';
 
+// Force dynamic rendering - NEVER run scrapers during build
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 function getSupabase() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

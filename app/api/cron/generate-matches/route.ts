@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateMatchesBatch } from '@/lib/matching/match-generator';
 import { generateReportsBatch } from '@/lib/matching/report-generator';
 
+// Force dynamic rendering - prevent build-time execution
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
 /**
  * POST /api/cron/generate-matches
  *

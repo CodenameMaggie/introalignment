@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { DocumentationScraper } from '@/lib/scrapers/documentation-scraper';
 
+// Force dynamic rendering - prevent build-time execution
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
 export async function GET(request: NextRequest) {
   try {
     const scraper = new DocumentationScraper();

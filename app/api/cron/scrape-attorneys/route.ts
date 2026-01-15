@@ -5,6 +5,11 @@ import { WealthCounselScraper } from '@/lib/scrapers/wealthcounsel-scraper';
 import { GoogleSearchScraper } from '@/lib/scrapers/google-search-scraper';
 import { StateBarScraper } from '@/lib/scrapers/state-bar-scraper';
 
+// Force dynamic rendering - prevent build-time execution
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
 function getSupabase() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
