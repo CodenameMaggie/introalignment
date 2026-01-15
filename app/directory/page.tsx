@@ -81,7 +81,7 @@ export default function DirectoryPage() {
         <p style={{ fontSize: '20px', opacity: 0.9, maxWidth: '700px', margin: '0 auto' }}>
           Find verified estate planning attorneys specializing in dynasty trusts, asset protection, and wealth preservation
         </p>
-        <p style={{ fontSize: '14px', marginTop: '20px', opacity: 0.8' }}>
+        <p style={{ fontSize: '14px', marginTop: '20px', opacity: 0.8 }}>
           ✓ All attorneys verified by Jordan & Atlas AI systems
         </p>
       </div>
