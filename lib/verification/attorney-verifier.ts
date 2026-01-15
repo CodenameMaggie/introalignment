@@ -11,6 +11,15 @@ import { createClient } from '@supabase/supabase-js';
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
+interface Attorney {
+  id: string;
+  full_name: string;
+  email: string;
+  firm: string;
+  state: string;
+  [key: string]: any;
+}
+
 export interface AttorneyVerificationResult {
   verified: boolean;
   confidence_score: number;  // 0-100
@@ -51,7 +60,7 @@ export class AttorneyVerifier {
       .from('partners')
       .select('*')
       .eq('id', attorneyId)
-      .single();
+      .single() as { data: Attorney | null; error: any };
 
     if (error || !attorney) {
       return {
