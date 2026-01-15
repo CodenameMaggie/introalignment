@@ -1,355 +1,340 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-
-interface Plan {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  price_monthly: number;
-  price_yearly: number;
-  introductions_per_month: number;
-  can_message: boolean;
-  can_see_compatibility_score: boolean;
-  can_see_detailed_report: boolean;
-  priority_matching: boolean;
-  human_review: boolean;
-  concierge_service: boolean;
-  is_featured: boolean;
-  badge_text: string | null;
-}
+import { useState } from 'react';
+import Link from 'next/link';
 
 export default function PricingPage() {
-  const [plans, setPlans] = useState<Plan[]>([]);
-  const [interval, setInterval] = useState<'month' | 'year'>('month');
-  const [loading, setLoading] = useState<string | null>(null);
-  const router = useRouter();
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
 
-  useEffect(() => {
-    fetchPlans();
-  }, []);
+  const features = {
+    free: [
+      'Basic profile in attorney directory',
+      'Podcast invitation opportunities',
+      'Weekly newsletter with legal insights',
+      'Community forum access (read-only)',
+      'Jordan + Atlas data verification',
+      'IntroAlignment network membership'
+    ],
+    premium: [
+      'Everything in Free, plus:',
+      'Featured placement in directory',
+      'Priority podcast booking',
+      'Direct client inquiry routing',
+      'Enhanced profile with video & portfolio',
+      'Analytics dashboard (views, inquiries)',
+      'Full community forum participation',
+      'Monthly performance reports',
+      'Custom URL for your profile',
+      'Remove "Free Member" badge',
+      'Early access to new features'
+    ]
+  };
 
-  async function fetchPlans() {
-    const res = await fetch('/api/billing/plans');
-    const data = await res.json();
-    setPlans(data.plans);
-  }
-
-  async function handleSubscribe(planSlug: string) {
-    if (planSlug === 'free') {
-      router.push('/signup');
-      return;
-    }
-
-    setLoading(planSlug);
-
-    try {
-      const res = await fetch('/api/billing/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planSlug, interval })
-      });
-
-      const data = await res.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert(data.error || 'Something went wrong');
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-    } finally {
-      setLoading(null);
-    }
-  }
+  const pricing = {
+    monthly: 197,
+    annual: 1970 // ~$164/month, 2 months free
+  };
 
   return (
-    <div className="min-h-screen bg-cream py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif font-bold text-navy mb-4">
-            Find Your Aligned Partner
-          </h1>
-          <p className="text-xl text-navy-light max-w-2xl mx-auto">
-            Choose the plan that fits your journey. All plans include our
-            comprehensive personality profiling and matching algorithm.
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+      {/* Header */}
+      <div style={{ padding: '40px 20px', textAlign: 'center', color: 'white' }}>
+        <h1 style={{ fontSize: '48px', fontWeight: 'bold', margin: '0 0 20px 0' }}>
+          Choose Your Plan
+        </h1>
+        <p style={{ fontSize: '20px', opacity: 0.9, maxWidth: '600px', margin: '0 auto' }}>
+          Start free and upgrade when you're ready to maximize your reach
+        </p>
+      </div>
+
+      {/* Billing Toggle */}
+      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{
+          display: 'inline-flex',
+          background: 'rgba(255,255,255,0.2)',
+          borderRadius: '50px',
+          padding: '4px'
+        }}>
+          <button
+            onClick={() => setBillingPeriod('monthly')}
+            style={{
+              padding: '12px 30px',
+              border: 'none',
+              borderRadius: '50px',
+              background: billingPeriod === 'monthly' ? 'white' : 'transparent',
+              color: billingPeriod === 'monthly' ? '#667eea' : 'white',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              transition: 'all 0.3s'
+            }}
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => setBillingPeriod('annual')}
+            style={{
+              padding: '12px 30px',
+              border: 'none',
+              borderRadius: '50px',
+              background: billingPeriod === 'annual' ? 'white' : 'transparent',
+              color: billingPeriod === 'annual' ? '#667eea' : 'white',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              position: 'relative'
+            }}
+          >
+            Annual
+            <span style={{
+              position: 'absolute',
+              top: '-8px',
+              right: '-8px',
+              background: '#10b981',
+              color: 'white',
+              fontSize: '10px',
+              padding: '2px 6px',
+              borderRadius: '10px',
+              fontWeight: 'bold'
+            }}>
+              SAVE 17%
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Pricing Cards */}
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 20px 80px 20px',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+        gap: '40px'
+      }}>
+        {/* Free Plan */}
+        <div style={{
+          background: 'white',
+          borderRadius: '20px',
+          padding: '40px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+          position: 'relative'
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '0 0 10px 0' }}>
+              Free
+            </h2>
+            <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#667eea', margin: '20px 0' }}>
+              $0
+              <span style={{ fontSize: '20px', color: '#999', fontWeight: 'normal' }}>/forever</span>
+            </div>
+            <p style={{ color: '#666', fontSize: '16px' }}>
+              Perfect for getting started
+            </p>
+          </div>
+
+          <Link
+            href="/signup"
+            style={{
+              display: 'block',
+              width: '100%',
+              padding: '16px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              textAlign: 'center',
+              borderRadius: '50px',
+              fontWeight: 'bold',
+              fontSize: '18px',
+              textDecoration: 'none',
+              marginBottom: '30px',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            Get Started Free
+          </Link>
+
+          <div style={{ borderTop: '2px solid #f0f0f0', paddingTop: '30px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>
+              What's included:
+            </h3>
+            {features.free.map((feature, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '12px' }}>
+                <span style={{ color: '#10b981', marginRight: '12px', fontSize: '20px' }}>✓</span>
+                <span style={{ color: '#666', fontSize: '16px' }}>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Premium Plan */}
+        <div style={{
+          background: 'white',
+          borderRadius: '20px',
+          padding: '40px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+          position: 'relative',
+          border: '3px solid #d4a574'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: '-15px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'linear-gradient(135deg, #d4a574 0%, #c9963d 100%)',
+            color: 'white',
+            padding: '8px 30px',
+            borderRadius: '20px',
+            fontWeight: 'bold',
+            fontSize: '14px',
+            boxShadow: '0 4px 12px rgba(212, 165, 116, 0.4)'
+          }}>
+            MOST POPULAR
+          </div>
+
+          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '0 0 10px 0' }}>
+              Premium
+            </h2>
+            <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#667eea', margin: '20px 0' }}>
+              ${billingPeriod === 'monthly' ? pricing.monthly : Math.round(pricing.annual / 12)}
+              <span style={{ fontSize: '20px', color: '#999', fontWeight: 'normal' }}>
+                /{billingPeriod === 'monthly' ? 'month' : 'month'}
+              </span>
+            </div>
+            {billingPeriod === 'annual' && (
+              <p style={{ color: '#10b981', fontSize: '14px', fontWeight: 'bold' }}>
+                ${pricing.annual}/year (save ${(pricing.monthly * 12) - pricing.annual}/year)
+              </p>
+            )}
+            <p style={{ color: '#666', fontSize: '16px' }}>
+              For attorneys ready to grow their practice
+            </p>
+          </div>
+
+          <Link
+            href="/upgrade"
+            style={{
+              display: 'block',
+              width: '100%',
+              padding: '16px',
+              background: 'linear-gradient(135deg, #d4a574 0%, #c9963d 100%)',
+              color: 'white',
+              textAlign: 'center',
+              borderRadius: '50px',
+              fontWeight: 'bold',
+              fontSize: '18px',
+              textDecoration: 'none',
+              marginBottom: '30px',
+              transition: 'transform 0.2s',
+              boxShadow: '0 4px 12px rgba(212, 165, 116, 0.3)'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            Upgrade to Premium
+          </Link>
+
+          <div style={{ borderTop: '2px solid #f0f0f0', paddingTop: '30px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#333', marginBottom: '20px' }}>
+              Everything in Free, plus:
+            </h3>
+            {features.premium.map((feature, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '12px' }}>
+                <span style={{ color: '#d4a574', marginRight: '12px', fontSize: '20px', fontWeight: 'bold' }}>✓</span>
+                <span style={{
+                  color: i === 0 ? '#333' : '#666',
+                  fontSize: '16px',
+                  fontWeight: i === 0 ? 'bold' : 'normal'
+                }}>
+                  {feature}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div style={{
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '60px 20px',
+        color: 'white'
+      }}>
+        <h2 style={{ fontSize: '36px', fontWeight: 'bold', textAlign: 'center', marginBottom: '40px' }}>
+          Frequently Asked Questions
+        </h2>
+
+        <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: '15px', padding: '30px', marginBottom: '20px' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
+            Can I try Premium before committing?
+          </h3>
+          <p style={{ opacity: 0.9, lineHeight: '1.6' }}>
+            Yes! Start with the free plan to experience IntroAlignment. When you're ready, upgrade to Premium and cancel anytime - no long-term contracts.
           </p>
         </div>
 
-        {/* Interval Toggle */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white rounded-full p-1 shadow-sm">
-            <button
-              onClick={() => setInterval('month')}
-              className={`px-6 py-2 rounded-full transition-all ${
-                interval === 'month'
-                  ? 'bg-navy text-cream'
-                  : 'text-navy hover:bg-cream-dark'
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setInterval('year')}
-              className={`px-6 py-2 rounded-full transition-all ${
-                interval === 'year'
-                  ? 'bg-navy text-cream'
-                  : 'text-navy hover:bg-cream-dark'
-              }`}
-            >
-              Yearly
-              <span className="ml-2 text-xs bg-gold text-navy-dark px-2 py-0.5 rounded-full font-medium">
-                Save 20%
-              </span>
-            </button>
-          </div>
+        <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: '15px', padding: '30px', marginBottom: '20px' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
+            How do client inquiries work?
+          </h3>
+          <p style={{ opacity: 0.9, lineHeight: '1.6' }}>
+            Premium members receive direct email notifications when high-net-worth clients search for attorneys in their specialization. Free members are listed in search results but inquiries go to premium members first.
+          </p>
         </div>
 
-        {/* Plans Grid */}
-        <div className="grid md:grid-cols-4 gap-6">
-          {plans.map(plan => (
-            <div
-              key={plan.id}
-              className={`bg-white rounded-2xl p-6 relative ${
-                plan.is_featured
-                  ? 'ring-2 ring-gold shadow-xl scale-105'
-                  : 'shadow-md border border-soft-gray'
-              }`}
-            >
-              {/* Badge */}
-              {plan.badge_text && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-navy-dark text-sm px-4 py-1 rounded-full font-semibold">
-                  {plan.badge_text}
-                </div>
-              )}
-
-              {/* Plan Name */}
-              <h3 className="text-xl font-semibold text-navy mb-2">
-                {plan.name}
-              </h3>
-              <p className="text-sm text-navy-light mb-4">
-                {plan.description}
-              </p>
-
-              {/* Price */}
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-navy">
-                  ${interval === 'year'
-                    ? Math.round(plan.price_yearly / 12)
-                    : plan.price_monthly}
-                </span>
-                <span className="text-navy-light">/mo</span>
-                {interval === 'year' && plan.price_yearly > 0 && (
-                  <div className="text-sm text-gold font-medium">
-                    Billed ${plan.price_yearly}/year
-                  </div>
-                )}
-              </div>
-
-              {/* Features */}
-              <ul className="space-y-3 mb-6">
-                <Feature
-                  included={true}
-                  text={plan.introductions_per_month === -1
-                    ? 'Unlimited introductions'
-                    : plan.introductions_per_month === 0
-                      ? 'No introductions'
-                      : `${plan.introductions_per_month} introductions/month`}
-                />
-                <Feature
-                  included={plan.can_message}
-                  text="Direct messaging"
-                />
-                <Feature
-                  included={plan.can_see_compatibility_score}
-                  text="Compatibility scores"
-                />
-                <Feature
-                  included={plan.can_see_detailed_report}
-                  text="Detailed reports"
-                />
-                <Feature
-                  included={plan.priority_matching}
-                  text="Priority matching"
-                />
-                <Feature
-                  included={plan.human_review}
-                  text="Human matchmaker review"
-                />
-                <Feature
-                  included={plan.concierge_service}
-                  text="Concierge service"
-                />
-              </ul>
-
-              {/* CTA */}
-              <button
-                onClick={() => handleSubscribe(plan.slug)}
-                disabled={loading === plan.slug}
-                className={`w-full py-3 rounded-full font-semibold transition-all ${
-                  plan.is_featured
-                    ? 'bg-gold text-navy-dark hover:bg-gold-light'
-                    : plan.slug === 'free'
-                      ? 'bg-cream-dark text-navy hover:bg-soft-gray'
-                      : 'bg-navy text-cream hover:bg-navy-light'
-                } disabled:opacity-50`}
-              >
-                {loading === plan.slug
-                  ? 'Loading...'
-                  : plan.slug === 'free'
-                    ? 'Get Started'
-                    : 'Subscribe'}
-              </button>
-            </div>
-          ))}
+        <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: '15px', padding: '30px', marginBottom: '20px' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
+            What is Jordan + Atlas verification?
+          </h3>
+          <p style={{ opacity: 0.9, lineHeight: '1.6' }}>
+            Our AI verification system (Jordan for analytics, Atlas for legal research) ensures all attorney data is accurate and credible before any outreach or publication. This protects both attorneys and clients.
+          </p>
         </div>
 
-        {/* Add-ons */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-serif font-bold text-navy text-center mb-8">
-            Add-ons
-          </h2>
-          <div className="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <AddOnCard
-              name="Extra Introduction"
-              price="$29"
-              description="One additional introduction"
-              slug="extra-intro"
-            />
-            <AddOnCard
-              name="3-Pack Introductions"
-              price="$69"
-              description="Three introductions (save $18)"
-              slug="intro-3-pack"
-            />
-            <AddOnCard
-              name="Compatibility Report"
-              price="$19"
-              description="Detailed 10-page analysis"
-              slug="compatibility-report"
-            />
-            <AddOnCard
-              name="Profile Review"
-              price="$99"
-              description="Professional optimization"
-              slug="profile-review"
-            />
-          </div>
-        </div>
-
-        {/* FAQ */}
-        <div className="mt-16 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-serif font-bold text-navy text-center mb-8">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-4">
-            <FAQ
-              q="What's an introduction?"
-              a="An introduction is when we connect you with a matched member. You'll receive their profile and compatibility report, and they'll receive yours. If both parties are interested, you can begin communicating."
-            />
-            <FAQ
-              q="Can I cancel anytime?"
-              a="Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period."
-            />
-            <FAQ
-              q="Do unused introductions roll over?"
-              a="No, introductions reset each billing period. However, you can purchase additional introductions that last for one year."
-            />
-            <FAQ
-              q="What's the difference between Aligned and Founder?"
-              a="Founder members receive unlimited introductions, personal attention from our human matchmaking team, and priority in all matches. It's our premium white-glove service."
-            />
-          </div>
+        <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: '15px', padding: '30px' }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>
+            Can I cancel my Premium subscription?
+          </h3>
+          <p style={{ opacity: 0.9, lineHeight: '1.6' }}>
+            Absolutely. Cancel anytime from your dashboard. You'll retain Premium access until the end of your billing period, then automatically revert to the Free plan.
+          </p>
         </div>
       </div>
-    </div>
-  );
-}
 
-function Feature({ included, text }: { included: boolean; text: string }) {
-  return (
-    <li className={`flex items-center gap-2 ${included ? 'text-navy' : 'text-navy-light line-through'}`}>
-      {included ? (
-        <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
-      ) : (
-        <svg className="w-5 h-5 text-navy-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      )}
-      {text}
-    </li>
-  );
-}
-
-function AddOnCard({ name, price, description, slug }: {
-  name: string;
-  price: string;
-  description: string;
-  slug: string;
-}) {
-  const [loading, setLoading] = useState(false);
-
-  async function handlePurchase() {
-    setLoading(true);
-    try {
-      const res = await fetch('/api/billing/purchase', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productSlug: slug })
-      });
-      const data = await res.json();
-      if (data.url) window.location.href = data.url;
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-soft-gray">
-      <h4 className="font-medium text-navy">{name}</h4>
-      <p className="text-sm text-navy-light mb-2">{description}</p>
-      <div className="flex items-center justify-between">
-        <span className="font-bold text-gold">{price}</span>
-        <button
-          onClick={handlePurchase}
-          disabled={loading}
-          className="text-sm px-3 py-1 bg-gold text-navy-dark rounded-full hover:bg-gold-light transition-colors disabled:opacity-50 font-medium"
+      {/* CTA Section */}
+      <div style={{
+        textAlign: 'center',
+        padding: '80px 20px',
+        background: 'rgba(0,0,0,0.2)'
+      }}>
+        <h2 style={{ fontSize: '36px', fontWeight: 'bold', color: 'white', marginBottom: '20px' }}>
+          Join 64+ Estate Planning Attorneys
+        </h2>
+        <p style={{ fontSize: '20px', color: 'white', opacity: 0.9, marginBottom: '40px', maxWidth: '600px', margin: '0 auto 40px auto' }}>
+          Connect with high-net-worth clients seeking dynasty trust and asset protection counsel
+        </p>
+        <Link
+          href="/signup"
+          style={{
+            display: 'inline-block',
+            padding: '18px 50px',
+            background: 'white',
+            color: '#667eea',
+            borderRadius: '50px',
+            fontWeight: 'bold',
+            fontSize: '20px',
+            textDecoration: 'none',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+            transition: 'transform 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
-          {loading ? '...' : 'Buy'}
-        </button>
+          Get Started Free
+        </Link>
       </div>
-    </div>
-  );
-}
-
-function FAQ({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="border-b border-cream-dark pb-4">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex justify-between items-center text-left"
-      >
-        <span className="font-medium text-navy">{q}</span>
-        <svg
-          className={`w-5 h-5 text-gold transition-transform ${open ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {open && (
-        <p className="mt-2 text-navy-light">{a}</p>
-      )}
     </div>
   );
 }
