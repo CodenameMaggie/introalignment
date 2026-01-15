@@ -44,13 +44,13 @@ async function sendPodcastInvitation(attorney) {
 
     <p>Hi ${firstName},</p>
 
-    <p>I came across your profile as ${professionalTitle} and was impressed by your expertise in ${specializations.join(', ')}.</p>
+    <p>We came across your profile as ${professionalTitle} and were impressed by your expertise in ${specializations.join(', ')}.</p>
 
-    <p>I'd love to invite you to be a guest on <strong>sovereigndesign.it.com</strong>, our podcast focused on dynasty trusts, asset protection, and legal strategies for generational wealth. We feature top estate planning attorneys sharing insights with our audience of high-net-worth clients and fellow professionals.</p>
+    <p>We'd like to invite you to be featured on the <strong>IntroAlignment Legal Podcast</strong>, where we showcase top estate planning attorneys sharing insights on dynasty trusts, asset protection, and generational wealth strategies. Our audience includes high-net-worth clients actively seeking expert counsel and fellow professionals.</p>
 
     <div class="podcast-badge">
-      <h3 style="margin: 0 0 10px 0;">🎙️ sovereigndesign.it.com</h3>
-      <p style="margin: 0; opacity: 0.9;">Legal Architecture for Sovereign Living</p>
+      <h3 style="margin: 0 0 10px 0;">🎙️ IntroAlignment Legal Podcast</h3>
+      <p style="margin: 0; opacity: 0.9;">Elite Estate Planning & Wealth Preservation Insights</p>
     </div>
 
     <div class="benefits">
@@ -81,9 +81,9 @@ async function sendPodcastInvitation(attorney) {
     <p>If you'd prefer to discuss this opportunity first, simply reply to this email. I'd be happy to answer any questions.</p>
 
     <p style="margin-top: 40px;">Looking forward to featuring your expertise,</p>
-    <p style="margin: 0;"><strong>Maggie Forbes</strong><br/>
-    Host, sovereigndesign.it.com<br/>
-    IntroAlignment Legal Network</p>
+    <p style="margin: 0;"><strong>The IntroAlignment Team</strong><br/>
+    Elite Legal Network & Podcast<br/>
+    Connecting Top Estate Planning Attorneys with UHNW Clients</p>
   </div>
 
   <div class="footer">

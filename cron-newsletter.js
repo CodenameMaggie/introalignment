@@ -24,19 +24,19 @@ const NEWSLETTER_CONTENT = {
     {
       title: '🏛️ New Estate Tax Exemption Changes',
       summary: 'The IRS announced updates to estate tax exemptions. Here\'s what your high-net-worth clients need to know.',
-      link: 'https://www.maggieforbesstrategies.com/insights/estate-tax-2026',
+      link: 'https://introalignment.com/insights/estate-tax-2026',
       category: 'Tax Planning'
     },
     {
       title: '💼 Multi-Generational Wealth Structures',
       summary: 'Case study: How one family preserved $50M across 4 generations using dynasty trusts and LLCs.',
-      link: 'https://www.maggieforbesstrategies.com/case-studies/multi-gen-wealth',
+      link: 'https://introalignment.com/case-studies/multi-gen-wealth',
       category: 'Case Study'
     },
     {
       title: '🤝 Networking Spotlight',
       summary: 'Meet 3 estate planning attorneys who joined our podcast this month and shared their expertise.',
-      link: 'https://sovereigndesign.it.com/episodes',
+      link: 'https://introalignment.com/podcast',
       category: 'Community'
     }
   ],
@@ -44,19 +44,19 @@ const NEWSLETTER_CONTENT = {
     {
       title: 'Dynasty Trust Masterclass Webinar',
       date: 'January 25, 2026 @ 2 PM EST',
-      link: 'https://www.maggieforbesstrategies.com/events/dynasty-trust-masterclass'
+      link: 'https://introalignment.com/events/dynasty-trust-masterclass'
     },
     {
       title: 'IntroAlignment Attorney Networking Happy Hour',
       date: 'January 30, 2026 @ 5 PM EST (Virtual)',
-      link: 'https://www.maggieforbesstrategies.com/events/networking-happy-hour'
+      link: 'https://introalignment.com/events/networking-happy-hour'
     }
   ],
   podcastSpotlight: {
     title: 'Latest Podcast Episode',
     guest: 'Sarah Mitchell, ACTEC Fellow',
     topic: 'Advanced Asset Protection Strategies for Ultra-High-Net-Worth Families',
-    link: 'https://sovereigndesign.it.com/episodes/sarah-mitchell'
+    link: 'https://introalignment.com/podcast/sarah-mitchell'
   }
 };
 
@@ -140,7 +140,7 @@ async function sendNewsletter(attorney) {
       <div style="margin: 40px 0; padding: 25px; background: #f8f9fa; border-radius: 8px; text-align: center;">
         <h3 style="margin: 0 0 10px 0;">Want to Be Featured?</h3>
         <p style="margin: 0 0 15px 0;">Join our podcast and share your expertise with high-net-worth clients nationwide.</p>
-        <a href="https://calendly.com/maggie-maggieforbesstrategies/podcast-introalignment" class="cta-button">Schedule Your Podcast Session</a>
+        <a href="https://introalignment.com/podcast-booking" class="cta-button">Schedule Your Podcast Session</a>
       </div>
 
       <p style="margin-top: 40px; color: #7f8c8d; font-size: 14px;">
@@ -157,8 +157,9 @@ async function sendNewsletter(attorney) {
       <p>Connecting Elite Estate Planning Attorneys with High-Net-Worth Clients</p>
 
       <div class="social-links">
-        <a href="https://www.maggieforbesstrategies.com">Website</a> |
-        <a href="https://sovereigndesign.it.com">Podcast</a> |
+        <a href="https://introalignment.com">Website</a> |
+        <a href="https://introalignment.com/podcast">Podcast</a> |
+        <a href="https://introalignment.com/community">Community</a> |
         <a href="mailto:hello@introalignment.com">Contact</a>
       </div>
 
