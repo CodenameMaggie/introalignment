@@ -19,5 +19,9 @@ RUN npm run build
 # Expose port
 EXPOSE 3000
 
+# Health check that Railway can use
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3000/api/ping', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
+
 # Start app
 CMD ["npm", "start"]
