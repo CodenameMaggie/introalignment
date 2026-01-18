@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntroAlignment | Legal Architecture for Sovereign Living</title>
+    <meta name="description" content="Dynasty trust design and generational wealth architecture. Building legal structures that protect what you've built for generations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #1a2a3a;
+            --navy-deep: #0f1a24;
+            --navy-light: #2d4055;
+            --cream: #FFFEF7;
+            --cream-dark: #f5f3ed;
+            --silver: #9ca8b8;
+            --silver-light: #c8d0dc;
+            --gold-accent: #b8a060;
+            --text-muted: #8a9aaa;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--cream);
+            color: var(--navy);
+            line-height: 1.8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(26, 42, 58, 0.97);
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+        .logo span { color: var(--silver-light); }
+        nav a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-left: 40px;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+        nav a:hover { opacity: 1; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 40px 80px;
+            background: linear-gradient(170deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-light) 100%);
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(184, 160, 96, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(156, 168, 184, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--silver-light);
+            border: 1px solid var(--silver);
+            padding: 10px 28px;
+            margin-bottom: 40px;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--cream);
+            margin-bottom: 30px;
+            line-height: 1.2;
+            animation: fadeUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-style: italic;
+            color: var(--silver-light);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            animation: fadeUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+        .hero-buttons {
+            animation: fadeUp 0.8s ease 0.8s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 16px 44px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+        .btn-primary {
+            background: var(--cream);
+            color: var(--navy);
+            border-color: var(--cream);
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--cream);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--cream);
+            border-color: var(--silver);
+        }
+        .btn-secondary:hover {
+            background: var(--cream);
+            color: var(--navy);
+            border-color: var(--cream);
+        }
+        .btn-dark {
+            background: var(--navy);
+            color: var(--cream);
+            border-color: var(--navy);
+        }
+        .btn-dark:hover {
+            background: var(--navy-deep);
+            border-color: var(--navy-deep);
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 120px 40px;
+            background: var(--cream);
+            text-align: center;
+        }
+        .problem-content { max-width: 900px; margin: 0 auto; }
+        .problem h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+        .problem-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--navy-light);
+            margin-bottom: 50px;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 500;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--navy-light);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .problem-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--navy-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+
+        /* Services */
+        .services {
+            padding: 120px 40px;
+            background: var(--navy);
+        }
+        .services-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .services h2 {
+            color: var(--cream);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 15px;
+        }
+        .services-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--silver);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-card {
+            padding: 50px 40px;
+            border: 1px solid rgba(156, 168, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            border-color: var(--silver);
+            transform: translateY(-5px);
+        }
+        .service-card h3 {
+            color: var(--silver-light);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        .service-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Process */
+        .process {
+            padding: 120px 40px;
+            background: var(--cream-dark);
+        }
+        .process-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .process h2 {
+            color: var(--navy);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 15px;
+        }
+        .process-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--navy-light);
+        }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .process-step { text-align: center; }
+        .step-number {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--silver);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        .process-step h3 {
+            color: var(--navy);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .process-step p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--navy-light);
+            line-height: 1.7;
+        }
+
+        /* Philosophy */
+        .philosophy {
+            padding: 120px 40px;
+            background: var(--cream);
+        }
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .philosophy-text h2 {
+            color: var(--navy);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+        }
+        .philosophy-text p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--navy-light);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        .philosophy-quote {
+            padding: 50px;
+            background: var(--navy);
+            position: relative;
+        }
+        .philosophy-quote::before {
+            content: '"';
+            font-family: 'Cinzel', serif;
+            font-size: 6rem;
+            color: var(--silver);
+            opacity: 0.3;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            line-height: 1;
+        }
+        .philosophy-quote p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        .philosophy-quote cite {
+            display: block;
+            margin-top: 25px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.9rem;
+            font-style: normal;
+            color: var(--silver);
+            letter-spacing: 0.1em;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 120px 40px;
+            background: linear-gradient(170deg, var(--navy) 0%, var(--navy-deep) 100%);
+            text-align: center;
+        }
+        .cta-content { max-width: 700px; margin: 0 auto; }
+        .cta h2 {
+            color: var(--cream);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 25px;
+        }
+        .cta p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--silver-light);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px;
+            background: var(--navy-deep);
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--cream);
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        .footer-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--silver);
+            margin-bottom: 30px;
+        }
+        .footer-links { margin-bottom: 30px; }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--cream); }
+        .footer-ecosystem {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .footer-ecosystem a {
+            color: var(--silver);
+            text-decoration: none;
+        }
+        .footer-ecosystem a:hover { color: var(--cream); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .philosophy-content { grid-template-columns: 1fr; gap: 50px; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 15px 25px; }
+            nav { display: none; }
+            .hero { padding: 100px 25px 60px; }
+            .problem, .services, .process, .philosophy, .cta { padding: 80px 25px; }
+            .stats-row { gap: 40px; }
+            .process-grid { grid-template-columns: 1fr; gap: 50px; }
+            .philosophy-quote { padding: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">Intro<span>Alignment</span></a>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#philosophy">Philosophy</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">The Sovereignty Pillar</span>
+            <h1>Legal Architecture for<br>Sovereign Living</h1>
+            <p class="hero-tagline">Dynasty trust design and generational wealth architecture for families who think in centuries, not quarters.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Begin Your Architecture</a>
+                <a href="https://sovereigndesign.it" target="_blank" class="btn btn-secondary">Listen to the Podcast</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem">
+        <div class="problem-content">
+            <h2>The Silent Erosion of Legacy</h2>
+            <p class="problem-subtitle">Without proper legal architecture, wealth rarely survives the builders.</p>
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Wealth lost by 2nd generation</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Wealth lost by 3rd generation</div>
+                </div>
+            </div>
+            <p class="problem-text">You can build the most successful business, accumulate significant wealth, raise exceptional children — but without proper legal architecture, it can all disappear in a generation. IntroAlignment exists to change those numbers for families who build with intention.</p>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="services-header">
+            <h2>What We Architect</h2>
+            <p class="services-subtitle">Legal structures designed to outlast lifetimes</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Dynasty Trust Design</h3>
+                <p>Multi-generational trust structures that protect wealth across centuries, not just decades. Properly designed to preserve assets while providing for heirs.</p>
+            </div>
+            <div class="service-card">
+                <h3>Asset Protection</h3>
+                <p>Legal frameworks that shield what you've built from litigation, creditors, and unforeseen circumstances. Proactive protection, not reactive defense.</p>
+            </div>
+            <div class="service-card">
+                <h3>Entity Architecture</h3>
+                <p>Holding companies, LLCs, and corporate structures designed for multi-generational ownership, tax efficiency, and operational flexibility.</p>
+            </div>
+            <div class="service-card">
+                <h3>Cross-Border Planning</h3>
+                <p>International structures for families with global interests. Jurisdiction analysis, tax treaty optimization, and compliant multi-national frameworks.</p>
+            </div>
+            <div class="service-card">
+                <h3>Succession Planning</h3>
+                <p>Ensuring smooth transitions that preserve family harmony and business continuity. Governance structures that work across generations.</p>
+            </div>
+            <div class="service-card">
+                <h3>Ongoing Stewardship</h3>
+                <p>Compliance, administration, and adaptation as laws change and families grow. Your structures evolve with your dynasty.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="process" id="process">
+        <div class="process-header">
+            <h2>The Architecture Process</h2>
+            <p class="process-subtitle">From vision to implementation to stewardship</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h3>Discovery</h3>
+                <p>Understand your family, values, assets, and vision. Map the sovereign economy you're building.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h3>Architecture</h3>
+                <p>Design the optimal legal framework. Structure selection, jurisdiction analysis, tax optimization.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h3>Implementation</h3>
+                <p>Execute with qualified legal counsel. Document creation, entity formation, asset transfers.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">04</div>
+                <h3>Stewardship</h3>
+                <p>Ongoing administration and adaptation. Your structures evolve as your dynasty grows.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-content">
+            <div class="philosophy-text">
+                <h2>The Sovereignty Pillar</h2>
+                <p>IntroAlignment exists because legal structure is the foundation of true sovereignty. You can build the most successful business, accumulate significant wealth, raise exceptional children — but without proper legal architecture, it can all disappear in a generation.</p>
+                <p>We serve families who think in generations, not quarters. Who understand that the structures they create today will determine whether their grandchildren inherit a legacy or start from zero.</p>
+                <p>This is the missing pillar for most families building wealth. The legal backbone that transforms a business into a dynasty, an estate into a sovereign economy.</p>
+            </div>
+            <div class="philosophy-quote">
+                <p>Philosophy becomes law. What you believe about legacy, stewardship, and family — we translate into structures that will stand for centuries.</p>
+                <cite>— The IntroAlignment Approach</cite>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="cta-content">
+            <h2>Build Your Legal Architecture</h2>
+            <p>Every sovereign economy needs a legal backbone. Let's architect the structures that will protect and perpetuate your legacy for generations.</p>
+            <a href="mailto:maggie@introalignment.com?subject=Legal%20Architecture%20Inquiry" class="btn btn-primary">Begin the Conversation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">IntroAlignment</div>
+        <p class="footer-tagline">Legal architecture for sovereign living</p>
+        <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="https://sovereigndesign.it" target="_blank">Podcast</a>
+            <a href="mailto:maggie@introalignment.com">Contact</a>
+        </div>
+        <p class="footer-ecosystem">Part of <a href="https://maggieforbesstrategies.com" target="_blank">The Sovereign Economy</a></p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
